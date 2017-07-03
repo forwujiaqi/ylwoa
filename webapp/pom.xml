@@ -19,6 +19,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>webapp</finalName>
+        <finalName>ROOT</finalName>
     </build>
 </project>
