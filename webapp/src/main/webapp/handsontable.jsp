@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Handsontable</title>
-    <script src="/dist/handsontable.full.js"></script>
+    <title>Super Table</title>
+    <script src="/handsontable/dist/handsontable.full.js"></script>
     <script src="/jquery/jquery-3.2.1.js"></script>
-    <link rel="stylesheet" href="/dist/handsontable.full.css"/>
+    <link rel="stylesheet" href="/handsontable/dist/handsontable.full.css"/>
+    <style type="text/css">
+        .handsontable {
+            color: #000;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 <p>
@@ -32,10 +38,8 @@
         data: getData(),
         startRows: 5,
         startCols: 5,
-        minRows: 5,
-        minCols: 5,
-//        maxRows: 10,
-//        maxCols: 10,
+        minRows: 30,
+        minCols: 26,
         manualColumnResize: true,
         manualRowResize: true,
         rowHeaders: true,
@@ -44,11 +48,10 @@
         manualColumnMove: true,
         manualRowMove: true,
         mergeCells: [],
-        contextMenu: true
+ //       contextMenu:true
+        contextMenu: ['row_above', 'row_below', '---------','col_left','col_right','---------','remove_row','remove_col','---------','mergeCells','---------','undo','redo']
     };
     hot = new Handsontable(example1, settings1);
-
-
 
     function save() {
 
