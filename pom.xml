@@ -8,6 +8,8 @@
   <modules>
     <module>webapp</module>
       <module>workorder</module>
+    <module>persistence</module>
+    <module>common</module>
   </modules>
   <packaging>pom</packaging>
 
