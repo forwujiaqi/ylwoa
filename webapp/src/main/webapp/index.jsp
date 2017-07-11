@@ -1,5 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.sendRedirect("/login");
+%>
 <html>
+<head>
+    <title>login</title>
+</head>
 <body>
-<h2>Hello World!</h2>
+
 </body>
 </html>
