@@ -21,9 +21,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- compiler settings properties -->
-        <java_source_version>1.7</java_source_version>
-        <java_target_version>1.7</java_target_version>
+        <java_source_version>1.8</java_source_version>
+        <java_target_version>1.8</java_target_version>
         <file_encoding>UTF-8</file_encoding>
+        <springframework-version>4.3.9.RELEASE</springframework-version>
     </properties>
 
     <dependencyManagement>
@@ -70,13 +71,13 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>4.3.9.RELEASE</version>
+                <version>${springframework-version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>4.3.9.RELEASE</version>
+                <version>${springframework-version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
             <dependency>

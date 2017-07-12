@@ -57,7 +57,7 @@
                                     <%--</label>--%>
                                 <%--</div>--%>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">登录</a>
+                                <a href="/logon" class="btn btn-lg btn-success btn-block">登录</a>
                             </fieldset>
                         </form>
                     </div>

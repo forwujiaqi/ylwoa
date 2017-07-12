@@ -1,4 +1,4 @@
-package ylwoa;
+package com.ylwoa;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

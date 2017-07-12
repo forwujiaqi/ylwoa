@@ -1,4 +1,4 @@
-package ylwoa;
+package com.ylwoa;
 
 /**
  * Hello world!
