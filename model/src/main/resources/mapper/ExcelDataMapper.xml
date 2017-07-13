@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylwoa.dao.ExcelDataMapper">
+  <resultMap id="BaseResultMap" type="com.ylwoa.model.ExcelData">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="excel_id" jdbcType="BIGINT" property="excelId" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="delete_flg" jdbcType="INTEGER" property="deleteFlg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ylwoa.model.ExcelData">
+    <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson" />
+    <result column="setting_json" jdbcType="LONGVARCHAR" property="settingJson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, excel_id, version, delete_flg, create_time, create_user_id, update_time, update_user_id
+  </sql>
+  <sql id="Blob_Column_List">
+    data_json, setting_json
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from excel_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from excel_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+    insert into excel_data (id, excel_id, version, 
+      delete_flg, create_time, create_user_id, 
+      update_time, update_user_id, data_json, 
+      setting_json)
+    values (#{id,jdbcType=BIGINT}, #{excelId,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, 
+      #{deleteFlg,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{dataJson,jdbcType=LONGVARCHAR}, 
+      #{settingJson,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+    insert into excel_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="excelId != null">
+        excel_id,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deleteFlg != null">
+        delete_flg,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="dataJson != null">
+        data_json,
+      </if>
+      <if test="settingJson != null">
+        setting_json,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="excelId != null">
+        #{excelId,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="deleteFlg != null">
+        #{deleteFlg,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="dataJson != null">
+        #{dataJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="settingJson != null">
+        #{settingJson,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+    update excel_data
+    <set>
+      <if test="excelId != null">
+        excel_id = #{excelId,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="deleteFlg != null">
+        delete_flg = #{deleteFlg,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="dataJson != null">
+        data_json = #{dataJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="settingJson != null">
+        setting_json = #{settingJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+    update excel_data
+    set excel_id = #{excelId,jdbcType=BIGINT},
+      version = #{version,jdbcType=BIGINT},
+      delete_flg = #{deleteFlg,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      data_json = #{dataJson,jdbcType=LONGVARCHAR},
+      setting_json = #{settingJson,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylwoa.model.ExcelData">
+    update excel_data
+    set excel_id = #{excelId,jdbcType=BIGINT},
+      version = #{version,jdbcType=BIGINT},
+      delete_flg = #{deleteFlg,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
