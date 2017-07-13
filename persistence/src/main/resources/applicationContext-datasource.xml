@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<context:annotation-config/>-->
+    <context:component-scan base-package="com.ylwoa.persistence.dao"/>
+
+    <!--TODO 这个好像没用-->
+    <context:property-placeholder location="classpath*:/mybatis/*.properties"/>
+
+    <!--TODO 换Druid 试试-->
+    <bean id="abstractPoolDatatSource" abstract="true" class="org.apache.tomcat.jdbc.pool.DataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="maxActive" value="128"/>
+        <property name="maxIdle" value="64"/>
+        <property name="maxWait" value="1000"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testWhileIdle" value="true"/>
+    </bean>
+
+    <!--TODO 这部分没用property的内容-->
+    <!--<bean id="dataSource" parent="abstractPoolDatatSource">-->
+        <!--<property name="url" value="${mysql.datasource.url}"/>-->
+        <!--<property name="username" value="${mysql.datasource.username}"/>-->
+        <!--<property name="password" value="${mysql.datasource.password}"/>-->
+    <!--</bean>-->
+
+    <bean id="dataSource" parent="abstractPoolDatatSource">
+        <property name="url" value="jdbc:mysql://10.100.172.82:3306/ylw_oa"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
+</beans>

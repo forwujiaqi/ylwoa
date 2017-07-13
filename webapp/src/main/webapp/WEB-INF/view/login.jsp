@@ -12,6 +12,7 @@
 
     <title>OA</title>
 
+    <%--TODO 这里为什么不用pageContext.request.contextPath --%>
     <!-- Bootstrap Core CSS -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -43,21 +44,24 @@
                         <h3 class="panel-title">OA</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" action="${pageContext.request.contextPath}/login" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="请输入手机号" name="phone"  autofocus>
+                                    <input class="form-control" placeholder="请输入手机号" name="phone" required  autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="请输入密码" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="请输入密码" name="password" type="password" required value="">
                                 </div>
+
+                                <%--TODO 怎么报错比较好 --%>
+                                <%--TODO 记住密码功能 --%>
                                 <%--<div class="checkbox">--%>
                                     <%--<label>--%>
                                         <%--<input name="remember" type="checkbox" value="Remember Me">Remember Me--%>
                                     <%--</label>--%>
                                 <%--</div>--%>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="/logon" class="btn btn-lg btn-success btn-block">登录</a>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
                             </fieldset>
                         </form>
                     </div>

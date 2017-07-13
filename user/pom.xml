@@ -7,9 +7,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>model</artifactId>
+    <artifactId>user</artifactId>
 
-    <name>model</name>
+    <name>user</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -17,6 +17,27 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>ylwoa</groupId>
+            <artifactId>persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ylwoa</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

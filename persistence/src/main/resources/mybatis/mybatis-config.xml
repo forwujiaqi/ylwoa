@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+<!--TODO 配置信息不全 意思不清楚-->
 <configuration>
     <settings>
         <setting name="cacheEnabled" value="false"/>

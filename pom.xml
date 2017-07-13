@@ -12,6 +12,7 @@
         <module>common</module>
         <module>model</module>
         <module>exception</module>
+        <module>user</module>
     </modules>
     <packaging>pom</packaging>
 

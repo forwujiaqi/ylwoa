@@ -2,16 +2,29 @@ package com.ylwoa.persistence.dao.impl;
 
 import com.ylwoa.model.User;
 import com.ylwoa.persistence.dao.UserDao;
+import org.springframework.stereotype.Repository;
 
-public class UserDaoImpl implements UserDao {
+import java.util.List;
+import java.util.Map;
+
+@Repository
+public class UserDaoImpl extends AbstractMySQLDao implements UserDao {
+
+    public static final String NAMESPACE = "com.ylwoa.dao.UserMapper.";
+
+    @Override
+    public List<User> select(Map<String, Object> params) {
+        return sqlSessionTemplate.selectList(NAMESPACE+"select", params);
+    }
+
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
     }
 
     @Override
-    public int insert(User record) {
-        return 0;
+    public int insert(User user) {
+        return sqlSessionTemplate.insert(NAMESPACE + "insert", user);
     }
 
     @Override

@@ -6,9 +6,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath:ApplicationContext.xml
-        </param-value>
+        <param-value>/WEB-INF/ApplicationContext.xml</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -62,6 +60,19 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.jpg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.woff2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.woff</url-pattern>
+    </servlet-mapping>
+    <!--TODO 这是干嘛的？-->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.*</url-pattern>
     </servlet-mapping>
 
 </web-app>

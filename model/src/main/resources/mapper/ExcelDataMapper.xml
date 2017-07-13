@@ -33,7 +33,7 @@
     delete from excel_data
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+  <insert id="insert" parameterType="com.ylwoa.model.ExcelData">
     insert into excel_data (id, excel_id, version, 
       delete_flg, create_time, create_user_id, 
       update_time, update_user_id, data_json, 
@@ -43,7 +43,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{dataJson,jdbcType=LONGVARCHAR}, 
       #{settingJson,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+  <insert id="insertSelective" parameterType="com.ylwoa.model.ExcelData">
     insert into excel_data
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -110,7 +110,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylwoa.model.ExcelData">
     update excel_data
     <set>
       <if test="excelId != null">
@@ -143,7 +143,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ylwoa.model.ExcelDataWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ylwoa.model.ExcelData">
     update excel_data
     set excel_id = #{excelId,jdbcType=BIGINT},
       version = #{version,jdbcType=BIGINT},
