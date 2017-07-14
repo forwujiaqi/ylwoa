@@ -10,6 +10,9 @@
 
     <mvc:annotation-driven/>
 
+    <!--不拦截静态资源-->
+    <mvc:default-servlet-handler />
+
     <!--<mvc:interceptors>-->
         <!--<mvc:interceptor>-->
             <!--<mvc:mapping path="/admin/*"/>-->
