@@ -31,6 +31,7 @@
 
     <bean id="dataSource" parent="abstractPoolDatatSource">
         <property name="url" value="jdbc:mysql://10.100.172.82:3306/ylw_oa"/>
+        <!--<property name="url" value="jdbc:mysql://10.101.21.250:3306/ylw_oa"/>-->
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>

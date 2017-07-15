@@ -13,6 +13,7 @@
         <module>model</module>
         <module>exception</module>
         <module>user</module>
+        <module>dailyrecord</module>
     </modules>
     <packaging>pom</packaging>
 

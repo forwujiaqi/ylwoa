@@ -13,4 +13,5 @@
     <context:component-scan base-package="com.ylwoa.web" />
     <import resource="classpath*:applicationContext-user.xml"/>
     <import resource="classpath*:applicationContext-datasource.xml"/>
+    <import resource="classpath*:applicationContext-dailyrecord.xml"/>
 </beans>

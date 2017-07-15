@@ -29,7 +29,7 @@ public class LoginController {
         try {
             userService.login(request, user);
             modelAndView.addObject("success", true);
-            modelAndView.setViewName("/homepage");
+            modelAndView.setViewName("redirect:/dailyrecord");
         } catch (Exception e) {
             modelAndView.addObject("success", false);
             modelAndView.addObject("message", e.getMessage());

@@ -1,8 +1,14 @@
 package com.ylwoa.persistence.dao;
 
 import com.ylwoa.model.JobRecord;
+import com.ylwoa.model.User;
+
+import java.util.List;
+import java.util.Map;
 
 public interface JobRecordDao {
+    List<JobRecord> select(Map<String, Object> params);
+
     int deleteByPrimaryKey(Long id);
 
     int insert(JobRecord record);
