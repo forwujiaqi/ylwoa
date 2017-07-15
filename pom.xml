@@ -27,6 +27,7 @@
         <java_target_version>1.8</java_target_version>
         <file_encoding>UTF-8</file_encoding>
         <springframework-version>4.3.9.RELEASE</springframework-version>
+        <ch.qos.logback.version>1.0.12</ch.qos.logback.version>
     </properties>
 
     <dependencyManagement>
@@ -86,6 +87,23 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.34</version>
+            </dependency>
+
+            <!--log-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.5</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${ch.qos.logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${ch.qos.logback.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

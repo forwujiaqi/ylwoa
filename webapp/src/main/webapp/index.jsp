@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    response.sendRedirect("/toLogin");
+//    response.sendRedirect("/jobRecord/list");
+    System.out.println("times");
+//    response.sendRedirect("/toLogin");
 %>
 <html>
 <head>

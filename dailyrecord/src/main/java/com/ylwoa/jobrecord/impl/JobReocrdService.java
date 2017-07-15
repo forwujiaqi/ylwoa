@@ -1,6 +1,6 @@
-package com.ylwoa.dailyrecord.impl;
+package com.ylwoa.jobrecord.impl;
 
-import com.ylwoa.dailyrecord.IDailyRecordService;
+import com.ylwoa.jobrecord.IJobRecordService;
 import com.ylwoa.model.JobRecord;
 import com.ylwoa.persistence.dao.JobRecordDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by wubiqing on 2017/7/15.
  */
 @Service
-public class DailyReocrdService implements IDailyRecordService {
+public class JobReocrdService implements IJobRecordService {
 
     @Autowired
     private JobRecordDao jobRecordDao;
@@ -25,13 +25,12 @@ public class DailyReocrdService implements IDailyRecordService {
     }
 
     @Override
-    public int insertDailyRecord(JobRecord jobRecord) throws Exception {
+    public int insertJobRecord(JobRecord jobRecord) throws Exception {
         return jobRecordDao.insert(jobRecord);
     }
 
     @Override
-    public int updateDailyRecord(JobRecord jobRecord) throws Exception {
+    public int updateJobRecord(JobRecord jobRecord) throws Exception {
         return jobRecordDao.updateByPrimaryKeySelective(jobRecord);
     }
-}
 }

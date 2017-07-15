@@ -1,9 +1,7 @@
 package com.ylwoa.persistence.dao.impl;
 
 import com.ylwoa.model.JobRecord;
-import com.ylwoa.model.User;
 import com.ylwoa.persistence.dao.JobRecordDao;
-import com.ylwoa.persistence.dao.UserDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

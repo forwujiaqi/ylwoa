@@ -10,4 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface IUserService {
 
     User login(HttpServletRequest request, User user) throws Exception;
+
+    User getUserByCookie(String cookieValue);
 }

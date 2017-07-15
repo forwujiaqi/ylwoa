@@ -13,18 +13,11 @@
     <!--不拦截静态资源-->
     <mvc:default-servlet-handler />
 
+    <!--TODO 静态资源会拦截吗-->
     <!--<mvc:interceptors>-->
         <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/admin/*"/>-->
-            <!--<bean class="com.ly.tcschedule.urlcaller.controller.AuthInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/suAdmin/*"/>-->
-            <!--<bean class="com.ly.tcschedule.urlcaller.controller.SuAuthInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/tcstrigger-api/*"/>-->
-            <!--<bean class="com.ly.tcschedule.urlcaller.controller.UserApiAuthInterceptor"/>-->
+            <!--<mvc:mapping path="jobRecord/*"/>-->
+            <!--<bean class="com.ylwoa.web.controller.AuthInterceptor"/>-->
         <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
 

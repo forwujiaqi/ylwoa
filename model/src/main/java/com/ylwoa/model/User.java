@@ -112,4 +112,21 @@ public class User {
     public void setUpdateUserId(Integer updateUserId) {
         this.updateUserId = updateUserId;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userType=" + userType +
+                ", phone='" + phone + '\'' +
+                ", realName='" + realName + '\'' +
+                ", deleteFlg=" + deleteFlg +
+                ", createTime=" + createTime +
+                ", createUserId=" + createUserId +
+                ", updateTime=" + updateTime +
+                ", updateUserId=" + updateUserId +
+                '}';
+    }
 }

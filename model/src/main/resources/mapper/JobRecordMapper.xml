@@ -157,4 +157,24 @@
       update_user_id = #{updateUserId,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="select"
+          parameterType="map"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from job_record
+    <where>
+      <if test="id!=null">
+        and id=#{id}
+      </if>
+      <if test="recordType != null">
+        record_type = #{recordType,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlg!=null and deleteFlg!=''">
+        and delete_flg=#{deleteFlg}
+      </if>
+    </where>
+  </select>
 </mapper>

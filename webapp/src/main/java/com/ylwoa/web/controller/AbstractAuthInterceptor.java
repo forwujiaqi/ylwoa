@@ -1,0 +1,72 @@
+package com.ylwoa.web.controller;
+
+import com.ylwoa.model.User;
+import com.ylwoa.user.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import static com.ylwoa.common.Commons.USER_COOKIE_KEY;
+import static com.ylwoa.common.Commons.USER_SESSION_MARK;
+
+public abstract class AbstractAuthInterceptor implements HandlerInterceptor {
+
+    private static transient Logger log = LoggerFactory.getLogger(AbstractAuthInterceptor.class);
+
+    @Resource
+    private IUserService userService;
+
+    protected boolean doPreHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        log.info("doPreHandle start " + httpServletRequest.getServletPath());
+
+        Cookie[] cookies = httpServletRequest.getCookies();
+        String userCookieValue = getCookieValue(cookies, USER_COOKIE_KEY);
+        log.info("userCookieValue " + userCookieValue);
+        if (userCookieValue==null ) {
+            redirectToLoginPage(httpServletResponse);
+            return false;
+        }
+
+        User user = userService.getUserByCookie(userCookieValue);
+        log.info("user " + user);
+        if (user == null) {
+            redirectToLoginPage(httpServletResponse);
+            return false;
+        }
+        httpServletRequest.setAttribute(USER_SESSION_MARK, user);
+        return true;
+    }
+
+    private void redirectToLoginPage(HttpServletResponse response) throws IOException {
+        log.info("AbstractAuthInterceptor redirectToLoginPage start");
+        response.sendRedirect("/toLogin");
+    }
+
+    private static String getCookieValue(Cookie[] cookies, String name) {
+        if (cookies == null) return null;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(name)) {
+                return cookie.getValue();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+
+    }
+
+}
