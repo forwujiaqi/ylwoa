@@ -51,7 +51,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">日报列表</h1>
+                        <h1 class="page-header">日志列表</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -67,20 +67,21 @@
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>序号</th>
-                                        <th>日报</th>
-                                        <th>填写人</th>
-                                        <th>填写时间</th>
-                                        <th>操作</th>
+                                        <th style="text-align: center">序号</th>
+                                        <th style="text-align: center">日报</th>
+                                        <th style="text-align: center">填写人</th>
+                                        <th style="text-align: center">填写时间</th>
+                                        <th style="text-align: center">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr class="odd gradeX">
-                                        <td style="vertical-align: middle">1</td>
-                                        <td style="text-align: center;vertical-align: middle">2017年7月10日日报</td>
-                                        <td style="text-align: center;vertical-align: middle">吴碧清</td>
-                                        <td style="text-align: center;vertical-align: middle">2017-07-10 13：53</td>
-                                         <td style="text-align: center;vertical-align: middle"><button type="button" class="btn btn-info">查看</button>
+                                        <td style="text-align: right;vertical-align: middle">1</td>
+                                        <td style="text-align: left;vertical-align: middle">2017年7月10日日报</td>
+                                        <td style="text-align: left;vertical-align: middle">吴碧清</td>
+                                        <td style="text-align: left;vertical-align: middle">2017-07-10 13:53</td>
+                                         <td style="text-align: center;vertical-align: middle"><button type="button" class="btn btn-primary">编辑</button>
+                                             <button type="button" class="btn btn-info">查看</button>
                                             <button type="button" class="btn btn-danger">删除</button></td>
                                     </tr>
                                     </tbody>

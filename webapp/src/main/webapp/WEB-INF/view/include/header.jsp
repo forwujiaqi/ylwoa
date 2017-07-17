@@ -39,13 +39,13 @@
                     <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主页</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i>日报功能<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>施工日志<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/jobRecord/toAdd">填写日报</a>
+                            <a href="/jobRecord/toAdd">填写日志</a>
                         </li>
                         <li>
-                            <a href="/jobRecord/list">日报列表</a>
+                            <a href="/jobRecord/list">日志列表</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
