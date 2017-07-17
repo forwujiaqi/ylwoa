@@ -1,6 +1,5 @@
 package com.ylwoa.web.controller;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ylwoa.jobrecord.IJobRecordService;
 import com.ylwoa.model.JobRecord;
@@ -21,7 +20,7 @@ import static com.ylwoa.common.Commons.ACTIVE_STATE;
  * Created by wubiqing on 2017/7/14.
  */
 @Controller
-@RequestMapping("/jobRecord/")
+@RequestMapping("/jobRecord")
 public class JobRecordController {
 
     @Autowired
@@ -31,24 +30,27 @@ public class JobRecordController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView dailyRecordList() {
-
-        log.info("dailyRecordList start");
-
-        ModelAndView mv = new ModelAndView("jobRecord/list");
+        ModelAndView mv = new ModelAndView("/jobRecord/list");
         Map<String, Object> paras = Maps.newHashMap();
-        List<JobRecord> jobRecordList = Lists.newArrayList();
+        List<JobRecord> jobRecordList;
         try {
             paras.put("deleteFlg", ACTIVE_STATE);
             jobRecordList = jobRecordService.getList(paras);
         } catch (Exception e) {
             e.printStackTrace();
+            log.error(e.getMessage());
             mv.addObject("success", false);
             mv.addObject("data", null);
-
             return mv;
         }
         mv.addObject("success", true);
         mv.addObject("data", jobRecordList);
+        return mv;
+    }
+
+    @RequestMapping(value = "/toAdd",method = RequestMethod.GET)
+    public ModelAndView toAdd() {
+        ModelAndView mv = new ModelAndView("/jobRecord/add");
         return mv;
     }
 }
