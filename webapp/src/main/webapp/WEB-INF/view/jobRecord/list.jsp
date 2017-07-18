@@ -1,4 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,6 +66,7 @@
                             <%--</div>--%>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
+                                <form id="form1" name="form1">
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
@@ -75,18 +78,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX">
-                                        <td style="text-align: right;vertical-align: middle">1</td>
-                                        <td style="text-align: left;vertical-align: middle">2017年7月10日日报</td>
-                                        <td style="text-align: left;vertical-align: middle">吴碧清</td>
-                                        <td style="text-align: left;vertical-align: middle">2017-07-10 13:53</td>
-                                         <td style="text-align: center;vertical-align: middle"><button type="button" class="btn btn-primary">编辑</button>
-                                             <button type="button" class="btn btn-info">查看</button>
-                                            <button type="button" class="btn btn-danger">删除</button></td>
-                                    </tr>
+                                    <c:forEach items="${pageData}" var="item" varStatus="status">
+                                        <tr class="odd gradeX">
+                                            <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
+                                            <td style="text-align: left;vertical-align: middle">${item.recordName}</td>
+                                            <td style="text-align: left;vertical-align: middle">${item.createUserId}</td>
+                                            <td style="text-align: left;vertical-align: middle"><fmt:formatDate value="${item.createTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></td>
+                                             <td style="text-align: center;vertical-align: middle"><button type="button" class="btn btn-primary" onclick="return editRecord(${item.id})">编辑</button>
+                                                 <button type="button" class="btn btn-info" id="view" onclick="return showRecord(${item.id})">查看</button>
+                                                <button type="button" class="btn btn-danger" onclick="return deleteRecord(${item.id})">删除</button></td>
+
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
+                            </form>
                             <!-- /.panel-body -->
                         <%--</div>--%>
                         <!-- /.panel -->
@@ -99,6 +106,23 @@
 
     </div>
     <!-- /#wrapper -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 id="title" class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div id="content" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
@@ -124,8 +148,42 @@
                 responsive: true
             });
         });
-    </script>
 
+        function showRecord(recordId) {
+            $.ajax({
+                type : "GET",
+                url : "${ctx}/jobRecord/view/"+recordId,
+                async: false,
+                success : function(msg) {
+                    if(msg.success == true){
+                        $("#content").html(msg.data.recordContent);
+                        $("#title").html(msg.data.recordName)
+                        $('#myModal').modal({
+                            backdrop:"static",
+                            keyboard:false,
+                            show:true
+                        });
+                    }else{
+                    }
+                }
+            });
+        }
+
+        function editRecord(recordId) {
+            document.form1.action = "${ctx}/jobRecord/toEdit/" + recordId;
+            document.form1.submit();
+            return true;
+        }
+
+        function deleteRecord(recordId) {
+            if (confirm('确定要删除吗?')) {
+                document.form1.action = "${ctx}/jobRecord/delete/" + recordId;
+                document.form1.submit();
+                return true;
+            }
+            return false;
+        }
+    </script>
 </body>
 
 </html>

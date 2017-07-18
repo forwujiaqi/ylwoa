@@ -58,7 +58,7 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/add">
+                <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/edit">
                     <div class="row">
                         <div class="col-lg-12" >
                             <input id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
@@ -67,6 +67,7 @@
                         <div class="col-lg-12">
                             <script id="editor" type="text/plain" style="width:1240px;height:650px;"></script>
                             <input id="recordContent" name="recordContent" type="hidden" value="">
+                            <input id="id" name="id" type="hidden" value="">
                         </div>
                     <!-- /.col-lg-12 -->
                     </div>
@@ -185,6 +186,13 @@
         });
     </script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#recordName").val(${data.recordName})
+            UE.getEditor('editor').setContext(${data.recordContent});
+            $("#id").val(${data.id})
+        };
+
+
         $("#save").click(function () {
 //            $("#save").attr("disabled",true)
             $("#recordContent").val(UE.getEditor('editor').getAllHtml());

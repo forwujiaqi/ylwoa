@@ -159,7 +159,7 @@
   </update>
   <select id="select"
           parameterType="map"
-          resultMap="BaseResultMap">
+          resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
