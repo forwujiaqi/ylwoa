@@ -32,6 +32,13 @@
     <!-- DataTables Responsive CSS -->
     <link href="${pageContext.request.contextPath}/assets/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.parse.min.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/lang/zh-cn/zh-cn.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -67,7 +74,7 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <form id="form1" name="form1">
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                                     <thead>
                                     <tr>
                                         <th style="text-align: center">序号</th>
@@ -144,29 +151,15 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {
-            $('#dataTables-example').DataTable({
+            $('#dataTables').DataTable({
                 responsive: true
             });
         });
 
         function showRecord(recordId) {
-            $.ajax({
-                type : "GET",
-                url : "${ctx}/jobRecord/view/"+recordId,
-                async: false,
-                success : function(msg) {
-                    if(msg.success == true){
-                        $("#content").html(msg.data.recordContent);
-                        $("#title").html(msg.data.recordName)
-                        $('#myModal').modal({
-                            backdrop:"static",
-                            keyboard:false,
-                            show:true
-                        });
-                    }else{
-                    }
-                }
-            });
+            document.form1.action = "${ctx}/jobRecord/toView/" + recordId;
+            document.form1.submit();
+            return true;
         }
 
         function editRecord(recordId) {

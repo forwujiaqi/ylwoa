@@ -82,26 +82,22 @@ public class JobRecordController {
     }
 
 
-    @RequestMapping(value = "/view/{recordId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public @ResponseBody
-    String getView(@PathVariable String recordId) {
-        JSONObject jsonObject = new JSONObject();
-
+    @RequestMapping(value = "/toView/{recordId}", method = RequestMethod.GET)
+    public ModelAndView toView(@PathVariable String recordId) {
+        ModelAndView mv = new ModelAndView("/jobRecord/view");
         Map<String, Object> paras = Maps.newHashMap();
         paras.put("id", recordId);
-
         try {
             List<JobRecord> jobRecordList = jobRecordService.getList(paras);
             if (null != jobRecordList && jobRecordList.size() > 0) {
-                jsonObject.put("success", true);
-                jsonObject.put("data", jobRecordList.get(0));
+                mv.addObject("success", true);
+                mv.addObject("data", jobRecordList.get(0));
             }
         } catch (Exception e) {
             log.error(e.getMessage());
-            jsonObject.put("success", false);
-            jsonObject.put("message", e.getMessage());
+            mv.addObject("success", false);
         }
-        return JSONObject.toJSONString(jsonObject, SerializerFeature.WriteMapNullValue);
+        return mv;
     }
 
     @RequestMapping(value = "/delete/{recordId}")
@@ -111,7 +107,7 @@ public class JobRecordController {
             JobRecord jobRecord = new JobRecord();
             jobRecord.setId(Long.parseLong(recordId));
             jobRecord.setDeleteFlg(INACTIVE_STATE);
-            jobRecordService.updateJobRecord(jobRecord);
+            int a =jobRecordService.updateJobRecord(jobRecord);
             mv.setViewName("forward:/jobRecord/list");
         } catch (Exception e) {
             log.error("recordId:" + recordId + " message:" + e.getMessage());
@@ -149,6 +145,7 @@ public class JobRecordController {
         jobRecordForUpdate.setUpdateTime(new Date());
         try {
             jobRecordService.updateJobRecord(jobRecordForUpdate);
+            mv.setViewName("forward:/jobRecord/list");
         } catch (Exception e) {
             log.error(e.getMessage());
             mv.addObject("success", false);

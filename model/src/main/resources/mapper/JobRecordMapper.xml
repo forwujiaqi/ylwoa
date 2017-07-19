@@ -170,11 +170,12 @@
         and id=#{id}
       </if>
       <if test="recordType != null">
-        record_type = #{recordType,jdbcType=INTEGER},
+        and record_type = #{recordType,jdbcType=INTEGER}
       </if>
-      <if test="deleteFlg!=null and deleteFlg!=''">
-        and delete_flg=#{deleteFlg}
+      <if test="deleteFlg != null">
+        and delete_flg= #{deleteFlg,jdbcType=INTEGER}
       </if>
     </where>
+    ORDER BY id DESC
   </select>
 </mapper>

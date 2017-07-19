@@ -63,7 +63,7 @@
                 <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/edit">
                     <div class="row">
                         <div class="col-lg-12" >
-                            <input id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
+                            <input readonly="readonly" id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
                             <br>
                         </div>
                         <div class="col-lg-12">
@@ -76,7 +76,6 @@
                     <div class="row">
                         <div class="col-lg-12" style="text-align:center;width:1240px">
                             <br>
-                            <button type="button" id="save" class="btn btn-success">保存</button>
                                 <a href="/jobRecord/list" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->
@@ -185,16 +184,8 @@
             ue.ready(function() {//编辑器初始化完成再赋值
                 $("#recordName").val("${data.recordName}")
                 ue.execCommand('insertHtml', '${data.recordContent}')
-                $("#id").val("${data.id}")
+                ue.setDisabled('fullscreen');
             });
-        });
-
-
-        $("#save").click(function () {
-            $("#save").attr("disabled",true)
-            $("#recordContent").val(UE.getEditor('editor').getContent());
-            $("#form").method="post";
-            $("#form").submit();
         });
     </script>
 </body>

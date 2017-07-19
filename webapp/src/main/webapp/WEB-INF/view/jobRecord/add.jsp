@@ -74,6 +74,7 @@
                         <div class="col-lg-12" style="text-align:center;width:1240px">
                             <br>
                             <button type="button" id="save" class="btn btn-success">保存</button>
+                            <a href="/jobRecord/list" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -91,7 +92,7 @@
     <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src=".${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/vendor/metisMenu/metisMenu.min.js"></script>
@@ -147,8 +148,6 @@
                     'edittable', //表格属性
                     'edittd', //单元格属性
                     'link', //超链接
-                    'emotion', //表情
-                    'spechars', //特殊字符
                     'searchreplace', //查询替换
                     'justifyleft', //居左对齐
                     'justifyright', //居右对齐
@@ -163,10 +162,6 @@
                     'directionalityrtl', //从右向左输入
                     'rowspacingtop', //段前距
                     'rowspacingbottom', //段后距
-                    'imagenone', //默认
-                    'imageleft', //左浮动
-                    'imageright', //右浮动
-                    'imagecenter', //居中
                     'lineheight', //行间距
                     'edittip ', //编辑提示
                     'customstyle', //自定义标题
@@ -175,9 +170,7 @@
                     'tolowercase', //字母小写
                     'background', //背景
                     'template', //模板
-                    'scrawl', //涂鸦
                     'inserttable', //插入表格
-                    'drafts', // 从草稿箱加载
                 ]
             ],
             autoHeightEnabled: true,
@@ -186,8 +179,8 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-//            $("#save").attr("disabled",true)
-            $("#recordContent").val(UE.getEditor('editor').getAllHtml());
+            $("#save").attr("disabled",true)
+            $("#recordContent").val(UE.getEditor('editor').getContent());
             $("#form").method="post";
             $("#form").submit();
         });
