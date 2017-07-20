@@ -1,0 +1,169 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>明仁信息管理系统</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="${pageContext.request.contextPath}/assets/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${pageContext.request.contextPath}/assets/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${pageContext.request.contextPath}/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="${pageContext.request.contextPath}/handsontable/dist/handsontable.full.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/handsontable/dist/handsontable.full.css"/>
+    <style type="text/css">
+        .handsontable {
+            color: #000;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <%@ include file="../include/header.jsp"%>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">施工进度</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/progress/add">
+                    <div class="row">
+                        <div class="col-lg-12" >
+                            <input id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
+                            <br>
+                        </div>
+                        <div class="col-lg-12">
+                            <div id="example1"></div>
+                        </div>
+                    <!-- /.col-lg-12 -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" style="text-align:center;width:1240px">
+                            <br>
+                            <button type="button" id="save" class="btn btn-success">保存</button>
+                            <a href="/progress/list/0" class="btn btn-warning" role="button">退出</a>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                </form>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="${pageContext.request.contextPath}/assets/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="${pageContext.request.contextPath}/assets/dist/js/sb-admin-2.js"></script>
+
+    <script type="text/javascript">
+
+        function getData() {
+            return [
+                ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
+                ['2008', 10, 11, 12, 13],
+                ['2009', 20, 11, 14, 13],
+                ['2010', 30, 15, 12, 13]
+            ];
+        }
+
+        var example1 = document.getElementById('example1'),
+            settings1,
+            hot;
+
+        settings1 = {
+            data: getData(),
+            startRows: 5,
+            startCols: 5,
+            minRows: 30,
+            minCols: 26,
+            manualColumnResize: true,
+            manualRowResize: true,
+            rowHeaders: true,
+            colHeaders: true,
+            minSpareRows: 1,
+            manualColumnMove: true,
+            manualRowMove: true,
+            mergeCells: [],
+            //       contextMenu:true
+            contextMenu: ['row_above', 'row_below', '---------','col_left','col_right','---------','remove_row','remove_col','---------','mergeCells','---------','undo','redo']
+        };
+        hot = new Handsontable(example1, settings1);
+
+        function save() {
+
+            var cellJson = new Object();
+            cellJson.dataInfo = hot.getData();
+            cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;
+            var dataJson = JSON.stringify({data: cellJson})
+        }
+
+        function load() {
+            var aa = {
+                "data": {
+                    "dataInfo": [["", "Kia", "Nissan", "Toyota", "Honda"], ["2008", 10, 11, 12, 13], ["2009", 20, 11, 14, 13], ["2010", 30, 15, 12, 13], [null, null, null, null, null]],
+                    "mergeInfo": [{"row": 1, "col": 2, "rowspan": 1, "colspan": 2}]
+                }
+            }
+            var mergeInfo = aa.data.mergeInfo
+            for (var i = 0; i < mergeInfo.length; i++) {
+                settings1.mergeCells.push(mergeInfo[i]);
+            }
+            settings1.data = aa.data.dataInfo
+            hot.destroy()
+            hot = new Handsontable(example1, settings1);
+            hot.render()
+        }
+
+    </script>
+    <script type="text/javascript">
+        $("#save").click(function () {
+//            $("#save").attr("disabled",true)
+//            $("#recordContent").val(UE.getEditor('editor').getContent());
+//            $("#form").method="post";
+//            $("#form").submit();
+        });
+    </script>
+</body>
+
+</html>

@@ -21,6 +21,21 @@ public class JobRecord {
 
     private String recordContent;
 
+    @Override
+    public String toString() {
+        return "JobRecord{" +
+                "id=" + id +
+                ", recordName='" + recordName + '\'' +
+                ", recordType=" + recordType +
+                ", deleteFlg=" + deleteFlg +
+                ", createTime=" + createTime +
+                ", createUserId=" + createUserId +
+                ", updateTime=" + updateTime +
+                ", updateUserId=" + updateUserId +
+                ", recordContent='" + recordContent + '\'' +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

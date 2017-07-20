@@ -7,7 +7,11 @@ public class ExcelData {
 
     private Long excelId;
 
+    private String excelName;
+
     private Long version;
+
+    private Integer status;
 
     private Integer deleteFlg;
 
@@ -15,9 +19,13 @@ public class ExcelData {
 
     private Integer createUserId;
 
+    private String createUserName;
+
     private Date updateTime;
 
     private Integer updateUserId;
+
+    private String updateUserName;
 
     private String dataJson;
 
@@ -28,7 +36,7 @@ public class ExcelData {
     }
 
     public void setDataJson(String dataJson) {
-        this.dataJson = dataJson == null ? null : dataJson.trim();
+        this.dataJson = dataJson;
     }
 
     public String getSettingJson() {
@@ -36,7 +44,7 @@ public class ExcelData {
     }
 
     public void setSettingJson(String settingJson) {
-        this.settingJson = settingJson == null ? null : settingJson.trim();
+        this.settingJson = settingJson;
     }
 
     public Long getId() {
@@ -55,12 +63,28 @@ public class ExcelData {
         this.excelId = excelId;
     }
 
+    public String getExcelName() {
+        return excelName;
+    }
+
+    public void setExcelName(String excelName) {
+        this.excelName = excelName == null ? null : excelName.trim();
+    }
+
     public Long getVersion() {
         return version;
     }
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getDeleteFlg() {
@@ -87,6 +111,14 @@ public class ExcelData {
         this.createUserId = createUserId;
     }
 
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName == null ? null : createUserName.trim();
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -101,5 +133,13 @@ public class ExcelData {
 
     public void setUpdateUserId(Integer updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+    public String getUpdateUserName() {
+        return updateUserName;
+    }
+
+    public void setUpdateUserName(String updateUserName) {
+        this.updateUserName = updateUserName == null ? null : updateUserName.trim();
     }
 }

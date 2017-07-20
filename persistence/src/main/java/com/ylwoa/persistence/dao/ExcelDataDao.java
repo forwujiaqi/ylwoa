@@ -5,15 +5,15 @@ import com.ylwoa.model.ExcelData;
 public interface ExcelDataDao {
     int deleteByPrimaryKey(Long id);
 
-    int insert(String record);
+    int insert(ExcelData excelData);
 
-    int insertSelective(String record);
+    int insertSelective(ExcelData excelData);
 
     ExcelData selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(String record);
+    int updateByPrimaryKeySelective(ExcelData excelData);
 
-    int updateByPrimaryKeyWithBLOBs(String record);
+    int updateByPrimaryKeyWithBLOBs(ExcelData excelData);
 
-    int updateByPrimaryKey(ExcelData record);
+    int updateByPrimaryKey(ExcelData excelData);
 }

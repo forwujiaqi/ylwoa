@@ -4,25 +4,30 @@
   <resultMap id="BaseResultMap" type="com.ylwoa.model.ExcelData">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="excel_id" jdbcType="BIGINT" property="excelId" />
+    <result column="excel_name" jdbcType="VARCHAR" property="excelName" />
     <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delete_flg" jdbcType="INTEGER" property="deleteFlg" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ylwoa.model.ExcelData">
     <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson" />
     <result column="setting_json" jdbcType="LONGVARCHAR" property="settingJson" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, excel_id, version, delete_flg, create_time, create_user_id, update_time, update_user_id
+    id, excel_id, excel_name, version, status, delete_flg, create_time, create_user_id,
+    create_user_name, update_time, update_user_id, update_user_name
   </sql>
   <sql id="Blob_Column_List">
     data_json, setting_json
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -34,14 +39,16 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ylwoa.model.ExcelData">
-    insert into excel_data (id, excel_id, version, 
-      delete_flg, create_time, create_user_id, 
-      update_time, update_user_id, data_json, 
-      setting_json)
-    values (#{id,jdbcType=BIGINT}, #{excelId,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, 
-      #{deleteFlg,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{dataJson,jdbcType=LONGVARCHAR}, 
-      #{settingJson,jdbcType=LONGVARCHAR})
+    insert into excel_data (id, excel_id, excel_name,
+      version, status, delete_flg,
+      create_time, create_user_id, create_user_name,
+      update_time, update_user_id, update_user_name,
+      data_json, setting_json)
+    values (#{id,jdbcType=BIGINT}, #{excelId,jdbcType=BIGINT}, #{excelName,jdbcType=VARCHAR},
+      #{version,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{deleteFlg,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{updateUserName,jdbcType=VARCHAR},
+      #{dataJson,jdbcType=LONGVARCHAR}, #{settingJson,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ylwoa.model.ExcelData">
     insert into excel_data
@@ -52,8 +59,14 @@
       <if test="excelId != null">
         excel_id,
       </if>
+      <if test="excelName != null">
+        excel_name,
+      </if>
       <if test="version != null">
         version,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="deleteFlg != null">
         delete_flg,
@@ -64,11 +77,17 @@
       <if test="createUserId != null">
         create_user_id,
       </if>
+      <if test="createUserName != null">
+        create_user_name,
+      </if>
       <if test="updateTime != null">
         update_time,
       </if>
       <if test="updateUserId != null">
         update_user_id,
+      </if>
+      <if test="updateUserName != null">
+        update_user_name,
       </if>
       <if test="dataJson != null">
         data_json,
@@ -84,8 +103,14 @@
       <if test="excelId != null">
         #{excelId,jdbcType=BIGINT},
       </if>
+      <if test="excelName != null">
+        #{excelName,jdbcType=VARCHAR},
+      </if>
       <if test="version != null">
         #{version,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="deleteFlg != null">
         #{deleteFlg,jdbcType=INTEGER},
@@ -96,11 +121,17 @@
       <if test="createUserId != null">
         #{createUserId,jdbcType=INTEGER},
       </if>
+      <if test="createUserName != null">
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
         #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateUserName != null">
+        #{updateUserName,jdbcType=VARCHAR},
       </if>
       <if test="dataJson != null">
         #{dataJson,jdbcType=LONGVARCHAR},
@@ -116,8 +147,14 @@
       <if test="excelId != null">
         excel_id = #{excelId,jdbcType=BIGINT},
       </if>
+      <if test="excelName != null">
+        excel_name = #{excelName,jdbcType=VARCHAR},
+      </if>
       <if test="version != null">
         version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="deleteFlg != null">
         delete_flg = #{deleteFlg,jdbcType=INTEGER},
@@ -128,11 +165,17 @@
       <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=INTEGER},
       </if>
+      <if test="createUserName != null">
+        create_user_name = #{createUserName,jdbcType=VARCHAR},
+      </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
         update_user_id = #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateUserName != null">
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
       </if>
       <if test="dataJson != null">
         data_json = #{dataJson,jdbcType=LONGVARCHAR},
@@ -146,12 +189,16 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ylwoa.model.ExcelData">
     update excel_data
     set excel_id = #{excelId,jdbcType=BIGINT},
+      excel_name = #{excelName,jdbcType=VARCHAR},
       version = #{version,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
       delete_flg = #{deleteFlg,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_user_name = #{createUserName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
       data_json = #{dataJson,jdbcType=LONGVARCHAR},
       setting_json = #{settingJson,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
@@ -159,12 +206,16 @@
   <update id="updateByPrimaryKey" parameterType="com.ylwoa.model.ExcelData">
     update excel_data
     set excel_id = #{excelId,jdbcType=BIGINT},
+      excel_name = #{excelName,jdbcType=VARCHAR},
       version = #{version,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
       delete_flg = #{deleteFlg,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_user_name = #{createUserName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=INTEGER}
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
