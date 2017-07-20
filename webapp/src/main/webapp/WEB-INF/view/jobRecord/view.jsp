@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-lg-12" style="text-align:center;width:1240px">
                             <br>
-                                <a href="/jobRecord/list" class="btn btn-warning" role="button">退出</a>
+                                <a href="/jobRecord/list/9999" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>

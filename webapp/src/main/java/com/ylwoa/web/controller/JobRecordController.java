@@ -35,8 +35,8 @@ public class JobRecordController {
 
     private static transient Logger log = LoggerFactory.getLogger(JobRecordController.class);
 
-    @RequestMapping(value = "/list")
-    public ModelAndView dailyRecordList() {
+    @RequestMapping(value = "/list/{pageNo}")
+    public ModelAndView dailyRecordList(@PathVariable String pageNo) {
         ModelAndView mv = new ModelAndView("/jobRecord/list");
         Map<String, Object> paras = Maps.newHashMap();
         List<JobRecord> jobRecordList;
@@ -44,14 +44,19 @@ public class JobRecordController {
             paras.put("deleteFlg", ACTIVE_STATE);
             jobRecordList = jobRecordService.getList(paras);
         } catch (Exception e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
+            log.error("dailyRecordList error",pageNo,e);
             mv.addObject("success", false);
             mv.addObject("pageData", null);
             return mv;
         }
         mv.addObject("success", true);
         mv.addObject("pageData", jobRecordList);
+        if ("0".equals(pageNo)) {
+            mv.addObject("pageNo", pageNo);
+        }else{
+            mv.addObject("pageNo", "9999");
+        }
+
         return mv;
     }
 
@@ -73,9 +78,9 @@ public class JobRecordController {
             jobRecord.setCreateTime(now);
             jobRecord.setDeleteFlg(ACTIVE_STATE);
             jobRecordService.insertJobRecord(jobRecord);
-            mv.setViewName("forward:/jobRecord/list");
+            mv.setViewName("forward:/jobRecord/list/0");
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("add error",jobRecord,e);
         }
 
         return mv;
@@ -94,7 +99,7 @@ public class JobRecordController {
                 mv.addObject("data", jobRecordList.get(0));
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("toView error",recordId,e);
             mv.addObject("success", false);
         }
         return mv;
@@ -107,10 +112,10 @@ public class JobRecordController {
             JobRecord jobRecord = new JobRecord();
             jobRecord.setId(Long.parseLong(recordId));
             jobRecord.setDeleteFlg(INACTIVE_STATE);
-            int a =jobRecordService.updateJobRecord(jobRecord);
-            mv.setViewName("forward:/jobRecord/list");
+            jobRecordService.updateJobRecord(jobRecord);
+            mv.setViewName("forward:/jobRecord/list/9999");
         } catch (Exception e) {
-            log.error("recordId:" + recordId + " message:" + e.getMessage());
+            log.error("delete error",recordId, e);
         }
 
         return mv;
@@ -128,7 +133,7 @@ public class JobRecordController {
                 mv.addObject("data", jobRecordList.get(0));
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("toEdit error",recordId,e);
             mv.addObject("success", false);
         }
         return mv;
@@ -145,9 +150,9 @@ public class JobRecordController {
         jobRecordForUpdate.setUpdateTime(new Date());
         try {
             jobRecordService.updateJobRecord(jobRecordForUpdate);
-            mv.setViewName("forward:/jobRecord/list");
+            mv.setViewName("forward:/jobRecord/list/9999");
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("edit error",jobRecord,e);
             mv.addObject("success", false);
         }
         return mv;

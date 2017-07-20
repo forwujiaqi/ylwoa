@@ -45,7 +45,7 @@
                             <a href="/jobRecord/toAdd">填写日志</a>
                         </li>
                         <li>
-                            <a href="/jobRecord/list">日志列表</a>
+                            <a href="/jobRecord/list/0">日志列表</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

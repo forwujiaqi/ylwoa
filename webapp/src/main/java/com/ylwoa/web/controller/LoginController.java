@@ -46,6 +46,7 @@ public class LoginController {
             modelAndView.addObject("success", true);
             modelAndView.setViewName("redirect:/jobRecord/list");
         } catch (Exception e) {
+            log.error("login error",user,e);
             modelAndView.addObject("success", false);
             modelAndView.addObject("message", e.getMessage());
         }
