@@ -82,9 +82,9 @@ public class ProgressController {
     public ModelAndView toView(@PathVariable String excelId) {
         ModelAndView mv = new ModelAndView("/progress/view");
         Map<String, Object> paras = Maps.newHashMap();
-        paras.put("id", excelId);
+        paras.put("excelId", excelId);
         try {
-            List<Excel> progressList = progressService.getList(paras);
+            List<Excel> progressList = progressService.getListById(paras);
             if (null != progressList && progressList.size() > 0) {
                 mv.addObject("success", true);
                 mv.addObject("data", progressList.get(0));
@@ -121,9 +121,9 @@ public class ProgressController {
     public ModelAndView toEdit(@PathVariable String excelId) {
         ModelAndView mv = new ModelAndView("/progress/edit");
         Map<String, Object> paras = Maps.newHashMap();
-        paras.put("id", excelId);
+        paras.put("excelId", excelId);
         try {
-            List<Excel> progressList = progressService.getList(paras);
+            List<Excel> progressList = progressService.getListById(paras);
             if (null != progressList && progressList.size() > 0) {
                 mv.addObject("success", true);
                 mv.addObject("data", progressList.get(0));

@@ -36,6 +36,11 @@ public class ProgressService implements IProgressService {
         return excelDao.select(params);
     }
 
+    @Override
+    public List<Excel> getListById(Map<String, Object> params) throws Exception {
+        return excelDao.selectById(params);
+    }
+
     // TODO @Transactional不起作用
     @Override
     @Transactional
@@ -86,7 +91,7 @@ public class ProgressService implements IProgressService {
             excelData.setDataJson(excel.getDataJson());
             excelData.setStatus(excel.getStatus());
             excelData.setVersion(excelResult.getVersion() + 1);
-            excelData.setDeleteFlg(excel.getDeleteFlg());
+            excelData.setDeleteFlg(ACTIVE_STATE);
             excelDataDao.insert(excelData);
 
             Excel excelForUpdate = new Excel();

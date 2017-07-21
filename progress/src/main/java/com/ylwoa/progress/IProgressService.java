@@ -14,7 +14,9 @@ public interface IProgressService {
 
     List<Excel> getList(Map<String, Object> params) throws Exception;
 
-    void insertExcel(Excel excel,User user) throws Exception;
+    List<Excel> getListById(Map<String, Object> params) throws Exception;
+
+    void insertExcel(Excel excel, User user) throws Exception;
 
     void updateExcel(Excel excel,User user) throws Exception;
 
