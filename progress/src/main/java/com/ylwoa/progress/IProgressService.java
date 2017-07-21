@@ -2,6 +2,7 @@ package com.ylwoa.progress;
 
 import com.ylwoa.model.Excel;
 import com.ylwoa.model.ExcelData;
+import com.ylwoa.model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,9 @@ public interface IProgressService {
 
     List<Excel> getList(Map<String, Object> params) throws Exception;
 
-    void insertExcel(Excel excel) throws Exception;
+    void insertExcel(Excel excel,User user) throws Exception;
 
-    void updateExcel(Excel excel) throws Exception;
+    void updateExcel(Excel excel,User user) throws Exception;
 
-    void insertExcelData(ExcelData excelData) throws Exception;
+    void deleteExcel(Excel excel,User user) throws Exception;
 }

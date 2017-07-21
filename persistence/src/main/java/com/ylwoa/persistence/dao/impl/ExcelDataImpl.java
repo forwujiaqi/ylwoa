@@ -1,49 +1,49 @@
 package com.ylwoa.persistence.dao.impl;
 
-import com.ylwoa.model.Excel;
-import com.ylwoa.persistence.dao.ExcelDao;
+import com.ylwoa.model.ExcelData;
+import com.ylwoa.persistence.dao.ExcelDataDao;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by wubiqing on 2017/7/20.
  */
 @Repository
-public class ExcelDataImpl implements ExcelDao {
+public class ExcelDataImpl extends AbstractMySQLDao implements ExcelDataDao {
+
+    public static final String NAMESPACE = "com.ylwoa.dao.ExcelDataMapper.";
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return 0;
     }
 
     @Override
-    public int insert(Excel record) {
+    public int insert(ExcelData excelData) {
+        return sqlSessionTemplate.insert(NAMESPACE + "insert", excelData);
+    }
+
+    @Override
+    public int insertSelective(ExcelData excelData) {
         return 0;
     }
 
     @Override
-    public int insertSelective(Excel excel) {
-        return 0;
-    }
-
-    @Override
-    public Excel selectByPrimaryKey(Long id) {
+    public ExcelData selectByPrimaryKey(Long id) {
         return null;
     }
 
     @Override
-    public int updateByPrimaryKeySelective(Excel excel) {
+    public int updateByPrimaryKeySelective(ExcelData excelData) {
         return 0;
     }
 
     @Override
-    public int updateByPrimaryKey(Excel excel) {
+    public int updateByPrimaryKeyWithBLOBs(ExcelData excelData) {
         return 0;
     }
 
     @Override
-    public List<Excel> select(Map<String, Object> params) {
-        return null;
+    public int updateByPrimaryKey(ExcelData excelData) {
+        return 0;
     }
 }

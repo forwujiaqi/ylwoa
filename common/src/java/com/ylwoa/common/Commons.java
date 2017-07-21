@@ -13,6 +13,9 @@ public class Commons {
     public static final String USER_SESSION_MARK = "USER_SESSION_MARK";
     public static final String DELETE_FLG = "deleteFlg";
 
+    // TODO 换枚举
+    public static final int PROGRESS = 1;
+
     public static String maskForCookie(String str) {
         String MASK_FOR_COOKIE = "rdfEk83.ejK.IMnBdU";
         return Hashing.sha256().hashString(MASK_FOR_COOKIE + str, Charsets.UTF_8).toString();

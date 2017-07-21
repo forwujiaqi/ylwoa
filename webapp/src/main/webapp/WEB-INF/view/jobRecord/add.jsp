@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="col-lg-12" style="text-align:center;width:1240px">
                             <br>
-                            <button type="button" id="save" class="btn btn-success">保存</button>
+                            <button type="button" id="save" class="btn btn-success">提交</button>
                             <a href="/jobRecord/list/0" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->

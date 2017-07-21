@@ -19,4 +19,6 @@ public interface ExcelDao {
     int updateByPrimaryKey(Excel excel);
 
     List<Excel> select(Map<String, Object> params);
+
+    List<Excel> selectById(Map<String, Object> params);
 }

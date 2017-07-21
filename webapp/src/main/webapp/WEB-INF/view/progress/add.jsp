@@ -59,17 +59,19 @@
                     <div class="row">
                         <div class="col-lg-12" >
                             <input id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
+                            <input id="dataJson" name="dataJson" type="hidden">
+                            <input id="settingJson" name="settingJson" type="hidden">
                             <br>
                         </div>
                         <div class="col-lg-12">
-                            <div id="example1"></div>
+                            <div id="excelShow"></div>
                         </div>
                     <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
                         <div class="col-lg-12" style="text-align:center;width:1240px">
                             <br>
-                            <button type="button" id="save" class="btn btn-success">保存</button>
+                            <button type="button" id="save" class="btn btn-success">提交</button>
                             <a href="/progress/list/0" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->
@@ -107,7 +109,7 @@
             ];
         }
 
-        var example1 = document.getElementById('example1'),
+        var excelShow = document.getElementById('excelShow'),
             settings1,
             hot;
 
@@ -128,15 +130,15 @@
             //       contextMenu:true
             contextMenu: ['row_above', 'row_below', '---------','col_left','col_right','---------','remove_row','remove_col','---------','mergeCells','---------','undo','redo']
         };
-        hot = new Handsontable(example1, settings1);
+        hot = new Handsontable(excelShow, settings1);
 
-        function save() {
-
-            var cellJson = new Object();
-            cellJson.dataInfo = hot.getData();
-            cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;
-            var dataJson = JSON.stringify({data: cellJson})
-        }
+//        function save() {
+//
+//            var cellJson = new Object();
+//            cellJson.dataInfo = hot.getData();
+//            cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;
+//            var dataJson = JSON.stringify({data: cellJson})
+//        }
 
         function load() {
             var aa = {
@@ -151,17 +153,21 @@
             }
             settings1.data = aa.data.dataInfo
             hot.destroy()
-            hot = new Handsontable(example1, settings1);
+            hot = new Handsontable(excelShow, settings1);
             hot.render()
         }
 
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-//            $("#save").attr("disabled",true)
-//            $("#recordContent").val(UE.getEditor('editor').getContent());
-//            $("#form").method="post";
-//            $("#form").submit();
+            $("#save").attr("disabled",true)
+            var cellJson = new Object();
+            cellJson.dataInfo = hot.getData();
+            cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;
+            var dataJson = JSON.stringify({data: cellJson})
+            $("#dataJson").val(dataJson);
+            $("#form").method="post";
+            $("#form").submit();
         });
     </script>
 </body>

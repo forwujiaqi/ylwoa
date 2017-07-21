@@ -2,6 +2,7 @@ package com.ylwoa.web.controller;
 
 import com.google.common.collect.Maps;
 import com.ylwoa.model.Excel;
+import com.ylwoa.model.User;
 import com.ylwoa.progress.IProgressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -65,13 +65,10 @@ public class ProgressController {
     public ModelAndView add(Excel progress) {
         ModelAndView mv = new ModelAndView("/progress/list");
         try {
-            Date now = new Date();
-            progress.setUpdateUserId(1);
-            progress.setUpdateTime(now);
-            progress.setCreateUserId(1);
-            progress.setCreateTime(now);
-            progress.setDeleteFlg(ACTIVE_STATE);
-            progressService.insertExcel(progress);
+            User user = new User();
+            user.setId(1);
+            user.setRealName("吴");
+            progressService.insertExcel(progress,user);
             mv.setViewName("forward:/progress/list/0");
         } catch (Exception e) {
             log.error("add error", progress, e);
@@ -103,10 +100,15 @@ public class ProgressController {
     public ModelAndView delete(@PathVariable String excelId) {
         ModelAndView mv = new ModelAndView("/progress/list");
         try {
+            User user = new User();
+            user.setId(1);
+            user.setRealName("吴");
+
             Excel progress = new Excel();
             progress.setId(Long.parseLong(excelId));
             progress.setDeleteFlg(INACTIVE_STATE);
-            progressService.updateExcel(progress);
+
+            progressService.deleteExcel(progress,user);
             mv.setViewName("forward:/progress/list/9999");
         } catch (Exception e) {
             log.error("delete error", excelId, e);
@@ -136,12 +138,11 @@ public class ProgressController {
     @RequestMapping(value = "/edit")
     public ModelAndView edit(Excel progress) {
         ModelAndView mv = new ModelAndView("/progress/list");
-        Excel progressForUpdate = new Excel();
-        progressForUpdate.setId(progress.getId());
-        progressForUpdate.setUpdateUserId(1);
-        progressForUpdate.setUpdateTime(new Date());
+        User user = new User();
+        user.setId(1);
+        user.setRealName("吴");
         try {
-            progressService.updateExcel(progressForUpdate);
+            progressService.updateExcel(progress,user);
             mv.setViewName("forward:/progress/list/9999");
         } catch (Exception e) {
             log.error("edit error", progress, e);

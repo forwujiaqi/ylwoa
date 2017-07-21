@@ -17,14 +17,13 @@
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ylwoa.model.ExcelData">
     <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson" />
-    <result column="setting_json" jdbcType="LONGVARCHAR" property="settingJson" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, excel_id, excel_name, version, status, delete_flg, create_time, create_user_id,
+    id, excel_id, excel_name, version, status,delete_flg, create_time, create_user_id,
     create_user_name, update_time, update_user_id, update_user_name
   </sql>
   <sql id="Blob_Column_List">
-    data_json, setting_json
+    data_json
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select
@@ -40,15 +39,15 @@
   </delete>
   <insert id="insert" parameterType="com.ylwoa.model.ExcelData">
     insert into excel_data (id, excel_id, excel_name,
-      version, status, delete_flg,
+      version, status,delete_flg,
       create_time, create_user_id, create_user_name,
       update_time, update_user_id, update_user_name,
-      data_json, setting_json)
+      data_json)
     values (#{id,jdbcType=BIGINT}, #{excelId,jdbcType=BIGINT}, #{excelName,jdbcType=VARCHAR},
-      #{version,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{deleteFlg,jdbcType=INTEGER},
+      #{version,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},#{deleteFlg,jdbcType=INTEGER},
       #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR},
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{updateUserName,jdbcType=VARCHAR},
-      #{dataJson,jdbcType=LONGVARCHAR}, #{settingJson,jdbcType=LONGVARCHAR})
+      #{dataJson,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ylwoa.model.ExcelData">
     insert into excel_data
@@ -92,9 +91,6 @@
       <if test="dataJson != null">
         data_json,
       </if>
-      <if test="settingJson != null">
-        setting_json,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -113,7 +109,7 @@
         #{status,jdbcType=INTEGER},
       </if>
       <if test="deleteFlg != null">
-        #{deleteFlg,jdbcType=INTEGER},
+        #{delete_flg,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -135,9 +131,6 @@
       </if>
       <if test="dataJson != null">
         #{dataJson,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="settingJson != null">
-        #{settingJson,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -180,9 +173,6 @@
       <if test="dataJson != null">
         data_json = #{dataJson,jdbcType=LONGVARCHAR},
       </if>
-      <if test="settingJson != null">
-        setting_json = #{settingJson,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -199,8 +189,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_user_id = #{updateUserId,jdbcType=INTEGER},
       update_user_name = #{updateUserName,jdbcType=VARCHAR},
-      data_json = #{dataJson,jdbcType=LONGVARCHAR},
-      setting_json = #{settingJson,jdbcType=LONGVARCHAR}
+      data_json = #{dataJson,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ylwoa.model.ExcelData">
