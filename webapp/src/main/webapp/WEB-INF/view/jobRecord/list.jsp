@@ -178,6 +178,7 @@
         var pageNo = "${pageNo}"
         if(pageNo == 0) {
             table.page(0).draw(false);
+            table.search("").draw();
         }
     });
 
