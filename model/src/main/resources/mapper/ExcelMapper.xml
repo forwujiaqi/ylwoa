@@ -106,7 +106,7 @@
       </if>
     ) as d
     on a.id = d.excel_id
-    ORDER BY d.status, a.id DESC
+    ORDER BY d.status, d.plan_end_date
   </select>
   <select id="selectById"
           parameterType="map"
