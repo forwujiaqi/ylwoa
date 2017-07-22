@@ -61,7 +61,7 @@
                 <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/add">
                     <div class="row">
                         <div class="col-lg-12" >
-                            <input id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
+                            <input id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称 格式：工程名+日期" style="width: 500px">
                             <br>
                         </div>
                         <div class="col-lg-12">

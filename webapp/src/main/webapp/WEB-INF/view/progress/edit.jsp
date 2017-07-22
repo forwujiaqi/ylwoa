@@ -26,6 +26,8 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="${pageContext.request.contextPath}/daterangepicker/daterangepicker.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,6 +64,12 @@
                         <div class="col-lg-12" >
                             <input value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
                             <br>
+                            <div class="form-group">
+                                <label>工期：</label>
+                                <input style="width: 250px" type="text" name="progressRange" readonly class="form-control active"
+                                       id="progressRange">
+                                <br>
+                            </div>
                             <label class="radio-inline">
                                 <input type="radio" name="status" id="optionsRadiosInline1" value="0" <c:if test="${data.status == 0}">checked="checked"</c:if>>进行中
                             </label>
@@ -109,6 +117,10 @@
     <!-- Custom Theme JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/dist/js/sb-admin-2.js"></script>
 
+    <script src="${pageContext.request.contextPath}/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/daterangepicker/daterangepicker.js"></script>
+    <script src="${pageContext.request.contextPath}/datepicker/bootstrap-datepicker.js"></script>
+
     <script type="text/javascript">
 
         function getData() {
@@ -141,6 +153,18 @@
 
         $(document).ready(function () {
            load()
+
+            $('#progressRange').daterangepicker({
+                <c:if test="${data.planStartDate!=null and data.planEndDate!=null}">
+                    startDate: "<fmt:formatDate value="${data.planStartDate}" type="date" pattern="yyyy-MM-dd"/>",
+                    endDate: "<fmt:formatDate value="${data.planEndDate}" type="date" pattern="yyyy-MM-dd"/>",
+                </c:if>
+                timePicker: true,
+                timePickerIncrement: 1,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                }
+            });
         });
 
         function load() {

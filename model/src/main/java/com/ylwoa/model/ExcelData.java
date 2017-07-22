@@ -17,6 +17,10 @@ public class ExcelData {
 
     private Date createTime;
 
+    private Date planStartDate;
+
+    private Date planEndDate;
+
     private Integer createUserId;
 
     private String createUserName;
@@ -30,6 +34,44 @@ public class ExcelData {
     private String dataJson;
 
     private String settingJson;
+
+    @Override
+    public String toString() {
+        return "ExcelData{" +
+                "id=" + id +
+                ", excelId=" + excelId +
+                ", excelName='" + excelName + '\'' +
+                ", version=" + version +
+                ", status=" + status +
+                ", deleteFlg=" + deleteFlg +
+                ", createTime=" + createTime +
+                ", planStartDate=" + planStartDate +
+                ", planEndDate=" + planEndDate +
+                ", createUserId=" + createUserId +
+                ", createUserName='" + createUserName + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateUserId=" + updateUserId +
+                ", updateUserName='" + updateUserName + '\'' +
+                ", dataJson='" + dataJson + '\'' +
+                ", settingJson='" + settingJson + '\'' +
+                '}';
+    }
+
+    public Date getPlanStartDate() {
+        return planStartDate;
+    }
+
+    public void setPlanStartDate(Date planStartDate) {
+        this.planStartDate = planStartDate;
+    }
+
+    public Date getPlanEndDate() {
+        return planEndDate;
+    }
+
+    public void setPlanEndDate(Date planEndDate) {
+        this.planEndDate = planEndDate;
+    }
 
     public String getDataJson() {
         return dataJson;

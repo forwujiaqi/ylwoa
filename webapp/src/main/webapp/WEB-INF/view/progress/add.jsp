@@ -24,6 +24,8 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="${pageContext.request.contextPath}/daterangepicker/daterangepicker.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,6 +64,13 @@
                             <input id="dataJson" name="dataJson" type="hidden">
                             <input id="settingJson" name="settingJson" type="hidden">
                             <br>
+                            <div class="form-group">
+                                <label>工期：</label>
+                                <input style="width: 250px" type="text" name="progressRange" readonly class="form-control active"
+                                          id="progressRange">
+                                <br>
+                            </div>
+
                         </div>
                         <div class="col-lg-12">
                             <div id="excelShow"></div>
@@ -98,6 +107,9 @@
     <!-- Custom Theme JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/dist/js/sb-admin-2.js"></script>
 
+    <script src="${pageContext.request.contextPath}/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/daterangepicker/daterangepicker.js"></script>
+
     <script type="text/javascript">
 
         function getData() {
@@ -132,30 +144,14 @@
         };
         hot = new Handsontable(excelShow, settings1);
 
-//        function save() {
-//
-//            var cellJson = new Object();
-//            cellJson.dataInfo = hot.getData();
-//            cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;
-//            var dataJson = JSON.stringify({data: cellJson})
-//        }
 
-        function load() {
-            var aa = {
-                "data": {
-                    "dataInfo": [["", "Kia", "Nissan", "Toyota", "Honda"], ["2008", 10, 11, 12, 13], ["2009", 20, 11, 14, 13], ["2010", 30, 15, 12, 13], [null, null, null, null, null]],
-                    "mergeInfo": [{"row": 1, "col": 2, "rowspan": 1, "colspan": 2}]
-                }
+        $('#progressRange').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 1,
+            locale: {
+                format: 'YYYY-MM-DD'
             }
-            var mergeInfo = aa.data.mergeInfo
-            for (var i = 0; i < mergeInfo.length; i++) {
-                settings1.mergeCells.push(mergeInfo[i]);
-            }
-            settings1.data = aa.data.dataInfo
-            hot.destroy()
-            hot = new Handsontable(excelShow, settings1);
-            hot.render()
-        }
+        });
 
     </script>
     <script type="text/javascript">

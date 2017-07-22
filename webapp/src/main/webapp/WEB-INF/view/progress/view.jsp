@@ -26,11 +26,13 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="${pageContext.request.contextPath}/daterangepicker/daterangepicker.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="${pageContext.request.contextPath}/handsontable/dist/handsontable.full.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/handsontable/dist/handsontable.full.css"/>
@@ -43,118 +45,140 @@
 </head>
 
 <body>
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-        <%@ include file="../include/header.jsp"%>
+    <!-- Navigation -->
+    <%@ include file="../include/header.jsp"%>
 
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">施工进度</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <form role="form" id="form">
                 <div class="row">
+                    <div class="col-lg-12" >
+                        <input value="${data.excelName}" readonly id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
+                        <br>
+                        <div class="form-group">
+                            <label>工期：</label>
+                            <input style="width: 250px" type="text" name="progressRange" disabled class="form-control active"
+                                   id="progressRange">
+                            <br>
+                        </div>
+                        <label class="radio-inline">
+                            <input disabled type="radio" name="status" id="optionsRadiosInline1" value="0" <c:if test="${data.status == 0}">checked="checked"</c:if>>进行中
+                        </label>
+                        <label class="radio-inline">
+                            <input disabled type="radio" name="status" id="optionsRadiosInline2" value="1" <c:if test="${data.status == 1}">checked="checked"</c:if>>已完成
+                        </label>
+                        <br>
+                        <input id="dataJson" name="dataJson" type="hidden" value="${data.dataJson}">
+                        <input id="status" name="status" type="hidden" value="${data.status}">
+                        <input id="id" name="id" type="hidden" value="${data.id}">
+                        <br>
+                    </div>
                     <div class="col-lg-12">
-                        <h1 class="page-header">施工进度</h1>
+                        <div id="excelShow"></div>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/progress/edit">
-                    <div class="row">
-                        <div class="col-lg-12" >
-                            <input readonly="readonly" value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
-                            <br>
-                            <label class="radio-inline">
-                                <input disabled type="radio" name="status" id="optionsRadiosInline1" value="0" <c:if test="${data.status == 0}">checked="checked"</c:if>>进行中
-                            </label>
-                            <label class="radio-inline">
-                                <input disabled type="radio" name="status" id="optionsRadiosInline2" value="1" <c:if test="${data.status == 1}">checked="checked"</c:if>>已完成
-                            </label>
-                            <br>
-                            <input id="dataJson" name="dataJson" type="hidden" value="${data.dataJson}">
-                            <input id="status" name="status" type="hidden" value="${data.status}">
-                            <input id="id" name="id" type="hidden" value="${data.id}">
-                            <br>
-                        </div>
-                        <div class="col-lg-12">
-                            <div id="excelShow"></div>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-12" style="text-align:center;width:1240px">
+                        <br>
+                        <a href="/progress/list/0" class="btn btn-warning" role="button">退出</a>
+                    </div>
                     <!-- /.col-lg-12 -->
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12" style="text-align:center;width:1240px">
-                            <br>
-                            <a href="/progress/list/0" class="btn btn-warning" role="button">退出</a>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                </form>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+                </div>
+            </form>
+            <!-- /.row -->
         </div>
-        <!-- /#page-wrapper -->
-
+        <!-- /.container-fluid -->
     </div>
-    <!-- /#wrapper -->
+    <!-- /#page-wrapper -->
 
-    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
+</div>
+<!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/metisMenu/metisMenu.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="${pageContext.request.contextPath}/assets/dist/js/sb-admin-2.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="${pageContext.request.contextPath}/assets/vendor/metisMenu/metisMenu.min.js"></script>
 
-    <script type="text/javascript">
+<!-- Custom Theme JavaScript -->
+<script src="${pageContext.request.contextPath}/assets/dist/js/sb-admin-2.js"></script>
 
-        function getData() {
-            return [[]];
-        }
+<script src="${pageContext.request.contextPath}/daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/daterangepicker/daterangepicker.js"></script>
+<script src="${pageContext.request.contextPath}/datepicker/bootstrap-datepicker.js"></script>
 
-        var excelShow = document.getElementById('excelShow'),
-            settings1,
-            hot;
+<script type="text/javascript">
 
-        settings1 = {
-            data: getData(),
-            startRows: 5,
-            startCols: 5,
-            minRows: 30,
-            minCols: 26,
-            manualColumnResize: true,
-            manualRowResize: true,
-            rowHeaders: true,
-            colHeaders: true,
-            minSpareRows: 1,
-            manualColumnMove: true,
-            manualRowMove: true,
-            mergeCells: [],
-            //       contextMenu:true
-            contextMenu: ['row_above', 'row_below', '---------','col_left','col_right','---------','remove_row','remove_col','---------','mergeCells','---------','undo','redo']
-        };
-        hot = new Handsontable(excelShow, settings1);
+    function getData() {
+        return [[]];
+    }
+
+    var excelShow = document.getElementById('excelShow'),
+        settings1,
+        hot;
+
+    settings1 = {
+        data: getData(),
+        startRows: 5,
+        startCols: 5,
+        minRows: 30,
+        minCols: 26,
+        manualColumnResize: true,
+        manualRowResize: true,
+        rowHeaders: true,
+        colHeaders: true,
+        minSpareRows: 1,
+        manualColumnMove: true,
+        manualRowMove: true,
+        mergeCells: [],
+        //       contextMenu:true
+        contextMenu: ['row_above', 'row_below', '---------','col_left','col_right','---------','remove_row','remove_col','---------','mergeCells','---------','undo','redo']
+    };
+    hot = new Handsontable(excelShow, settings1);
 
 
-        $(document).ready(function () {
-           load()
-        });
+    $(document).ready(function () {
+        load()
 
-        function load() {
-            var aa = ${data.dataJson}
-            var mergeInfo = aa.data.mergeInfo
-            for (var i = 0; i < mergeInfo.length; i++) {
-                settings1.mergeCells.push(mergeInfo[i]);
+        $('#progressRange').daterangepicker({
+            <c:if test="${data.planStartDate!=null and data.planEndDate!=null}">
+            startDate: "<fmt:formatDate value="${data.planStartDate}" type="date" pattern="yyyy-MM-dd"/>",
+            endDate: "<fmt:formatDate value="${data.planEndDate}" type="date" pattern="yyyy-MM-dd"/>",
+            </c:if>
+            timePicker: true,
+            timePickerIncrement: 1,
+            locale: {
+                format: 'YYYY-MM-DD'
             }
-            settings1.data = aa.data.dataInfo
-            hot.destroy()
-            hot = new Handsontable(excelShow, settings1);
-            hot.render()
-        }
+        });
+    });
 
-    </script>
+    function load() {
+        var aa = ${data.dataJson}
+        var mergeInfo = aa.data.mergeInfo
+        for (var i = 0; i < mergeInfo.length; i++) {
+            settings1.mergeCells.push(mergeInfo[i]);
+        }
+        settings1.data = aa.data.dataInfo
+        hot.destroy()
+        hot = new Handsontable(excelShow, settings1);
+        hot.render()
+    }
+
+</script>
 </body>
 
 </html>

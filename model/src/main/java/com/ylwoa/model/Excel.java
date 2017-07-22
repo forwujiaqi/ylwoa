@@ -24,6 +24,12 @@ public class Excel {
 
     private String createUserName;
 
+    private String progressRange;
+
+    private Date planStartDate;
+
+    private Date planEndDate;
+
     private Date updateTime;
 
     private Integer updateUserId;
@@ -33,6 +39,53 @@ public class Excel {
     private String dataJson;
 
     private String settingJson;
+
+    public String getProgressRange() {
+        return progressRange;
+    }
+
+    public void setProgressRange(String progressRange) {
+        this.progressRange = progressRange;
+    }
+
+    @Override
+    public String toString() {
+        return "Excel{" +
+                "id=" + id +
+                ", excelType=" + excelType +
+                ", excelId=" + excelId +
+                ", excelName='" + excelName + '\'' +
+                ", version=" + version +
+                ", status=" + status +
+                ", deleteFlg=" + deleteFlg +
+                ", createTime=" + createTime +
+                ", createUserId=" + createUserId +
+                ", createUserName='" + createUserName + '\'' +
+                ", planStartDate=" + planStartDate +
+                ", planEndDate=" + planEndDate +
+                ", updateTime=" + updateTime +
+                ", updateUserId=" + updateUserId +
+                ", updateUserName='" + updateUserName + '\'' +
+                ", dataJson='" + dataJson + '\'' +
+                ", settingJson='" + settingJson + '\'' +
+                '}';
+    }
+
+    public Date getPlanStartDate() {
+        return planStartDate;
+    }
+
+    public void setPlanStartDate(Date planStartDate) {
+        this.planStartDate = planStartDate;
+    }
+
+    public Date getPlanEndDate() {
+        return planEndDate;
+    }
+
+    public void setPlanEndDate(Date planEndDate) {
+        this.planEndDate = planEndDate;
+    }
 
     public Long getExcelId() {
         return excelId;

@@ -1,5 +1,6 @@
 package com.ylwoa.progress.impl;
 
+import com.ylwoa.common.Commons;
 import com.ylwoa.model.Excel;
 import com.ylwoa.model.ExcelData;
 import com.ylwoa.model.User;
@@ -58,6 +59,10 @@ public class ProgressService implements IProgressService {
         excelData.setCreateTime(now);
         excelData.setCreateUserName(user.getRealName());
 
+        Commons.DateRange dateRange =Commons.parseDateRange(excel.getProgressRange());
+        excelData.setPlanStartDate(dateRange.getStart());
+        excelData.setPlanEndDate(dateRange.getEnd());
+
         excelData.setExcelId(excel.getId());
         excelData.setExcelName(excel.getExcelName());
         excelData.setDataJson(excel.getDataJson());
@@ -85,6 +90,10 @@ public class ProgressService implements IProgressService {
             excelData.setCreateUserId(excelResult.getCreateUserId());
             excelData.setCreateTime(excelResult.getCreateTime());
             excelData.setCreateUserName(excelResult.getCreateUserName());
+
+            Commons.DateRange dateRange =Commons.parseDateRange(excel.getProgressRange());
+            excelData.setPlanStartDate(dateRange.getStart());
+            excelData.setPlanEndDate(dateRange.getEnd());
 
             excelData.setExcelId(excelResult.getId());
             excelData.setExcelName(excel.getExcelName());
@@ -118,6 +127,9 @@ public class ProgressService implements IProgressService {
             excelData.setCreateUserId(excelResult.getCreateUserId());
             excelData.setCreateTime(excelResult.getCreateTime());
             excelData.setCreateUserName(excelResult.getCreateUserName());
+
+            excelData.setPlanStartDate(excelResult.getPlanStartDate());
+            excelData.setPlanEndDate(excelResult.getPlanEndDate());
 
             excelData.setExcelId(excelResult.getId());
             excelData.setExcelName(excelResult.getExcelName());
