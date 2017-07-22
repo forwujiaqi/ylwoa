@@ -51,6 +51,30 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>采购申请<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/purchasing/toAdd">采购申请</a>
+                        </li>
+                        <li>
+                            <a href="/purchasing/list/0">采购列表</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>到货申请<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/arrive/toAdd">到货申请</a>
+                        </li>
+                        <li>
+                            <a href="/arrive/list/0">到货列表</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>施工日志<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>

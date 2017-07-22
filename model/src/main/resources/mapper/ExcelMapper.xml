@@ -106,6 +106,10 @@
       </if>
     ) as d
     on a.id = d.excel_id
+    where 1=1
+    <if test="excelType != null">
+      and a.excel_type =  #{excelType,jdbcType=INTEGER}
+    </if>
     ORDER BY d.status, d.plan_end_date
   </select>
   <select id="selectById"

@@ -23,32 +23,30 @@ import static com.ylwoa.common.Commons.INACTIVE_STATE;
 /**
  * Created by wubiqing on 2017/7/20.
  */
-@RequestMapping("/progress")
+@RequestMapping("/arrive")
 @Controller
-public class ProgressController {
+public class ArriveController {
     @Autowired
     private IProgressService progressService;
 
-    private static transient Logger log = LoggerFactory.getLogger(ProgressController.class);
+    private static transient Logger log = LoggerFactory.getLogger(ArriveController.class);
 
     @RequestMapping(value = "/list/{pageNo}")
-    public ModelAndView progressList(@PathVariable String pageNo) {
-        ModelAndView mv = new ModelAndView("/progress/list");
+    public ModelAndView list(@PathVariable String pageNo) throws Exception {
+        ModelAndView mv = new ModelAndView("/arrive/list");
         Map<String, Object> paras = Maps.newHashMap();
 
-        List<Excel> progressList;
+        List<Excel> list;
         try {
             paras.put("deleteFlg", ACTIVE_STATE);
-            paras.put("excelType", ExcelTypeEnum.PROGRESS.ordinal());
-            progressList = progressService.getList(paras);
+            paras.put("excelType", ExcelTypeEnum.ARRIVE.ordinal());
+            list = progressService.getList(paras);
         } catch (Exception e) {
-            log.error("progressList error", pageNo, e);
-            mv.addObject("success", false);
-            mv.addObject("pageData", null);
-            return mv;
+            log.error("list error", pageNo, e);
+            throw e;
         }
         mv.addObject("success", true);
-        mv.addObject("pageData", progressList);
+        mv.addObject("pageData", list);
         if ("0".equals(pageNo)) {
             mv.addObject("pageNo", pageNo);
         } else {
@@ -60,22 +58,23 @@ public class ProgressController {
 
     @RequestMapping(value = "/toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd() {
-        ModelAndView mv = new ModelAndView("/progress/add");
+        ModelAndView mv = new ModelAndView("/arrive/add");
         return mv;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView add(Excel progress) {
-        ModelAndView mv = new ModelAndView("/progress/list");
+    public ModelAndView add(Excel excel) throws Exception {
+        ModelAndView mv = new ModelAndView("/arrive/list");
         try {
             User user = new User();
             user.setId(1);
             user.setRealName("吴");
-            progress.setExcelType(ExcelTypeEnum.PROGRESS.ordinal());
-            progressService.insertExcel(progress,user);
-            mv.setViewName("forward:/progress/list/0");
+            excel.setExcelType(ExcelTypeEnum.ARRIVE.ordinal());
+            progressService.insertExcel(excel,user);
+            mv.setViewName("forward:/arrive/list/0");
         } catch (Exception e) {
-            log.error("add error", progress, e);
+            log.error("add error", excel, e);
+            throw e;
         }
 
         return mv;
@@ -83,74 +82,75 @@ public class ProgressController {
 
 
     @RequestMapping(value = "/toView/{excelId}", method = RequestMethod.GET)
-    public ModelAndView toView(@PathVariable String excelId) {
-        ModelAndView mv = new ModelAndView("/progress/view");
+    public ModelAndView toView(@PathVariable String excelId) throws Exception {
+        ModelAndView mv = new ModelAndView("/arrive/view");
         Map<String, Object> paras = Maps.newHashMap();
         paras.put("excelId", excelId);
         try {
-            List<Excel> progressList = progressService.getListById(paras);
-            if (null != progressList && progressList.size() > 0) {
+            List<Excel> excelList = progressService.getListById(paras);
+            if (null != excelList && excelList.size() > 0) {
                 mv.addObject("success", true);
-                mv.addObject("data", progressList.get(0));
+                mv.addObject("data", excelList.get(0));
             }
         } catch (Exception e) {
             log.error("toView error", excelId, e);
-            mv.addObject("success", false);
+            throw e;
         }
         return mv;
     }
 
     @RequestMapping(value = "/delete/{excelId}")
-    public ModelAndView delete(@PathVariable String excelId) {
-        ModelAndView mv = new ModelAndView("/progress/list");
+    public ModelAndView delete(@PathVariable String excelId) throws Exception {
+        ModelAndView mv = new ModelAndView("/arrive/list");
         try {
             User user = new User();
             user.setId(1);
             user.setRealName("吴");
 
-            Excel progress = new Excel();
-            progress.setId(Long.parseLong(excelId));
-            progress.setDeleteFlg(INACTIVE_STATE);
+            Excel excel = new Excel();
+            excel.setId(Long.parseLong(excelId));
+            excel.setDeleteFlg(INACTIVE_STATE);
 
-            progressService.deleteExcel(progress,user);
-            mv.setViewName("forward:/progress/list/9999");
+            progressService.deleteExcel(excel,user);
+            mv.setViewName("forward:/arrive/list/9999");
         } catch (Exception e) {
             log.error("delete error", excelId, e);
+            throw e;
         }
 
         return mv;
     }
 
     @RequestMapping(value = "/toEdit/{excelId}")
-    public ModelAndView toEdit(@PathVariable String excelId) {
-        ModelAndView mv = new ModelAndView("/progress/edit");
+    public ModelAndView toEdit(@PathVariable String excelId) throws Exception {
+        ModelAndView mv = new ModelAndView("/arrive/edit");
         Map<String, Object> paras = Maps.newHashMap();
         paras.put("excelId", excelId);
         try {
-            List<Excel> progressList = progressService.getListById(paras);
-            if (null != progressList && progressList.size() > 0) {
+            List<Excel> excelList = progressService.getListById(paras);
+            if (null != excelList && excelList.size() > 0) {
                 mv.addObject("success", true);
-                mv.addObject("data", progressList.get(0));
+                mv.addObject("data", excelList.get(0));
             }
         } catch (Exception e) {
             log.error("toEdit error", excelId, e);
-            mv.addObject("success", false);
+            throw e;
         }
         return mv;
     }
 
     @RequestMapping(value = "/edit")
-    public ModelAndView edit(Excel progress) {
-        ModelAndView mv = new ModelAndView("/progress/list");
+    public ModelAndView edit(Excel excel) throws Exception {
+        ModelAndView mv = new ModelAndView("/arrive/list");
         User user = new User();
         user.setId(1);
         user.setRealName("吴");
         try {
-            progressService.updateExcel(progress,user);
-            mv.setViewName("forward:/progress/list/9999");
+            progressService.updateExcel(excel,user);
+            mv.setViewName("forward:/arrive/list/9999");
         } catch (Exception e) {
-            log.error("edit error", progress, e);
-            mv.addObject("success", false);
+            log.error("edit error", excel, e);
+            throw e;
         }
         return mv;
     }

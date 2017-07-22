@@ -19,8 +19,6 @@ public class Commons {
     public static final String DELETE_FLG = "deleteFlg";
     public static final String DATE_RANGE_FORMAT = "yyyy-MM-dd";
 
-    // TODO 换枚举
-    public static final int PROGRESS = 1;
 
     public static String maskForCookie(String str) {
         String MASK_FOR_COOKIE = "rdfEk83.ejK.IMnBdU";

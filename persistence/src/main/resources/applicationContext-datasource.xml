@@ -30,10 +30,16 @@
     <!--</bean>-->
 
     <bean id="dataSource" parent="abstractPoolDatatSource">
-        <property name="url" value="jdbc:mysql://localhost/ylwoa?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;generateSimpleParameterMetadata=true"/>
+        <property name="url" value="jdbc:mysql://10.100.172.82/ylw_oa?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;generateSimpleParameterMetadata=true"/>
         <property name="username" value="root"/>
-        <property name="password" value="123456"/>
+        <property name="password" value="root"/>
     </bean>
+
+    <!--<bean id="dataSource" parent="abstractPoolDatatSource">-->
+        <!--<property name="url" value="jdbc:mysql://localhost/ylwoa?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;generateSimpleParameterMetadata=true"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="123456"/>-->
+    <!--</bean>-->
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />

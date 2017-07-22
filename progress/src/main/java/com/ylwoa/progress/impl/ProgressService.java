@@ -18,7 +18,6 @@ import java.util.Map;
 
 import static com.ylwoa.common.Commons.ACTIVE_STATE;
 import static com.ylwoa.common.Commons.INACTIVE_STATE;
-import static com.ylwoa.common.Commons.PROGRESS;
 
 /**
  * Created by wubiqing on 2017/7/20.
@@ -47,7 +46,6 @@ public class ProgressService implements IProgressService {
     @Transactional
     public void insertExcel(Excel excel, User user) throws Exception {
         excel.setVersion((long) 1);
-        excel.setExcelType(PROGRESS);
         excelDao.insert(excel);
 
         ExcelData excelData = new ExcelData();
