@@ -68,13 +68,13 @@
                             <br>
                         </div>
                         <div class="col-lg-12">
-                            <script id="editor" type="text/plain" style="width:1240px;height:650px;"></script>
+                            <script id="editor" type="text/plain" style="width:100%;height:650px;"></script>
                             <input id="recordContent" name="recordContent" type="hidden" value="">
                         </div>
                     <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
-                        <div class="col-lg-12" style="text-align:center;width:1240px">
+                        <div class="col-lg-12" style="text-align:center;width:100%">
                             <br>
                             <button type="button" id="save" class="btn btn-success">提交</button>
                             <a href="/jobRecord/list/0" class="btn btn-warning" role="button">退出</a>

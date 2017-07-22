@@ -78,7 +78,7 @@
                     <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
-                        <div class="col-lg-12" style="text-align:center;width:1240px">
+                        <div class="col-lg-12" style="text-align:center;width:100%">
                             <br>
                             <button type="button" id="save" class="btn btn-success">提交</button>
                             <a href="/progress/list/0" class="btn btn-warning" role="button">退出</a>
@@ -129,8 +129,8 @@
             data: getData(),
             startRows: 5,
             startCols: 5,
-            minRows: 30,
-            minCols: 26,
+            minRows: 25,
+            minCols: 18,
             manualColumnResize: true,
             manualRowResize: true,
             rowHeaders: true,
