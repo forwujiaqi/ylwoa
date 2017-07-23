@@ -1,7 +1,8 @@
 package com.ylwoa.web.controller;
 
-import com.ylwoa.user.IUserService;
+import com.ylwoa.common.Commons;
 import com.ylwoa.model.User;
+import com.ylwoa.user.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,16 +38,18 @@ public class LoginController {
 
         ModelAndView modelAndView = new ModelAndView("/toLogin");
         try {
-            userService.login(request, user);
-            // TODO cookie的值要参考下
-            String cookie = user.getPhone();
-            Cookie cookieToAdd = new Cookie(USER_COOKIE_KEY, cookie);
+            user = userService.login(request, user);
+            String phoneCookie = user.getPhone();
+            String password = user.getPassword();
+            String maskedCookie = Commons.maskForCookie(password);
+
+            Cookie cookieToAdd = new Cookie(USER_COOKIE_KEY, phoneCookie + "$" + maskedCookie);
             cookieToAdd.setMaxAge(60 * 60 * 24); //过期时间1天
             response.addCookie(cookieToAdd);
             modelAndView.addObject("success", true);
-            modelAndView.setViewName("redirect:/jobRecord/list");
+            modelAndView.setViewName("redirect:/progress/list/0");
         } catch (Exception e) {
-            log.error("login error",user,e);
+            log.error("login error", user, e);
             modelAndView.addObject("success", false);
             modelAndView.addObject("message", e.getMessage());
         }
@@ -55,8 +58,7 @@ public class LoginController {
 
     @RequestMapping("/logout")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response)
-            throws IOException
-    {
+            throws IOException {
         log.info("logout start");
         request.getSession().invalidate();
         Cookie cookieToAdd = new Cookie(USER_COOKIE_KEY, null);

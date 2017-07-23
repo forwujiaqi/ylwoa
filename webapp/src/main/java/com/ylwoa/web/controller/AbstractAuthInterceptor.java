@@ -1,5 +1,6 @@
 package com.ylwoa.web.controller;
 
+import com.ylwoa.common.Commons;
 import com.ylwoa.model.User;
 import com.ylwoa.user.IUserService;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static com.ylwoa.common.Commons.USER_COOKIE_KEY;
@@ -23,29 +25,40 @@ public abstract class AbstractAuthInterceptor implements HandlerInterceptor {
     @Resource
     private IUserService userService;
 
-    protected boolean doPreHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        log.info("doPreHandle start " + httpServletRequest.getServletPath());
+    protected boolean doPreHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
 
-        Cookie[] cookies = httpServletRequest.getCookies();
+        Cookie[] cookies = request.getCookies();
         String userCookieValue = getCookieValue(cookies, USER_COOKIE_KEY);
-        log.info("userCookieValue " + userCookieValue);
         if (userCookieValue==null ) {
-            redirectToLoginPage(httpServletResponse);
+            redirectToLoginPage(response);
             return false;
         }
 
-        User user = userService.getUserByCookie(userCookieValue);
-        log.info("user " + user);
-        if (user == null) {
-            redirectToLoginPage(httpServletResponse);
+        int pos = userCookieValue.indexOf('$');
+        if (pos < 0) {
             return false;
         }
-        httpServletRequest.setAttribute(USER_SESSION_MARK, user);
+        String phone = userCookieValue.substring(0, pos);
+        String maskedPassword = userCookieValue.substring(pos + 1);
+
+        User user = userService.getUserByCookie(phone);
+        if (user == null) {
+            redirectToLoginPage(response);
+            return false;
+        }
+
+        if (!Commons.maskForCookie(user.getPassword()).equals(maskedPassword)) {
+            redirectToLoginPage(response);
+            return false;
+        }
+
+        HttpServletRequest servletRequest = (HttpServletRequest) request;
+        HttpSession session = servletRequest.getSession();
+        session.setAttribute(USER_SESSION_MARK, user);
         return true;
     }
 
     private void redirectToLoginPage(HttpServletResponse response) throws IOException {
-        log.info("AbstractAuthInterceptor redirectToLoginPage start");
         response.sendRedirect("/toLogin");
     }
 

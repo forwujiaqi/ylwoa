@@ -13,13 +13,16 @@
     <!--不拦截静态资源-->
     <mvc:default-servlet-handler />
 
-    <!--TODO 静态资源会拦截吗-->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="jobRecord/*"/>-->
-            <!--<bean class="com.ylwoa.web.controller.AuthInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <!--静态资源会拦截吗 不会-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/progress/**"/>
+            <mvc:mapping path="/purchasing/**"/>
+            <mvc:mapping path="/arrive/**"/>
+            <mvc:mapping path="/jobRecord/**"/>
+            <bean class="com.ylwoa.web.controller.AuthInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"/>

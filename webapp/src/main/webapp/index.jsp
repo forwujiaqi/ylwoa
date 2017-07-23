@@ -4,6 +4,6 @@
     <title>login</title>
 </head>
 <body>
-    <jsp:forward page="/jobRecord/list/0" />
+    <jsp:forward page="/progress/list/0" />
 </body>
 </html>

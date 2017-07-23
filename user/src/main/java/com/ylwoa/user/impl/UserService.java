@@ -51,7 +51,6 @@ public class UserService implements IUserService {
 
     @Override
     public User getUserByCookie(String cookieValue) {
-        // TODO get userByCookie
         Map<String, Object> paras = new HashMap<>();
         paras.put("phone", cookieValue);
         paras.put(DELETE_FLG, ACTIVE_STATE);

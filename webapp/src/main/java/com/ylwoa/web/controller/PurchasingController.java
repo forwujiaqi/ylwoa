@@ -1,6 +1,7 @@
 package com.ylwoa.web.controller;
 
 import com.google.common.collect.Maps;
+import com.ylwoa.common.Commons;
 import com.ylwoa.common.ExcelTypeEnum;
 import com.ylwoa.model.Excel;
 import com.ylwoa.model.User;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -63,12 +65,12 @@ public class PurchasingController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView add(Excel excel) throws Exception {
+    public ModelAndView add(HttpServletRequest request, Excel excel) throws Exception {
         ModelAndView mv = new ModelAndView("/purchasing/list");
         try {
-            User user = new User();
-            user.setId(1);
-            user.setRealName("吴");
+            User user = Commons.getUserInfoFromSession(request);
+            user.setId(user.getId());
+            user.setRealName(user.getRealName());
             excel.setExcelType(ExcelTypeEnum.PURCHASING.ordinal());
             progressService.insertExcel(excel,user);
             mv.setViewName("forward:/purchasing/list/0");
@@ -100,12 +102,12 @@ public class PurchasingController {
     }
 
     @RequestMapping(value = "/delete/{excelId}")
-    public ModelAndView delete(@PathVariable String excelId) throws Exception {
+    public ModelAndView delete(HttpServletRequest request,@PathVariable String excelId) throws Exception {
         ModelAndView mv = new ModelAndView("/purchasing/list");
         try {
-            User user = new User();
-            user.setId(1);
-            user.setRealName("吴");
+            User user = Commons.getUserInfoFromSession(request);
+            user.setId(user.getId());
+            user.setRealName(user.getRealName());
 
             Excel excel = new Excel();
             excel.setId(Long.parseLong(excelId));
@@ -140,11 +142,11 @@ public class PurchasingController {
     }
 
     @RequestMapping(value = "/edit")
-    public ModelAndView edit(Excel excel) throws Exception {
+    public ModelAndView edit(HttpServletRequest request,Excel excel) throws Exception {
         ModelAndView mv = new ModelAndView("/purchasing/list");
-        User user = new User();
-        user.setId(1);
-        user.setRealName("吴");
+        User user = Commons.getUserInfoFromSession(request);
+        user.setId(user.getId());
+        user.setRealName(user.getRealName());
         try {
             progressService.updateExcel(excel,user);
             mv.setViewName("forward:/purchasing/list/9999");

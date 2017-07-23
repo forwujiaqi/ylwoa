@@ -76,13 +76,12 @@
                                 <tr>
                                     <th style="text-align: center">序号</th>
                                     <th style="text-align: center">进度表</th>
-                                    <th class="visible-md" style="text-align: center">计划开始时间</th>
+                                    <th style="text-align: center">计划开始时间</th>
                                     <th style="text-align: center">计划完成时间</th>
                                     <th style="text-align: center">状态</th>
                                     <th style="text-align: center">完成时间</th>
-                                    <th class="visible-md"
-                                        style="text-align: center">创建人</th>
-                                    <th class="visible-md" style="text-align: center">创建时间</th>
+                                    <th style="text-align: center">创建人</th>
+                                    <th style="text-align: center">创建时间</th>
                                     <th style="text-align: center">修改人</th>
                                     <th style="text-align: center">修改时间</th>
                                     <th style="text-align: center">操作</th>
@@ -106,7 +105,7 @@
                                     </c:choose>
                                     <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
                                     <td style="text-align: left;vertical-align: middle">${item.excelName}</td>
-                                    <td class="visible-md" tyle="text-align: left;vertical-align: middle"><fmt:formatDate
+                                    <td style="text-align: left;vertical-align: middle"><fmt:formatDate
                                             value="${item.planStartDate}" type="date" pattern="yyyy-MM-dd"/></td>
                                     <td style="text-align: left;vertical-align: middle"><fmt:formatDate
                                             value="${item.planEndDate}" type="date" pattern="yyyy-MM-dd"/></td>
@@ -120,8 +119,8 @@
                                                     value="${item.updateTime}" type="date" pattern="yyyy-MM-dd"/>
                                         </c:if>
                                     </td>
-                                    <td class="visible-md" style="text-align: left;vertical-align: middle">${item.createUserName}</td>
-                                    <td class="visible-md" style="text-align: left;vertical-align: middle"><fmt:formatDate
+                                    <td style="text-align: left;vertical-align: middle">${item.createUserName}</td>
+                                    <td style="text-align: left;vertical-align: middle"><fmt:formatDate
                                             value="${item.createTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></td>
                                     <td style="text-align: left;vertical-align: middle">${item.updateUserName}</td>
                                     <td style="text-align: left;vertical-align: middle"><fmt:formatDate
@@ -207,6 +206,11 @@
             table.page(0).draw(false);
             table.search("").draw();
         }
+
+        if($("#dataTables").width() < 1000) {
+
+        }
+
     });
 
     function showProgress(progressId) {

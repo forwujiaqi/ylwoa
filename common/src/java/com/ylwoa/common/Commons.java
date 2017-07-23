@@ -1,8 +1,14 @@
 package com.ylwoa.common;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.hash.Hashing;
+import com.ylwoa.model.User;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +39,7 @@ public class Commons {
     public static DateRange parseDateRange(String strRange) throws ParseException {
         List<String> dateStrings = Splitter.on(" - ").splitToList(strRange);
         if (dateStrings.size() != 2) {
-            throw new ParseException(strRange,0);
+            throw new ParseException(strRange, 0);
         }
         DateRange ret = new DateRange();
         SimpleDateFormat dft = new SimpleDateFormat(DATE_RANGE_FORMAT);
@@ -41,6 +47,18 @@ public class Commons {
         ret.setEnd(dft.parse(dateStrings.get(1)));
         return ret;
     }
+
+    public static User getUserInfoFromSession(ServletRequest request) {
+        User user = null;
+        HttpServletRequest servletRequest = (HttpServletRequest) request;
+        HttpSession session = servletRequest.getSession(false);
+        if (null != session) {
+            user = (User) session.getAttribute(USER_SESSION_MARK);
+        }
+        Preconditions.checkNotNull(user, "get session null");
+        return user;
+    }
+
 
     public static class DateRange {
         private Date start;
