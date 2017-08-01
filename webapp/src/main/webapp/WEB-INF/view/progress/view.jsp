@@ -55,7 +55,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">施工进度</h1>
+                    <h1 class="page-header">查看施工进度</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

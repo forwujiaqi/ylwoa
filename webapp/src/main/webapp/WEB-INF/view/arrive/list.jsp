@@ -57,7 +57,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">进度列表</h1>
+                    <h1 class="page-header">到货清单</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -75,9 +75,7 @@
                                 <thead>
                                 <tr>
                                     <th style="text-align: center">序号</th>
-                                    <th style="text-align: center">进度表</th>
-                                    <th class="visible-md" style="text-align: center">计划开始时间</th>
-                                    <th style="text-align: center">计划完成时间</th>
+                                    <th style="text-align: center">到货清单</th>
                                     <th style="text-align: center">状态</th>
                                     <th style="text-align: center">完成时间</th>
                                     <th class="visible-md"
@@ -94,22 +92,12 @@
                                         <c:when test="${item.status == 1}">
                                             <tr class="success">
                                         </c:when>
-                                        <c:when test="${item.status == 0 and (nowDate - item.planEndDate.time > 0)}">
-                                            <tr class="danger">
-                                        </c:when>
-                                        <c:when test="${item.status == 0 and (item.planEndDate.time - nowDate <  86400000*7 )  }">
-                                            <tr class="warning">
-                                        </c:when>
                                         <c:otherwise>
                                             <tr>
                                         </c:otherwise>
                                     </c:choose>
                                     <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
                                     <td style="text-align: left;vertical-align: middle">${item.excelName}</td>
-                                    <td class="visible-md" tyle="text-align: left;vertical-align: middle"><fmt:formatDate
-                                            value="${item.planStartDate}" type="date" pattern="yyyy-MM-dd"/></td>
-                                    <td style="text-align: left;vertical-align: middle"><fmt:formatDate
-                                            value="${item.planEndDate}" type="date" pattern="yyyy-MM-dd"/></td>
                                     <td style="text-align: left;vertical-align: middle">
                                         <c:if test="${item.status != 0}">已完成</c:if>
                                         <c:if test="${item.status == 0}">进行中</c:if>

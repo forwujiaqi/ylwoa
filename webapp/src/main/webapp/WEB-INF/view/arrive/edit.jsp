@@ -55,16 +55,16 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">施工进度</h1>
+                        <h1 class="page-header">编辑到货清单</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/arrive/edit">
                     <div class="row">
                         <div class="col-lg-12" >
-                            <input value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
+                            <input value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写到货清单名" style="width: 500px">
                             <br>
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label>工期：</label>
                                 <input style="width: 250px" type="text" name="progressRange" readonly class="form-control active"
                                        id="progressRange">

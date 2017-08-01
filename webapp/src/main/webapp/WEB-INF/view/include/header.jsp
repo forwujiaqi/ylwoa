@@ -39,18 +39,6 @@
                     <%--<a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主页</a>--%>
                 <%--</li>--%>
                 <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i>施工进度<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="/progress/toAdd">填写进度</a>
-                        </li>
-                        <li>
-                            <a href="/progress/list/0">进度列表</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>采购申请<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -70,6 +58,18 @@
                         </li>
                         <li>
                             <a href="/arrive/list/0">到货列表</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>施工进度<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/progress/toAdd">填写进度</a>
+                        </li>
+                        <li>
+                            <a href="/progress/list/0">进度列表</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
