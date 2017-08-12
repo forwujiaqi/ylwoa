@@ -26,6 +26,8 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="${pageContext.request.contextPath}/jquery-manifest-master/build/manifest.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -66,7 +68,13 @@
                             <input id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
                             <br>
                         </div>
+                        <div class="col-lg-12" >
+                            <input id="owner"
+                                   name="owner" autocomplete="off">
+                            <input type="hidden" name="ownerName" id="ownerName">
+                        </div>
                         <div class="col-lg-12">
+                            <br>
                             <script id="editor" type="text/plain" style="width:100%;height:650px;"></script>
                             <input id="recordContent" name="recordContent" type="hidden" value="">
                             <input id="id" name="id" type="hidden" value="">
@@ -92,7 +100,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/jquery/jquery-1.9.1.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -102,6 +110,11 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/dist/js/sb-admin-2.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/parts/jquery.ui.widget.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/jquery.manifest.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/parts/jquery.marcopolo.js"></script>
+
 
     <script type="text/javascript">
         //实例化编辑器
@@ -186,13 +199,16 @@
                 $("#recordName").val("${data.recordName}")
                 ue.execCommand('insertHtml', '${data.recordContent}')
                 $("#id").val("${data.id}")
+                $("#owner").val("${data.ownerName}")
+                $('#owner').manifest();
             });
         });
 
 
         $("#save").click(function () {
-            $("#save").attr("disabled",true)
+            var $btn = $(this).button('loading')
             $("#recordContent").val(UE.getEditor('editor').getContent());
+            $("#ownerName").val($('#owner').manifest('values'));
             $("#form").method="post";
             $("#form").submit();
         });

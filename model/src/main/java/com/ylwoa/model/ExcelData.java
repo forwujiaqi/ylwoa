@@ -35,6 +35,10 @@ public class ExcelData {
 
     private String settingJson;
 
+    private String owner;
+
+    private String ownerName;
+
     @Override
     public String toString() {
         return "ExcelData{" +
@@ -55,6 +59,22 @@ public class ExcelData {
                 ", dataJson='" + dataJson + '\'' +
                 ", settingJson='" + settingJson + '\'' +
                 '}';
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public Date getPlanStartDate() {

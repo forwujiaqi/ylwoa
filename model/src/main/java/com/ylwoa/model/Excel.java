@@ -40,6 +40,10 @@ public class Excel {
 
     private String settingJson;
 
+    private String owner;
+
+    private String ownerName;
+
     public String getProgressRange() {
         return progressRange;
     }
@@ -69,6 +73,22 @@ public class Excel {
                 ", dataJson='" + dataJson + '\'' +
                 ", settingJson='" + settingJson + '\'' +
                 '}';
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public Date getPlanStartDate() {

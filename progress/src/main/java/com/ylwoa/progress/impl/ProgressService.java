@@ -67,6 +67,7 @@ public class ProgressService implements IProgressService {
         excelData.setStatus(0);
         excelData.setDeleteFlg(ACTIVE_STATE);
         excelData.setVersion((long) 1);
+        excelData.setOwnerName(excel.getOwnerName());
         excelDataDao.insert(excelData);
     }
 
@@ -99,6 +100,7 @@ public class ProgressService implements IProgressService {
             excelData.setStatus(excel.getStatus());
             excelData.setVersion(excelResult.getVersion() + 1);
             excelData.setDeleteFlg(ACTIVE_STATE);
+            excelData.setOwnerName(excel.getOwnerName());
             excelDataDao.insert(excelData);
 
             Excel excelForUpdate = new Excel();

@@ -61,4 +61,12 @@ public class UserService implements IUserService {
         }
         return user;
     }
+
+    @Override
+    public List<User> getUserList() {
+        Map<String, Object> paras = new HashMap<>();
+        paras.put(DELETE_FLG, ACTIVE_STATE);
+        List<User> userList = userDao.select(paras);
+        return userList;
+    }
 }

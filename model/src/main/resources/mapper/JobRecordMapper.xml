@@ -10,12 +10,15 @@
     <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ylwoa.model.JobRecord">
     <result column="record_content" jdbcType="LONGVARCHAR" property="recordContent" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, record_name, record_type, delete_flg, create_time, create_user_id, update_time, 
+    id, record_name, record_type, delete_flg, create_time, create_user_id, update_time, owner_id,owner_name,
     update_user_id
   </sql>
   <sql id="Blob_Column_List">
@@ -36,11 +39,12 @@
   <insert id="insert" parameterType="com.ylwoa.model.JobRecord">
     insert into job_record (id, record_name, record_type, 
       delete_flg, create_time, create_user_id, 
-      update_time, update_user_id, record_content
+      update_time, update_user_id, record_content,owner_id,owner_name
       )
     values (#{id,jdbcType=BIGINT}, #{recordName,jdbcType=VARCHAR}, #{recordType,jdbcType=INTEGER}, 
       #{deleteFlg,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{recordContent,jdbcType=LONGVARCHAR}
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{recordContent,jdbcType=LONGVARCHAR},
+      #{ownerId,jdbcType=INTEGER},#{ownerName,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ylwoa.model.JobRecord">
@@ -73,6 +77,12 @@
       <if test="recordContent != null">
         record_content,
       </if>
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="ownerName != null">
+        owner_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -101,6 +111,12 @@
       </if>
       <if test="recordContent != null">
         #{recordContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerName != null">
+        #{ownerName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -131,6 +147,12 @@
       <if test="recordContent != null">
         record_content = #{recordContent,jdbcType=LONGVARCHAR},
       </if>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerName != null">
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -143,7 +165,9 @@
       create_user_id = #{createUserId,jdbcType=INTEGER},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_user_id = #{updateUserId,jdbcType=INTEGER},
-      record_content = #{recordContent,jdbcType=LONGVARCHAR}
+      record_content = #{recordContent,jdbcType=LONGVARCHAR},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      owner_name = #{ownerName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ylwoa.model.JobRecord">
@@ -154,7 +178,9 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=INTEGER}
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      owner_name = #{ownerName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="select"

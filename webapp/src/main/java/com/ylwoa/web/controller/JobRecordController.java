@@ -1,5 +1,6 @@
 package com.ylwoa.web.controller;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
 import com.ylwoa.jobrecord.IJobRecordService;
 import com.ylwoa.model.JobRecord;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.ylwoa.common.Commons.ACTIVE_STATE;
 import static com.ylwoa.common.Commons.INACTIVE_STATE;
@@ -40,7 +39,7 @@ public class JobRecordController {
             paras.put("deleteFlg", ACTIVE_STATE);
             jobRecordList = jobRecordService.getList(paras);
         } catch (Exception e) {
-            log.error("dailyRecordList error",pageNo,e);
+            log.error("dailyRecordList error", pageNo, e);
             mv.addObject("success", false);
             mv.addObject("pageData", null);
             return mv;
@@ -49,7 +48,7 @@ public class JobRecordController {
         mv.addObject("pageData", jobRecordList);
         if ("0".equals(pageNo)) {
             mv.addObject("pageNo", pageNo);
-        }else{
+        } else {
             mv.addObject("pageNo", "9999");
         }
 
@@ -73,10 +72,11 @@ public class JobRecordController {
             jobRecord.setCreateUserId(1);
             jobRecord.setCreateTime(now);
             jobRecord.setDeleteFlg(ACTIVE_STATE);
+            jobRecord.setOwnerName(jobRecord.getOwnerName());
             jobRecordService.insertJobRecord(jobRecord);
             mv.setViewName("forward:/jobRecord/list/0");
         } catch (Exception e) {
-            log.error("add error",jobRecord,e);
+            log.error("add error", jobRecord, e);
         }
 
         return mv;
@@ -95,7 +95,7 @@ public class JobRecordController {
                 mv.addObject("data", jobRecordList.get(0));
             }
         } catch (Exception e) {
-            log.error("toView error",recordId,e);
+            log.error("toView error", recordId, e);
             mv.addObject("success", false);
         }
         return mv;
@@ -111,7 +111,7 @@ public class JobRecordController {
             jobRecordService.updateJobRecord(jobRecord);
             mv.setViewName("forward:/jobRecord/list/9999");
         } catch (Exception e) {
-            log.error("delete error",recordId, e);
+            log.error("delete error", recordId, e);
         }
 
         return mv;
@@ -129,7 +129,7 @@ public class JobRecordController {
                 mv.addObject("data", jobRecordList.get(0));
             }
         } catch (Exception e) {
-            log.error("toEdit error",recordId,e);
+            log.error("toEdit error", recordId, e);
             mv.addObject("success", false);
         }
         return mv;
@@ -144,11 +144,12 @@ public class JobRecordController {
         jobRecordForUpdate.setRecordName(jobRecord.getRecordName());
         jobRecordForUpdate.setUpdateUserId(1);
         jobRecordForUpdate.setUpdateTime(new Date());
+        jobRecordForUpdate.setOwnerName(jobRecord.getOwnerName());
         try {
             jobRecordService.updateJobRecord(jobRecordForUpdate);
             mv.setViewName("forward:/jobRecord/list/9999");
         } catch (Exception e) {
-            log.error("edit error",jobRecord,e);
+            log.error("edit error", jobRecord, e);
             mv.addObject("success", false);
         }
         return mv;

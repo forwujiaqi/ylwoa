@@ -21,6 +21,12 @@ public class JobRecord {
 
     private String recordContent;
 
+    private Integer ownerId;
+
+    private String ownerName;
+
+    private String owner;
+
     @Override
     public String toString() {
         return "JobRecord{" +
@@ -33,7 +39,33 @@ public class JobRecord {
                 ", updateTime=" + updateTime +
                 ", updateUserId=" + updateUserId +
                 ", recordContent='" + recordContent + '\'' +
+                ", ownerId=" + ownerId +
+                ", ownerName='" + ownerName + '\'' +
                 '}';
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public Long getId() {

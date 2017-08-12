@@ -35,9 +35,9 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <%--<li>--%>
-                    <%--<a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主页</a>--%>
-                <%--</li>--%>
+                <li>
+                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主页</a>
+                </li>
                 <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>采购申请<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

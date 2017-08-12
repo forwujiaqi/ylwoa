@@ -26,6 +26,8 @@
 
     <link href="${pageContext.request.contextPath}/daterangepicker/daterangepicker.css" rel="stylesheet">
 
+    <link href="${pageContext.request.contextPath}/jquery-manifest-master/build/manifest.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -72,6 +74,10 @@
                             </div>
 
                         </div>
+                        <div class="col-lg-12" >
+                            <input id="owner" name="owner" autocomplete="off">
+                            <input type="hidden" name="ownerName" id="ownerName">
+                        </div>
                         <div class="col-lg-12">
                             <div id="excelShow"></div>
                         </div>
@@ -96,7 +102,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/jquery/jquery-1.9.1.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -109,6 +115,11 @@
 
     <script src="${pageContext.request.contextPath}/daterangepicker/moment.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/daterangepicker/daterangepicker.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/parts/jquery.ui.widget.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/jquery.manifest.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/parts/jquery.marcopolo.js"></script>
+
 
     <script type="text/javascript">
 
@@ -153,6 +164,8 @@
             }
         });
 
+        $('#owner').manifest();
+
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
@@ -162,6 +175,7 @@
             cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;
             var dataJson = JSON.stringify({data: cellJson})
             $("#dataJson").val(dataJson);
+            $("#ownerName").val($('#owner').manifest('values'));
             $("#form").method="post";
             $("#form").submit();
         });

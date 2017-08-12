@@ -24,6 +24,8 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="${pageContext.request.contextPath}/jquery-manifest-master/build/manifest.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,11 +38,6 @@
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/lang/zh-cn/zh-cn.js"></script>
-    <%--<style type="text/css">--%>
-        <%--div{--%>
-            <%--width:100%;--%>
-        <%--}--%>
-    <%--</style>--%>
 </head>
 
 <body>
@@ -61,13 +58,19 @@
                 <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/add">
                     <div class="row">
                         <div class="col-lg-12" >
-                            <input id="recordName"
+                            <input id="recordName" onfocus="$('#recordName').popover('show');" data-placement="top" data-toggle="popover" data-content="例如：港口大厦水电施工20170705"
                                    name="recordName" class="form-control"
-                                   placeholder="请填写日志名称 例如：港口大厦水电施工20170705" style="width: 500px">
+                                   style="width: 500px">
 
                             <br>
                         </div>
+                        <div class="col-lg-12" >
+                            <input id="owner" onfocus="$('#owner').popover('show');"  data-placement="top" data-toggle="popover" data-content="请填写项目负责人，可以填多个"
+                                   name="owner" autocomplete="off">
+                            <input type="hidden" name="ownerName" id="ownerName">
+                        </div>
                         <div class="col-lg-12">
+                            <br>
                             <script id="editor" type="text/plain" style="width:100%;height:650px;"></script>
                             <input id="recordContent" name="recordContent" type="hidden" value="">
                         </div>
@@ -92,7 +95,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/jquery/jquery-1.9.1.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -102,6 +105,10 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/dist/js/sb-admin-2.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/parts/jquery.ui.widget.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/jquery.manifest.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/jquery-manifest-master/build/parts/jquery.marcopolo.js"></script>
 
     <script type="text/javascript">
 
@@ -179,11 +186,25 @@
             autoHeightEnabled: true,
             autoFloatEnabled: true
         });
+
+        $('#owner').manifest();
+
+//        $('#owner').manifest({
+//            marcoPolo: {
+//                url: '/getAllActiveUser',
+//                formatItem: function (data) {
+//                    return data.realName;
+//                }
+//            }
+//        });
+
+
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-            $("#save").attr("disabled",true)
+            var $btn = $(this).button('loading')
             $("#recordContent").val(UE.getEditor('editor').getContent());
+            $("#ownerName").val($('#owner').manifest('values'));
             $("#form").method="post";
             $("#form").submit();
         });

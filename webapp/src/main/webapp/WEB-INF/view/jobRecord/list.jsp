@@ -149,7 +149,7 @@
 </div>
 
 <!-- jQuery -->
-<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/jquery/jquery-1.9.1.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
