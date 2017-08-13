@@ -1,6 +1,7 @@
 package com.ylwoa.user.impl;
 
 import com.google.common.base.Preconditions;
+import com.ylwoa.common.Commons;
 import com.ylwoa.user.IUserService;
 import com.ylwoa.model.User;
 import com.ylwoa.persistence.dao.UserDao;
@@ -37,11 +38,11 @@ public class UserService implements IUserService {
         paras.put(DELETE_FLG, ACTIVE_STATE);
         List<User> userList = userDao.select(paras);
         if (null != userList && userList.size() > 0) {
-            User loginUser = userList.get(0);
-            if (loginUser.getPassword().endsWith(user.getPassword())) {
+            User userFromDB = userList.get(0);
+            if (userFromDB.getPassword().endsWith(Commons.maskForDB(user.getPassword()))) {
                 HttpSession session = request.getSession();
                 session.setAttribute(USER_SESSION_MARK, userList.get(0));
-                return loginUser;
+                return userFromDB;
             }
             throw new Exception("用户名密码不正确");
         }
@@ -68,5 +69,15 @@ public class UserService implements IUserService {
         paras.put(DELETE_FLG, ACTIVE_STATE);
         List<User> userList = userDao.select(paras);
         return userList;
+    }
+
+    @Override
+    public User getUserById(Integer userId) {
+        return userDao.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public int updateByPrimaryKey(User user) {
+        return userDao.updateByPrimaryKeySelective(user);
     }
 }

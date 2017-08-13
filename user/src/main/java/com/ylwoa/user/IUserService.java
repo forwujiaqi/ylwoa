@@ -15,4 +15,8 @@ public interface IUserService {
     User getUserByCookie(String cookieValue);
 
     List<User> getUserList();
+
+    User getUserById(Integer userId);
+
+    int updateByPrimaryKey(User user);
 }

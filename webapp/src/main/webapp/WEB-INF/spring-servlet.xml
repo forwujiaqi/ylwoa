@@ -20,6 +20,7 @@
             <mvc:mapping path="/purchasing/**"/>
             <mvc:mapping path="/arrive/**"/>
             <mvc:mapping path="/jobRecord/**"/>
+            <mvc:mapping path="/user/**"/>
             <bean class="com.ylwoa.web.controller.AuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

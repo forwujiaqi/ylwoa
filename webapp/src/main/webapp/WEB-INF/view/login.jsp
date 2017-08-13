@@ -1,4 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,6 +67,12 @@
                             </fieldset>
                         </form>
                     </div>
+                    <c:if test="${success == false}">
+                        <div class="alert alert-danger" role="alert">${message}</div>
+                    </c:if>
+                    <c:if test="${success == true}">
+                        <div class="alert alert-success" role="alert">${message}</div>
+                    </c:if>
                 </div>
             </div>
         </div>

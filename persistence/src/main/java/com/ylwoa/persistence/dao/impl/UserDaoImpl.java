@@ -34,16 +34,16 @@ public class UserDaoImpl extends AbstractMySQLDao implements UserDao {
 
     @Override
     public User selectByPrimaryKey(Integer id) {
-        return null;
+        return sqlSessionTemplate.selectOne(NAMESPACE+"selectByPrimaryKey",id);
     }
 
     @Override
-    public int updateByPrimaryKeySelective(User record) {
-        return 0;
+    public int updateByPrimaryKeySelective(User user) {
+        return sqlSessionTemplate.update(NAMESPACE + "updateByPrimaryKeySelective", user);
     }
 
     @Override
-    public int updateByPrimaryKey(User record) {
+    public int updateByPrimaryKey(User user) {
         return 0;
     }
 }

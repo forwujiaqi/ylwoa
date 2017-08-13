@@ -1,5 +1,6 @@
 package com.ylwoa.web.controller;
 
+import com.google.common.base.Strings;
 import com.ylwoa.common.Commons;
 import com.ylwoa.model.User;
 import com.ylwoa.user.IUserService;
@@ -28,15 +29,17 @@ public class LoginController {
 
     @RequestMapping(value = "/toLogin")
     public String toLogin() throws IOException {
-        log.info("toLogin start");
         return "/login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response, User user) {
-        log.info("login start");
 
-        ModelAndView modelAndView = new ModelAndView("/toLogin");
+        if (user == null || Strings.isNullOrEmpty(user.getPhone()) ) {
+            return new ModelAndView("redirect:/toLogin");
+        }
+
+        ModelAndView modelAndView = new ModelAndView("/login");
         try {
             user = userService.login(request, user);
             String phoneCookie = user.getPhone();
@@ -59,7 +62,6 @@ public class LoginController {
     @RequestMapping("/logout")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        log.info("logout start");
         request.getSession().invalidate();
         Cookie cookieToAdd = new Cookie(USER_COOKIE_KEY, null);
         cookieToAdd.setMaxAge(0);
