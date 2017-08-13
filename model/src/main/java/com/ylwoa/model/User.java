@@ -31,6 +31,15 @@ public class User {
 
     private String password3;
 
+    private String permit;
+
+    public String getPermit() {
+        return permit;
+    }
+
+    public void setPermit(String permit) {
+        this.permit = permit;
+    }
 
     public String getPassword1() {
         return password1;

@@ -65,7 +65,7 @@
                             <br>
                         </div>
                         <div class="col-lg-12" >
-                            <input id="owner" onfocus="$('#owner').popover('show');"  data-placement="top" data-toggle="popover" data-content="请填写项目负责人，可以填多个"
+                            <input id="owner" onfocus="$('#owner').popover('show');"  data-placement="right" data-toggle="popover" data-content="请填写项目负责人，可以填多个，已半角逗号分隔"
                                    name="owner" autocomplete="off">
                             <input type="hidden" name="ownerName" id="ownerName">
                         </div>
@@ -202,7 +202,12 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-            var $btn = $(this).button('loading')
+            if($('#owner').manifest('values') == ""){
+                alert("请填写项目负责人");
+                return;
+            }
+
+            $(this).button('loading')
             $("#recordContent").val(UE.getEditor('editor').getContent());
             $("#ownerName").val($('#owner').manifest('values'));
             $("#form").method="post";

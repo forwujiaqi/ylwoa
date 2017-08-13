@@ -201,6 +201,10 @@
       <if test="deleteFlg != null">
         and delete_flg= #{deleteFlg,jdbcType=INTEGER}
       </if>
+      <if test="createUserId != null and myName != null">
+        and (create_user_id = #{createUserId,jdbcType=INTEGER}
+        or position(#{myName,jdbcType=VARCHAR} in CONCAT(owner_name,',') ) >0)
+      </if>
     </where>
     ORDER BY id DESC
   </select>

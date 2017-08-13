@@ -66,12 +66,19 @@
                     <div class="col-lg-12" >
                         <input value="${data.excelName}" readonly id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
                         <br>
-                        <div class="form-group">
-                            <label>工期：</label>
-                            <input style="width: 250px" type="text" name="progressRange" disabled class="form-control active"
-                                   id="progressRange">
-                            <br>
-                        </div>
+                    </div>
+                    <div class="col-lg-12" >
+                        <input id="owner" name="owner" autocomplete="off">
+                        <input type="hidden" name="ownerName" id="ownerName">
+                    </div>
+                    <div class="col-lg-12" >
+                        <br>
+                        <label>工期：</label>
+                        <input style="width: 250px" type="text" name="progressRange" disabled class="form-control active"
+                               id="progressRange">
+                        <br>
+                    </div>
+                    <div class="col-lg-12" >
                         <label class="radio-inline">
                             <input disabled type="radio" name="status" id="optionsRadiosInline1" value="0" <c:if test="${data.status == 0}">checked="checked"</c:if>>进行中
                         </label>
@@ -82,13 +89,9 @@
                         <input id="dataJson" name="dataJson" type="hidden" value="${data.dataJson}">
                         <input id="status" name="status" type="hidden" value="${data.status}">
                         <input id="id" name="id" type="hidden" value="${data.id}">
-                        <br>
-                    </div>
-                    <div class="col-lg-12" >
-                        <input id="owner" name="owner" autocomplete="off">
-                        <input type="hidden" name="ownerName" id="ownerName">
                     </div>
                     <div class="col-lg-12">
+                        <br>
                         <div id="excelShow"></div>
                     </div>
                     <!-- /.col-lg-12 -->

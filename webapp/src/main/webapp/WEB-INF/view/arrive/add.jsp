@@ -65,22 +65,21 @@
                             <input id="excelName" name="excelName" class="form-control" placeholder="请填写到货清单名" style="width: 500px">
                             <input id="dataJson" name="dataJson" type="hidden">
                             <input id="settingJson" name="settingJson" type="hidden">
-                            <br>
-                            <div class="form-group" hidden>
-                                <label>工期：</label>
-                                <input style="width: 250px" type="text" name="progressRange" readonly class="form-control active"
-                                          id="progressRange">
-                                <br>
-                            </div>
                         </div>
                         <div class="col-lg-12" >
                             <br>
-                            <label>负责人：</label>
                             <input id="owner" onfocus="$('#owner').popover('show');"  data-placement="top" data-toggle="popover" data-content="请填写项目负责人，可以填多个"
                                    name="owner" autocomplete="off">
                             <input type="hidden" name="ownerName" id="ownerName">
                         </div>
+                        <div class="col-lg-12" >
+                            <br>
+                            <label>工期：</label>
+                            <input style="width: 250px" type="text" name="progressRange" readonly class="form-control active"
+                                   id="progressRange">
+                        </div>
                         <div class="col-lg-12">
+                            <br>
                             <div id="excelShow"></div>
                         </div>
                     <!-- /.col-lg-12 -->
@@ -171,7 +170,12 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-            $("#save").attr("disabled",true)
+            if($('#owner').manifest('values') == ""){
+                alert("请填写项目负责人");
+                return;
+            }
+
+            $(this).button('loading')
             var cellJson = new Object();
             cellJson.dataInfo = hot.getData();
             cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;

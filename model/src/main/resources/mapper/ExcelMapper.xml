@@ -111,6 +111,10 @@
     <if test="excelType != null">
       and a.excel_type =  #{excelType,jdbcType=INTEGER}
     </if>
+    <if test="createUserId != null and myName != null">
+      and (d.create_user_id = #{createUserId,jdbcType=INTEGER}
+      or position(#{myName,jdbcType=VARCHAR} in CONCAT(d.owner_name,',') ) >0)
+    </if>
     ORDER BY d.status, d.plan_end_date
   </select>
   <select id="selectById"

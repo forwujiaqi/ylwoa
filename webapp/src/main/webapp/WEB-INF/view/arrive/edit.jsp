@@ -66,27 +66,29 @@
                         <div class="col-lg-12" >
                             <input value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写到货清单名" style="width: 500px">
                             <br>
-                            <div class="form-group" hidden>
-                                <label>工期：</label>
-                                <input style="width: 250px" type="text" name="progressRange" readonly class="form-control active"
-                                       id="progressRange">
-                                <br>
-                            </div>
+                        </div>
+                        <div class="col-lg-12" >
+                            <input id="owner" name="owner" autocomplete="off">
+                            <input type="hidden" name="ownerName" id="ownerName">
+                        </div>
+
+                        <div class="col-lg-12" >
+                            <br>
+                            <label>工期：</label>
+                            <input style="width: 250px" type="text" name="progressRange" readonly class="form-control active"
+                                   id="progressRange">
+                        </div>
+                        <div class="col-lg-12" >
+                            <br>
                             <label class="radio-inline">
                                 <input type="radio" name="status" id="optionsRadiosInline1" value="0" <c:if test="${data.status == 0}">checked="checked"</c:if>>进行中
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="status" id="optionsRadiosInline2" value="1" <c:if test="${data.status == 1}">checked="checked"</c:if>>已完成
                             </label>
-                            <br>
                             <input id="dataJson" name="dataJson" type="hidden" value="${data.dataJson}">
                             <input id="status" name="status" type="hidden" value="${data.status}">
                             <input id="id" name="id" type="hidden" value="${data.id}">
-                            <br>
-                        </div>
-                        <div class="col-lg-12" >
-                            <input id="owner" name="owner" autocomplete="off">
-                            <input type="hidden" name="ownerName" id="ownerName">
                         </div>
                         <div class="col-lg-12">
                             <br>
@@ -196,7 +198,12 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-            $("#save").attr("disabled",true)
+            if($('#owner').manifest('values') == ""){
+                alert("请填写项目负责人");
+                return;
+            }
+
+            $(this).button('loading')
             var cellJson = new Object();
             cellJson.dataInfo = hot.getData();
             cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;

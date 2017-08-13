@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
 import static com.ylwoa.common.Commons.ACTIVE_STATE;
 import static com.ylwoa.common.Commons.INACTIVE_STATE;
+import static com.ylwoa.common.Commons.USER_SESSION_MARK;
 
 /**
  * Created by wubiqing on 2017/7/20.
@@ -34,7 +36,7 @@ public class PurchasingController {
     private static transient Logger log = LoggerFactory.getLogger(PurchasingController.class);
 
     @RequestMapping(value = "/list/{pageNo}")
-    public ModelAndView list(@PathVariable String pageNo) throws Exception {
+    public ModelAndView list(@PathVariable String pageNo, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("/purchasing/list");
         Map<String, Object> paras = Maps.newHashMap();
 
@@ -42,10 +44,14 @@ public class PurchasingController {
         try {
             paras.put("deleteFlg", ACTIVE_STATE);
             paras.put("excelType", ExcelTypeEnum.PURCHASING.ordinal());
+            Commons.putPermissionCondition(session, paras,0);
             list = progressService.getList(paras);
         } catch (Exception e) {
-            log.error("list error", pageNo, e);
-            throw e;
+            log.error("list error pageNo:"+ pageNo, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "查询列表失败");
+            mv.setViewName("/purchasing/list");
+            return mv;
         }
         mv.addObject("success", true);
         mv.addObject("pageData", list);
@@ -54,7 +60,7 @@ public class PurchasingController {
         } else {
             mv.addObject("pageNo", "9999");
         }
-
+        mv.addObject("permitNo",((User)session.getAttribute(USER_SESSION_MARK)).getPermit().substring(0,1));
         return mv;
     }
 
@@ -75,8 +81,11 @@ public class PurchasingController {
             progressService.insertExcel(excel,user);
             mv.setViewName("forward:/purchasing/list/0");
         } catch (Exception e) {
-            log.error("add error", excel, e);
-            throw e;
+            log.error("add error excel:"+ excel, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "添加失败");
+            mv.setViewName("/purchasing/add");
+            return mv;
         }
 
         return mv;
@@ -95,7 +104,7 @@ public class PurchasingController {
                 mv.addObject("data", excelList.get(0));
             }
         } catch (Exception e) {
-            log.error("toView error", excelId, e);
+            log.error("toView error excelId:"+ excelId, e);
             throw e;
         }
         return mv;
@@ -116,8 +125,11 @@ public class PurchasingController {
             progressService.deleteExcel(excel,user);
             mv.setViewName("forward:/purchasing/list/9999");
         } catch (Exception e) {
-            log.error("delete error", excelId, e);
-            throw e;
+            log.error("delete error excelId:"+ excelId, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "删除失败");
+            mv.setViewName("/purchasing/list");
+            return mv;
         }
 
         return mv;
@@ -135,7 +147,7 @@ public class PurchasingController {
                 mv.addObject("data", excelList.get(0));
             }
         } catch (Exception e) {
-            log.error("toEdit error", excelId, e);
+            log.error("toEdit error excelId:"+ excelId, e);
             throw e;
         }
         return mv;
@@ -151,8 +163,11 @@ public class PurchasingController {
             progressService.updateExcel(excel,user);
             mv.setViewName("forward:/purchasing/list/9999");
         } catch (Exception e) {
-            log.error("edit error", excel, e);
-            throw e;
+            log.error("edit error excel:"+ excel, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "编辑失败");
+            mv.setViewName("/purchasing/edit");
+            return mv;
         }
         return mv;
     }

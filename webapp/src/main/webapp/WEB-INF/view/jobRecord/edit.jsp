@@ -206,7 +206,12 @@
 
 
         $("#save").click(function () {
-            var $btn = $(this).button('loading')
+            if($('#owner').manifest('values') == ""){
+                alert("请填写项目负责人");
+                return;
+            }
+
+            $(this).button('loading')
             $("#recordContent").val(UE.getEditor('editor').getContent());
             $("#ownerName").val($('#owner').manifest('values'));
             $("#form").method="post";

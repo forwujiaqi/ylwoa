@@ -79,6 +79,7 @@
                             <input type="hidden" name="ownerName" id="ownerName">
                         </div>
                         <div class="col-lg-12">
+                            <br>
                             <div id="excelShow"></div>
                         </div>
                     <!-- /.col-lg-12 -->
@@ -169,7 +170,12 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-            $("#save").attr("disabled",true)
+            if($('#owner').manifest('values') == ""){
+                alert("请填写项目负责人");
+                return;
+            }
+
+            $(this).button('loading')
             var cellJson = new Object();
             cellJson.dataInfo = hot.getData();
             cellJson.mergeInfo = hot.mergeCells.mergedCellInfoCollection;

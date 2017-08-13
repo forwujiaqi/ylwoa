@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wubiqing on 2017/7/15.
@@ -24,6 +25,11 @@ public class Commons {
     public static final String USER_SESSION_MARK = "USER_SESSION_MARK";
     public static final String DELETE_FLG = "deleteFlg";
     public static final String DATE_RANGE_FORMAT = "yyyy-MM-dd";
+
+    public static final String PERMIT_1 = "1";//查看/编辑所有项目
+    public static final String PERMIT_2 = "2";//查看所有项目
+    public static final String PERMIT_3 = "3";//查看/编辑自己负责的项目,查看编辑自己的项目
+    public static final String PERMIT_9 = "9";//查看自己负责的项目 查看编辑自己的项目（默认权限）
 
 
     public static String maskForCookie(String str) {
@@ -57,6 +63,23 @@ public class Commons {
         }
         Preconditions.checkNotNull(user, "get session null");
         return user;
+    }
+
+    public static void putPermissionCondition(HttpSession session, Map<String, Object> paras, int permitNo) {
+        String permit = ((User)session.getAttribute(USER_SESSION_MARK)).getPermit().substring(permitNo,permitNo+1);
+        if (permit.equals(Commons.PERMIT_1)) {
+            paras.put("createUserId", null);
+            paras.put("myName", null);
+        } else if (permit.equals(Commons.PERMIT_2)) {
+            paras.put("createUserId",  null);
+            paras.put("myName", null);
+        } else if (permit.equals(Commons.PERMIT_3)) {
+            paras.put("createUserId", ((User)session.getAttribute(USER_SESSION_MARK)).getId());
+            paras.put("myName", ((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
+        } else if (permit.equals(Commons.PERMIT_9)) {
+            paras.put("createUserId", ((User)session.getAttribute(USER_SESSION_MARK)).getId());
+            paras.put("myName", ((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
+        }
     }
 
 

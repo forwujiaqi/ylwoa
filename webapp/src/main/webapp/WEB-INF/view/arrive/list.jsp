@@ -63,6 +63,9 @@
             </div>
             <!-- /.row -->
             <div class="row">
+                <c:if test="${success == false}">
+                    <div class="alert alert-danger" role="alert">${message}</div>
+                </c:if>
                 <div class="col-lg-12">
                     <%--<div class="panel panel-default">--%>
                     <%--<div class="panel-heading">--%>
@@ -115,15 +118,21 @@
                                     <td style="text-align: left;vertical-align: middle"><fmt:formatDate
                                             value="${item.updateTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></td>
                                     <td style="text-align: center;vertical-align: middle">
-                                        <button type="button" class="btn btn-primary"
-                                                onclick="return editProgress(${item.id})">编辑
-                                        </button>
+                                        <c:if test="${sessionScope.USER_SESSION_MARK.id == item.createUserId or
+                                             (permitNo == 1 or permitNo == 3)}">
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="return editProgress(${item.id})">编辑
+                                            </button>
+                                        </c:if>
                                         <button type="button" class="btn btn-info" id="view"
                                                 onclick="return showProgress(${item.id})">查看
                                         </button>
-                                        <button type="button" class="btn btn-danger"
-                                                onclick="return deleteProgress(${item.id})">删除
-                                        </button>
+                                        <c:if test="${sessionScope.USER_SESSION_MARK.id == item.createUserId or
+                                             (permitNo == 1 or permitNo == 3)}">
+                                            <button type="button" class="btn btn-danger"
+                                                    onclick="return deleteProgress(${item.id})">删除
+                                            </button>
+                                        </c:if>
                                     </td>
 
                                     </tr>
@@ -204,6 +213,7 @@
     }
 
     function editProgress(progressId) {
+        $(this).button('loading')
         document.form1.action = "${ctx}/arrive/toEdit/" + progressId;
         document.form1.submit();
         return true;
@@ -211,6 +221,7 @@
 
     function deleteProgress(progressId) {
         if (confirm('确定要删除吗?')) {
+            $(this).button('loading')
             document.form1.action = "${ctx}/arrive/delete/" + progressId;
             document.form1.submit();
             return true;

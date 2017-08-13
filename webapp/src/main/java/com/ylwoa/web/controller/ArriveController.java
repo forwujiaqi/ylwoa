@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
 import static com.ylwoa.common.Commons.ACTIVE_STATE;
 import static com.ylwoa.common.Commons.INACTIVE_STATE;
+import static com.ylwoa.common.Commons.USER_SESSION_MARK;
 
 /**
  * Created by wubiqing on 2017/7/20.
@@ -34,18 +36,21 @@ public class ArriveController {
     private static transient Logger log = LoggerFactory.getLogger(ArriveController.class);
 
     @RequestMapping(value = "/list/{pageNo}")
-    public ModelAndView list(@PathVariable String pageNo) throws Exception {
+    public ModelAndView list(@PathVariable String pageNo, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("/arrive/list");
         Map<String, Object> paras = Maps.newHashMap();
 
         List<Excel> list;
         try {
             paras.put("deleteFlg", ACTIVE_STATE);
+            Commons.putPermissionCondition(session, paras,1);
             paras.put("excelType", ExcelTypeEnum.ARRIVE.ordinal());
             list = progressService.getList(paras);
         } catch (Exception e) {
-            log.error("list error", pageNo, e);
-            throw e;
+            log.error("list error pageNo："+ pageNo, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "查询列表失败");
+            return mv;
         }
         mv.addObject("success", true);
         mv.addObject("pageData", list);
@@ -54,7 +59,7 @@ public class ArriveController {
         } else {
             mv.addObject("pageNo", "9999");
         }
-
+        mv.addObject("permitNo",((User)session.getAttribute(USER_SESSION_MARK)).getPermit().substring(1,2));
         return mv;
     }
 
@@ -75,8 +80,11 @@ public class ArriveController {
             progressService.insertExcel(excel,user);
             mv.setViewName("forward:/arrive/list/0");
         } catch (Exception e) {
-            log.error("add error", excel, e);
-            throw e;
+            log.error("add error excel:"+ excel, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "添加失败");
+            mv.setViewName("/arrive/add");
+            return mv;
         }
 
         return mv;
@@ -95,7 +103,7 @@ public class ArriveController {
                 mv.addObject("data", excelList.get(0));
             }
         } catch (Exception e) {
-            log.error("toView error", excelId, e);
+            log.error("toView error excelId:"+ excelId, e);
             throw e;
         }
         return mv;
@@ -116,8 +124,11 @@ public class ArriveController {
             progressService.deleteExcel(excel,user);
             mv.setViewName("forward:/arrive/list/9999");
         } catch (Exception e) {
-            log.error("delete error", excelId, e);
-            throw e;
+            log.error("delete error excelId:"+ excelId, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "删除失败");
+            mv.setViewName("/arrive/list");
+            return mv;
         }
 
         return mv;
@@ -135,7 +146,7 @@ public class ArriveController {
                 mv.addObject("data", excelList.get(0));
             }
         } catch (Exception e) {
-            log.error("toEdit error", excelId, e);
+            log.error("toEdit error excelId:"+ excelId, e);
             throw e;
         }
         return mv;
@@ -152,7 +163,9 @@ public class ArriveController {
             mv.setViewName("forward:/arrive/list/9999");
         } catch (Exception e) {
             log.error("edit error", excel, e);
-            throw e;
+            mv.addObject("success", false);
+            mv.addObject("message", "编辑失败");
+            mv.setViewName("/arrive/edit");
         }
         return mv;
     }
