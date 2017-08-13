@@ -32,6 +32,11 @@ public class LoginController {
         return "/login";
     }
 
+    @RequestMapping(value = "/toHomepage")
+    public String toHomepage() throws IOException {
+        return "/homepage";
+    }
+
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response, User user) {
 
@@ -50,7 +55,7 @@ public class LoginController {
             cookieToAdd.setMaxAge(60 * 60 * 24); //过期时间1天
             response.addCookie(cookieToAdd);
             modelAndView.addObject("success", true);
-            modelAndView.setViewName("redirect:/progress/list/0");
+            modelAndView.setViewName("redirect:/homepage");
         } catch (Exception e) {
             log.error("login error", user, e);
             modelAndView.addObject("success", false);

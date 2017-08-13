@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">明仁信息管理系统</a>
+        <a class="navbar-brand" href="/toHomepage">明仁信息管理系统</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -36,7 +36,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主页</a>
+                    <a href="/toHomepage"><i class="fa fa-home"></i> 主页</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>采购申请<span class="fa arrow"></span></a>
@@ -87,7 +87,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i>用户管理<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-user fa-fw"></i>用户管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/user/toChangePassword">修改密码</a>
