@@ -54,7 +54,7 @@
         <%@ include file="../include/header.jsp"%>
 
         <!-- Page Content -->
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="margin-left: 200px">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">

@@ -41,12 +41,13 @@
         <%@ include file="include/header.jsp"%>
 
         <!-- Page Content -->
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="margin-left: 200px">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">明仁信息管理系统</h1>
                     </div>
+                    <div><p><span style="color: rgb(255, 0, 0);">请尽快修改默认密码。（用户管理-&gt;修改密码）</span></p></div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->

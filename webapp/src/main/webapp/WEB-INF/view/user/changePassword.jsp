@@ -41,7 +41,7 @@
         <%@ include file="../include/header.jsp"%>
 
         <!-- Page Content -->
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="margin-left: 200px">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -70,13 +70,14 @@
                         <div class="col-lg-12" >
                             <input id="password3" type="password"  placeholder="再次输入新密码"
                                    name="password3" class="form-control"
+                                   onfocus="$('#password3').popover('show');" data-placement="right" data-toggle="popover" data-content="密码由8~12位的半角英数字组成"
                                    style="width: 500px">
                             <br>
                         </div>
                     <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
-                        <div class="col-lg-12" style="text-align:center">
+                        <div class="col-lg-12" style="text-align:center;width: 500px">
                             <br>
                             <button type="button" id="save" class="btn btn-success">提交</button>
                             <a href="/jobRecord/list/0" class="btn btn-warning" role="button">退出</a>

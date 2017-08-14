@@ -32,9 +32,9 @@
     </ul>
     <!-- /.navbar-top-links -->
 
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
+    <div class="navbar-default sidebar" role="navigation" style="width: 200px">
+        <div class="sidebar-nav navbar-collapse" style="width: 200px">
+            <ul class="nav" id="side-menu" style="width: 200px">
                 <li>
                     <a href="/toHomepage"><i class="fa fa-home"></i> 主页</a>
                 </li>
