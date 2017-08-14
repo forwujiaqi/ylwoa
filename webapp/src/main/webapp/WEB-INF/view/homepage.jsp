@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>明仁信息管理系统</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -56,8 +56,6 @@
         <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/jquery/jquery-1.9.1.min.js"></script>
 

@@ -15,4 +15,27 @@
     <import resource="classpath*:applicationContext-datasource.xml"/>
     <import resource="classpath*:applicationContext-dailyrecord.xml"/>
     <import resource="classpath*:applicationContext-progress.xml"/>
+
+    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">yes</prop>
+                        <prop key="kaptcha.border.color">105,179,90</prop>
+                        <prop key="kaptcha.textproducer.font.color">blue</prop>
+                        <prop key="kaptcha.textproducer.font.size">30</prop>
+                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+                        <!--<prop key="kaptcha.textproducer.char.string">拉三等奖水电费和煽风点火收到货付款</prop> 默认为abcde2345678gfynmnpwx-->
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <prop key="kaptcha.image.width">110</prop>
+                        <prop key="kaptcha.image.height">35</prop>
+                        <prop key="kaptcha.session.key">valicode</prop>
+                        <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+                        <!-- <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop> -->
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
 </beans>

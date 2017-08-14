@@ -33,7 +33,24 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style>
+        input.captchar_style {
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,15 +71,15 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="请输入密码" name="password" type="password" required value="">
                                 </div>
-
-                                <%--TODO 怎么报错比较好 --%>
-                                <%--TODO 记住密码功能 --%>
-                                <%--<div class="checkbox">--%>
-                                    <%--<label>--%>
-                                        <%--<input name="remember" type="checkbox" value="Remember Me">Remember Me--%>
-                                    <%--</label>--%>
-                                <%--</div>--%>
-                                <!-- Change this to a button or input when using this as a form -->
+                                <div class="form-group">
+                                    <input class="captchar_style" required
+                                           id="mcode" name="mcode" value="" placeholder="请输入右边的验证码"
+                                           class="hst2"  style="vertical-align:middle"/>
+                                    <img id=""  style="vertical-align:middle" alt="验证码"
+                                         onclick="this.src='${pageContext.request.contextPath}/kaptcha/getKaptchaImage?e='+new Date()"
+                                         src="${pageContext.request.contextPath}/kaptcha/getKaptchaImage"/>
+                                    <img id="mcodecheck" src="" alt=""  style="vertical-align:middle"/>
+                                </div>
                                 <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
                             </fieldset>
                         </form>

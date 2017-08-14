@@ -2,6 +2,7 @@ package com.ylwoa.web.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
 import com.ylwoa.common.Commons;
 import com.ylwoa.model.User;
@@ -80,6 +81,22 @@ public class UserController {
             log.error("para:" + user.toString());
             return modelAndView;
         }
+
+        if (!CharMatcher.javaLetterOrDigit().matchesAllOf(user.getPassword2())) {
+            modelAndView.addObject("success", false);
+            modelAndView.addObject("message", "密码只能由英数字组成");
+            log.error("para:" + user.toString());
+            return modelAndView;
+        }
+
+        if (user.getPassword2().length() < 8  || user.getPassword2().length() > 12) {
+
+            modelAndView.addObject("success", false);
+            modelAndView.addObject("message", "密码长度需要在8~12位");
+            log.error("para:" + user.toString());
+            return modelAndView;
+        }
+
         User userFromSession = (User) session.getAttribute(USER_SESSION_MARK);
 
         User userFromDB = userService.getUserById(userFromSession.getId());

@@ -63,6 +63,7 @@
                         <div class="col-lg-12" >
                             <input id="password2" type="password"  placeholder="新密码"
                                    name="password2" class="form-control"
+                                   onfocus="$('#password2').popover('show');" data-placement="right" data-toggle="popover" data-content="密码由8~12位的半角英数字组成"
                                    style="width: 500px">
                             <br>
                         </div>
@@ -75,7 +76,7 @@
                     <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
-                        <div class="col-lg-12" style="text-align:center;width:100%">
+                        <div class="col-lg-12" style="text-align:center">
                             <br>
                             <button type="button" id="save" class="btn btn-success">提交</button>
                             <a href="/jobRecord/list/0" class="btn btn-warning" role="button">退出</a>
