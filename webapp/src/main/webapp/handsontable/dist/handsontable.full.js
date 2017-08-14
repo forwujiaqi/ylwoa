@@ -42589,7 +42589,7 @@ var KEY = exports.KEY = 'col_left';
 function columnLeftItem() {
   return {
     key: KEY,
-    name: 'Insert column on the left',
+    name: '在左边插入一列',
     callback: function callback(key, selection) {
       this.alter('insert_col', selection.start.col, 1, 'ContextMenu.columnLeft');
     },
@@ -42632,7 +42632,7 @@ var KEY = exports.KEY = 'col_right';
 function columnRightItem() {
   return {
     key: KEY,
-    name: 'Insert column on the right',
+    name: '在右边插入一列',
 
     callback: function callback(key, selection) {
       this.alter('insert_col', selection.end.col + 1, 1, 'ContextMenu.columnRight');
@@ -42723,7 +42723,7 @@ var KEY = exports.KEY = 'redo';
 function redoItem() {
   return {
     key: KEY,
-    name: 'Redo',
+    name: '重做',
 
     callback: function callback() {
       this.redo();
@@ -42752,7 +42752,7 @@ var KEY = exports.KEY = 'remove_col';
 function removeColumnItem() {
   return {
     key: KEY,
-    name: 'Remove column',
+    name: '删除当前列',
 
     callback: function callback(key, selection) {
       var amount = selection.end.col - selection.start.col + 1;
@@ -42789,7 +42789,7 @@ var KEY = exports.KEY = 'remove_row';
 function removeRowItem() {
   return {
     key: KEY,
-    name: 'Remove row',
+    name: '删除当前行',
 
     callback: function callback(key, selection) {
       var amount = selection.end.row - selection.start.row + 1;
@@ -42826,7 +42826,7 @@ var KEY = exports.KEY = 'row_above';
 function rowAboveItem() {
   return {
     key: KEY,
-    name: 'Insert row above',
+    name: '在上面插入一行',
 
     callback: function callback(key, selection) {
       this.alter('insert_row', selection.start.row, 1, 'ContextMenu.rowAbove');
@@ -42860,7 +42860,7 @@ var KEY = exports.KEY = 'row_below';
 function rowBelowItem() {
   return {
     key: KEY,
-    name: 'Insert row below',
+    name: '在下面插入一行',
 
     callback: function callback(key, selection) {
       this.alter('insert_row', selection.end.row + 1, 1, 'ContextMenu.rowBelow');
@@ -42890,7 +42890,7 @@ var KEY = exports.KEY = 'undo';
 function undoItem() {
   return {
     key: KEY,
-    name: 'Undo',
+    name: '撤销',
 
     callback: function callback() {
       this.undo();
@@ -48611,9 +48611,9 @@ var addMergeActionsToContextMenu = function addMergeActionsToContextMenu(default
       var sel = this.getSelected();
       var info = this.mergeCells.mergedCellInfoCollection.getInfo(sel[0], sel[1]);
       if (info) {
-        return 'Unmerge cells';
+        return '取消单元格合并';
       }
-      return 'Merge cells';
+      return '合并单元格';
     },
     callback: function callback() {
       this.mergeCells.mergeOrUnmergeSelection(this.getSelectedRange());
