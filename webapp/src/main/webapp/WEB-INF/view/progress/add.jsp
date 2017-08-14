@@ -68,8 +68,7 @@
                             <br>
                         </div>
                         <div class="col-lg-12" >
-                            <input id="owner" onfocus="$('#owner').popover('show');"  data-placement="top" data-toggle="popover" data-content="请填写项目负责人，可以填多个"
-                                   name="owner" autocomplete="off">
+                            <input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔
                             <input type="hidden" name="ownerName" id="ownerName">
                         </div>
                         <div class="col-lg-12" >
@@ -126,10 +125,7 @@
 
         function getData() {
             return [
-                ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
-                ['2008', 10, 11, 12, 13],
-                ['2009', 20, 11, 14, 13],
-                ['2010', 30, 15, 12, 13]
+                ['']
             ];
         }
 

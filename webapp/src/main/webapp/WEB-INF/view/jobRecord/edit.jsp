@@ -65,12 +65,11 @@
                 <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/edit">
                     <div class="row">
                         <div class="col-lg-12" >
-                            <input id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
+                            <input id="recordName" name="recordName" class="form-control"  placeholder="请填写施工日志名称" style="width: 500px">
                             <br>
                         </div>
                         <div class="col-lg-12" >
-                            <input id="owner"
-                                   name="owner" autocomplete="off">
+                            <input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔
                             <input type="hidden" name="ownerName" id="ownerName">
                         </div>
                         <div class="col-lg-12">
@@ -183,7 +182,6 @@
                     'autotypeset', //自动排版
                     'touppercase', //字母大写
                     'tolowercase', //字母小写
-                    'background', //背景
                     'template', //模板
                     'inserttable', //插入表格
                 ]
