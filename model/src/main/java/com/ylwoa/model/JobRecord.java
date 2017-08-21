@@ -15,9 +15,13 @@ public class JobRecord {
 
     private Integer createUserId;
 
+    private String createUserName;
+
     private Date updateTime;
 
     private Integer updateUserId;
+
+    private String updateUserName;
 
     private String recordContent;
 
@@ -36,12 +40,31 @@ public class JobRecord {
                 ", deleteFlg=" + deleteFlg +
                 ", createTime=" + createTime +
                 ", createUserId=" + createUserId +
+                ", createUserName='" + createUserName + '\'' +
                 ", updateTime=" + updateTime +
                 ", updateUserId=" + updateUserId +
+                ", updateUserName='" + updateUserName + '\'' +
                 ", recordContent='" + recordContent + '\'' +
                 ", ownerId=" + ownerId +
                 ", ownerName='" + ownerName + '\'' +
+                ", owner='" + owner + '\'' +
                 '}';
+    }
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public String getUpdateUserName() {
+        return updateUserName;
+    }
+
+    public void setUpdateUserName(String updateUserName) {
+        this.updateUserName = updateUserName;
     }
 
     public String getOwner() {

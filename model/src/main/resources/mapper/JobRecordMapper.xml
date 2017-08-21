@@ -8,9 +8,10 @@
     <result column="delete_flg" jdbcType="INTEGER" property="deleteFlg" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
-
+    <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
     <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
     <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
   </resultMap>
@@ -19,7 +20,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, record_name, record_type, delete_flg, create_time, create_user_id, update_time, owner_id,owner_name,
-    update_user_id
+    update_user_id,create_user_name,update_user_name
   </sql>
   <sql id="Blob_Column_List">
     record_content
@@ -39,12 +40,12 @@
   <insert id="insert" parameterType="com.ylwoa.model.JobRecord">
     insert into job_record (id, record_name, record_type, 
       delete_flg, create_time, create_user_id, 
-      update_time, update_user_id, record_content,owner_id,owner_name
+      update_time, update_user_id, record_content,owner_id,owner_name,create_user_name,update_user_name
       )
     values (#{id,jdbcType=BIGINT}, #{recordName,jdbcType=VARCHAR}, #{recordType,jdbcType=INTEGER}, 
       #{deleteFlg,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{recordContent,jdbcType=LONGVARCHAR},
-      #{ownerId,jdbcType=INTEGER},#{ownerName,jdbcType=VARCHAR}
+      #{ownerId,jdbcType=INTEGER},#{ownerName,jdbcType=VARCHAR},#{createUserName,jdbcType=VARCHAR},#{updateUserName,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ylwoa.model.JobRecord">
@@ -68,11 +69,17 @@
       <if test="createUserId != null">
         create_user_id,
       </if>
+      <if test="createUserName != null">
+        create_user_name,
+      </if>
       <if test="updateTime != null">
         update_time,
       </if>
       <if test="updateUserId != null">
         update_user_id,
+      </if>
+      <if test="updateUserName != null">
+        update_user_name,
       </if>
       <if test="recordContent != null">
         record_content,
@@ -103,11 +110,17 @@
       <if test="createUserId != null">
         #{createUserId,jdbcType=INTEGER},
       </if>
+      <if test="createUserName != null">
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
         #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateUserName != null">
+        #{updateUserName,jdbcType=VARCHAR},
       </if>
       <if test="recordContent != null">
         #{recordContent,jdbcType=LONGVARCHAR},
@@ -138,11 +151,17 @@
       <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=INTEGER},
       </if>
+      <if test="createUserName != null">
+        create_user_name = #{createUserName,jdbcType=VARCHAR},
+      </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
         update_user_id = #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateUserName != null">
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
       </if>
       <if test="recordContent != null">
         record_content = #{recordContent,jdbcType=LONGVARCHAR},
@@ -177,8 +196,10 @@
       delete_flg = #{deleteFlg,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_user_name = #{createUserName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
       owner_id = #{ownerId,jdbcType=INTEGER},
       owner_name = #{ownerName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
@@ -203,7 +224,8 @@
       </if>
       <if test="createUserId != null and myName != null">
         and (create_user_id = #{createUserId,jdbcType=INTEGER}
-        or position(#{myName,jdbcType=VARCHAR} in CONCAT(owner_name,',') ) >0)
+        or position(#{myName,jdbcType=VARCHAR} in CONCAT(owner_name,',') ) >0
+        or create_user_id = 1)
       </if>
     </where>
     ORDER BY id DESC

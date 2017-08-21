@@ -50,6 +50,12 @@
             -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
             transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
         }
+
+        #footer{
+            position: absolute;  bottom: 0; /* 关键 */
+            left:45%; /* IE下一定要记得 */
+            height: 20px;         /* footer的高度一定要是固定值*/
+        }
     </style>
 </head>
 
@@ -93,6 +99,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="footer">
+        <a target="_blank" href="http://www.miitbeian.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+            <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">苏ICP备17048723号</span>
+        </a>
     </div>
 
     <!-- jQuery -->

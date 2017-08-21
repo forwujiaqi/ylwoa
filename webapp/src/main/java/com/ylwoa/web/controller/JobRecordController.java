@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -78,15 +79,17 @@ public class JobRecordController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView add(JobRecord jobRecord,HttpSession session) {
+    public ModelAndView add(JobRecord jobRecord, HttpSession session) {
         ModelAndView mv = new ModelAndView("/jobRecord/list");
         try {
             Date now = new Date();
             jobRecord.setRecordType(1);
             jobRecord.setUpdateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
             jobRecord.setUpdateTime(now);
+            jobRecord.setUpdateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
             jobRecord.setCreateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
             jobRecord.setCreateTime(now);
+            jobRecord.setCreateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
             jobRecord.setDeleteFlg(ACTIVE_STATE);
             jobRecord.setOwnerName(jobRecord.getOwnerName().replaceAll("，",","));
             jobRecordService.insertJobRecord(jobRecord);
@@ -131,6 +134,7 @@ public class JobRecordController {
             jobRecord.setDeleteFlg(INACTIVE_STATE);
             jobRecord.setUpdateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
             jobRecord.setUpdateTime(new Date());
+            jobRecord.setUpdateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
             jobRecordService.updateJobRecord(jobRecord);
             mv.setViewName("forward:/jobRecord/list/9999");
         } catch (Exception e) {
@@ -173,6 +177,7 @@ public class JobRecordController {
         jobRecordForUpdate.setUpdateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
         jobRecordForUpdate.setUpdateTime(new Date());
         jobRecordForUpdate.setOwnerName(jobRecord.getOwnerName().replaceAll("，",","));
+        jobRecordForUpdate.setUpdateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
         try {
             jobRecordService.updateJobRecord(jobRecordForUpdate);
             mv.setViewName("forward:/jobRecord/list/9999");

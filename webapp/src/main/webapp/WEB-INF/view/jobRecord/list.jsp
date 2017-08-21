@@ -100,7 +100,7 @@
                                     <tr class="odd gradeX">
                                         <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
                                         <td style="text-align: left;vertical-align: middle">${item.recordName}</td>
-                                        <td style="text-align: left;vertical-align: middle">${item.createUserId}</td>
+                                        <td style="text-align: left;vertical-align: middle">${item.createUserName}</td>
                                         <td style="text-align: left;vertical-align: middle"><fmt:formatDate
                                                 value="${item.createTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></td>
                                         <td style="text-align: center;vertical-align: middle">
