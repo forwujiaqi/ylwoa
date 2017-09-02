@@ -34,4 +34,4 @@ CREATE TABLE `user` (
   `update_user_id` int(11) NOT NULL COMMENT '更新用户id',
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone` (`phone`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';

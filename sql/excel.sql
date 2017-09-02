@@ -24,7 +24,7 @@ CREATE TABLE `excel` (
   `version` bigint(20) NOT NULL COMMENT '版本号',
   `excel_type` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of excel

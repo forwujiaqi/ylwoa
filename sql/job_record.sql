@@ -34,7 +34,7 @@ CREATE TABLE `job_record` (
   `update_user_id` int(11) NOT NULL COMMENT '更新用户id',
   `update_user_name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of job_record

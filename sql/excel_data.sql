@@ -37,7 +37,7 @@ CREATE TABLE `excel_data` (
   `update_user_id` int(11) NOT NULL COMMENT '更新用户id',
   `update_user_name` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of excel_data
