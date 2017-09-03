@@ -67,10 +67,10 @@
                             <input value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写到货清单名" style="width: 500px">
                             <br>
                         </div>
-                        <div class="col-lg-12" >
-                            <input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔
-                            <input type="hidden" name="ownerName" id="ownerName">
-                        </div>
+                        <%--<div class="col-lg-12" >--%>
+                            <%--<input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔--%>
+                            <%--<input type="hidden" name="ownerName" id="ownerName">--%>
+                        <%--</div>--%>
 
                         <div class="col-lg-12" >
                             <br>
@@ -179,8 +179,8 @@
                     format: 'YYYY-MM-DD'
                 }
             });
-            $("#owner").val("${data.ownerName}");
-            $('#owner').manifest();
+            <%--$("#owner").val("${data.ownerName}");--%>
+            <%--$('#owner').manifest();--%>
         });
 
         function load() {

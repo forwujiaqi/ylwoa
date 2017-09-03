@@ -68,11 +68,11 @@
                             <input readonly="readonly" id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
                             <br>
                         </div>
-                        <div class="col-lg-12" >
-                            <input id="owner"
-                                   name="owner" autocomplete="off">
-                            <input type="hidden" name="ownerName" id="ownerName">
-                        </div>
+                        <%--<div class="col-lg-12" >--%>
+                            <%--<input id="owner"--%>
+                                   <%--name="owner" autocomplete="off">--%>
+                            <%--<input type="hidden" name="ownerName" id="ownerName">--%>
+                        <%--</div>--%>
                         <div class="col-lg-12">
                             <br>
                             <script id="editor" type="text/plain" style="width:100%;height:650px;"></script>
@@ -198,8 +198,8 @@
                 $("#recordName").val("${data.recordName}")
                 ue.execCommand('insertHtml', '${data.recordContent}')
                 ue.setDisabled('fullscreen');
-                $("#owner").val("${data.ownerName}")
-                $('#owner').manifest();
+                <%--$("#owner").val("${data.ownerName}")--%>
+                <%--$('#owner').manifest();--%>
             });
         });
     </script>

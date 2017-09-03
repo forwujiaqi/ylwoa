@@ -68,10 +68,10 @@
                             <input id="recordName" name="recordName" class="form-control"  placeholder="请填写施工日志名称" style="width: 500px">
                             <br>
                         </div>
-                        <div class="col-lg-12" >
-                            <input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔
-                            <input type="hidden" name="ownerName" id="ownerName">
-                        </div>
+                        <%--<div class="col-lg-12" >--%>
+                            <%--<input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔--%>
+                            <%--<input type="hidden" name="ownerName" id="ownerName">--%>
+                        <%--</div>--%>
                         <div class="col-lg-12">
                             <br>
                             <script id="editor" type="text/plain" style="width:100%;height:650px;"></script>
@@ -197,17 +197,17 @@
                 $("#recordName").val("${data.recordName}")
                 ue.execCommand('insertHtml', '${data.recordContent}')
                 $("#id").val("${data.id}")
-                $("#owner").val("${data.ownerName}")
-                $('#owner').manifest();
+                <%--$("#owner").val("${data.ownerName}")--%>
+                <%--$('#owner').manifest();--%>
             });
         });
 
 
         $("#save").click(function () {
-            if($('#owner').manifest('values') == ""){
-                alert("请填写项目负责人");
-                return;
-            }
+//            if($('#owner').manifest('values') == ""){
+//                alert("请填写项目负责人");
+//                return;
+//            }
 
             $(this).button('loading')
             $("#recordContent").val(UE.getEditor('editor').getContent());

@@ -57,20 +57,23 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">编辑采购单</h1>
+                        <h1 class="page-header">编辑采供单</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/purchasing/edit">
+                    <c:if test="${success == false}">
+                        <div class="alert alert-danger" role="alert">${message}</div>
+                    </c:if>
                     <div class="row">
                         <div class="col-lg-12" >
-                            <input value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写采购单名称" style="width: 500px">
+                            <input value="${data.excelName}" id="excelName" name="excelName" class="form-control" placeholder="请填写采供单名称" style="width: 500px">
                             <br>
                         </div>
-                        <div class="col-lg-12" >
-                            <input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔
-                            <input type="hidden" name="ownerName" id="ownerName">
-                        </div>
+                        <%--<div class="col-lg-12" >--%>
+                            <%--<input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔--%>
+                            <%--<input type="hidden" name="ownerName" id="ownerName">--%>
+                        <%--</div>--%>
                         <div class="col-lg-12" >
                             <br>
                             <label>工期：</label>
@@ -154,9 +157,54 @@
             manualRowResize: true,
             rowHeaders: true,
             colHeaders: true,
+            colHeaders: ['序号','名称','品牌','规格','单位','数量','要求到货时间','采购部反馈意见','备注','发货时间','确认','备注','收货时间','确认','备注'],
             minSpareRows: 1,
-            manualColumnMove: true,
-            manualRowMove: true,
+            fixedRowsTop: 2,
+//            manualColumnMove: true,
+//            manualRowMove: true,
+            columns: [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                    type: 'date',
+                    dateFormat: 'YYYY/MM/DD',
+                    correctFormat: true
+                },
+                {
+                    type: 'dropdown',
+                    source: ['可行', '需要延误', '不可行']
+                },
+                {},
+                {
+                    type: 'date',
+                    dateFormat: 'YYYY/MM/DD',
+                    correctFormat: true
+                },
+                {
+                    type: 'dropdown',
+                    source: ['OK', 'NG']
+                },
+                {},
+                {
+                    type: 'date',
+                    dateFormat: 'YYYY/MM/DD',
+                    correctFormat: true
+                },
+                {
+                    type: 'dropdown',
+                    source: ['OK', 'NG']
+                },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+            ],
             mergeCells: [],
             //       contextMenu:true
             contextMenu: ['row_above', 'row_below', '---------','col_left','col_right','---------','remove_row','remove_col','---------','mergeCells','---------','undo','redo']
@@ -178,8 +226,8 @@
                     format: 'YYYY-MM-DD'
                 }
             });
-            $("#owner").val("${data.ownerName}")
-            $('#owner').manifest();
+            <%--$("#owner").val("${data.ownerName}")--%>
+            <%--$('#owner').manifest();--%>
         });
 
         function load() {
@@ -197,10 +245,10 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-            if($('#owner').manifest('values') == ""){
-                alert("请填写项目负责人");
-                return;
-            }
+//            if($('#owner').manifest('values') == ""){
+//                alert("请填写项目负责人");
+//                return;
+//            }
 
             $(this).button('loading')
             var cellJson = new Object();

@@ -39,29 +39,29 @@
                     <a href="/toHomepage"><i class="fa fa-home"></i> 主页</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i>采购申请<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>采供系统<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/purchasing/toAdd">采购申请</a>
+                            <a href="/purchasing/toAdd">采供申请</a>
                         </li>
                         <li>
-                            <a href="/purchasing/list/0">采购列表</a>
+                            <a href="/purchasing/list/0">采供列表</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i>到货申请<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="/arrive/toAdd">到货申请</a>
-                        </li>
-                        <li>
-                            <a href="/arrive/list/0">到货列表</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                <%--<li>--%>
+                    <%--<a href="#"><i class="fa fa-edit fa-fw"></i>到货申请<span class="fa arrow"></span></a>--%>
+                    <%--<ul class="nav nav-second-level">--%>
+                        <%--<li>--%>
+                            <%--<a href="/arrive/toAdd">到货申请</a>--%>
+                        <%--</li>--%>
+                        <%--<li>--%>
+                            <%--<a href="/arrive/list/0">到货列表</a>--%>
+                        <%--</li>--%>
+                    <%--</ul>--%>
+                    <%--<!-- /.nav-second-level -->--%>
+                <%--</li>--%>
                 <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>施工进度<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

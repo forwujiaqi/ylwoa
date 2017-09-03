@@ -67,6 +67,7 @@ public class PurchasingController {
     @RequestMapping(value = "/toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd() {
         ModelAndView mv = new ModelAndView("/purchasing/add");
+        mv.addObject("success", true);
         return mv;
     }
 

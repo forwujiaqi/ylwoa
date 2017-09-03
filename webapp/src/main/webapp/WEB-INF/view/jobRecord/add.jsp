@@ -1,4 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,10 +65,10 @@
 
                             <br>
                         </div>
-                        <div class="col-lg-12" >
-                            <input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔
-                            <input type="hidden" name="ownerName" id="ownerName">
-                        </div>
+                        <%--<div class="col-lg-12" >--%>
+                            <%--<input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔--%>
+                            <%--<input type="hidden" name="ownerName" id="ownerName">--%>
+                        <%--</div>--%>
                         <div class="col-lg-12">
                             <br>
                             <script id="editor" type="text/plain" style="width:100%;height:650px;"></script>
@@ -184,7 +186,7 @@
             autoFloatEnabled: true
         });
 
-        $('#owner').manifest();
+//        $('#owner').manifest();
 
 //        $('#owner').manifest({
 //            marcoPolo: {
@@ -199,10 +201,10 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-            if($('#owner').manifest('values') == ""){
-                alert("请填写项目负责人");
-                return;
-            }
+//            if($('#owner').manifest('values') == ""){
+//                alert("请填写项目负责人");
+//                return;
+//            }
 
             $(this).button('loading')
             $("#recordContent").val(UE.getEditor('editor').getContent());

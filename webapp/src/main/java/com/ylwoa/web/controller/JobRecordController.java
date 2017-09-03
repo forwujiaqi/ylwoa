@@ -91,7 +91,7 @@ public class JobRecordController {
             jobRecord.setCreateTime(now);
             jobRecord.setCreateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
             jobRecord.setDeleteFlg(ACTIVE_STATE);
-            jobRecord.setOwnerName(jobRecord.getOwnerName().replaceAll("，",","));
+//            jobRecord.setOwnerName(jobRecord.getOwnerName().replaceAll("，",","));
             jobRecordService.insertJobRecord(jobRecord);
             mv.setViewName("forward:/jobRecord/list/0");
         } catch (Exception e) {
@@ -176,7 +176,7 @@ public class JobRecordController {
         jobRecordForUpdate.setRecordName(jobRecord.getRecordName());
         jobRecordForUpdate.setUpdateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
         jobRecordForUpdate.setUpdateTime(new Date());
-        jobRecordForUpdate.setOwnerName(jobRecord.getOwnerName().replaceAll("，",","));
+//        jobRecordForUpdate.setOwnerName(jobRecord.getOwnerName().replaceAll("，",","));
         jobRecordForUpdate.setUpdateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
         try {
             jobRecordService.updateJobRecord(jobRecordForUpdate);

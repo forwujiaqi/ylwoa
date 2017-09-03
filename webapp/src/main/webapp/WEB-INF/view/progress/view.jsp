@@ -62,15 +62,18 @@
                 <!-- /.col-lg-12 -->
             </div>
             <form role="form" id="form">
+                <c:if test="${success == false}">
+                    <div class="alert alert-danger" role="alert">${message}</div>
+                </c:if>
                 <div class="row">
                     <div class="col-lg-12" >
                         <input value="${data.excelName}" readonly id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
                         <br>
                     </div>
-                    <div class="col-lg-12" >
-                        <input id="owner" name="owner" autocomplete="off">
-                        <input type="hidden" name="ownerName" id="ownerName">
-                    </div>
+                    <%--<div class="col-lg-12" >--%>
+                        <%--<input id="owner" name="owner" autocomplete="off">--%>
+                        <%--<input type="hidden" name="ownerName" id="ownerName">--%>
+                    <%--</div>--%>
                     <div class="col-lg-12" >
                         <br>
                         <label>工期：</label>
@@ -178,8 +181,8 @@
                 format: 'YYYY-MM-DD'
             }
         });
-        $("#owner").val("${data.ownerName}")
-        $('#owner').manifest();
+        <%--$("#owner").val("${data.ownerName}")--%>
+        <%--$('#owner').manifest();--%>
     });
 
     function load() {
