@@ -78,7 +78,8 @@
                                 <thead>
                                 <tr>
                                     <th style="text-align: center">序号</th>
-                                    <th style="text-align: center">采购清单</th>
+                                    <th style="text-align: center">采供单</th>
+                                    <th style="text-align: center">工程</th>
                                     <th style="text-align: center">状态</th>
                                     <th style="text-align: center">完成时间</th>
                                     <th style="text-align: center">创建人</th>
@@ -100,6 +101,7 @@
                                     </c:choose>
                                     <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
                                     <td style="text-align: left;vertical-align: middle">${item.excelName}</td>
+                                    <td style="text-align: left;vertical-align: middle">${item.projectName}</td>
                                     <td style="text-align: left;vertical-align: middle">
                                         <c:if test="${item.status != 0}">已完成</c:if>
                                         <c:if test="${item.status == 0}">进行中</c:if>

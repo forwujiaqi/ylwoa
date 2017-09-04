@@ -10,6 +10,8 @@
     <result column="excel_id" jdbcType="BIGINT" property="excelId" />
     <result column="excel_name" jdbcType="VARCHAR" property="excelName" />
     <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson" />
     <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -25,7 +27,7 @@
     id, version, excel_type
   </sql>
   <sql id="Base_Data_Column_List">
-    id, excel_id, excel_name, version, status, delete_flg,plan_start_date,plan_end_date,create_time, create_user_id,
+    id, excel_id, excel_name, version,project_id, status, delete_flg,plan_start_date,plan_end_date,create_time, create_user_id,
     create_user_name, update_time, update_user_id, update_user_name, data_json,owner_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -92,10 +94,10 @@
           resultMap="BaseResultMap">
     select a.id,a.version,a.excel_type,d.delete_flg,d.plan_start_date,d.plan_end_date,
     d.excel_id,d.excel_name,d.status,d.create_time,d.create_user_id,d.create_user_name,
-    d.update_time,d.update_user_id,d.update_user_name,d.owner_name from excel as a
+    d.update_time,d.update_user_id,d.update_user_name,d.owner_name,d.project_id,e.project_name from excel as a
     inner join
     (
-      select b.excel_id,b.excel_name,b.status,b.delete_flg,b.plan_start_date,b.plan_end_date,
+      select b.excel_id,b.excel_name,b.project_id,b.status,b.delete_flg,b.plan_start_date,b.plan_end_date,
       b.create_time,b.create_user_id,b.create_user_name,
       b.update_time,b.update_user_id,b.update_user_name,b.owner_name from excel_data as b
       where b.version = (select max(c.version) from excel_data as c where b.excel_id = c.excel_id)
@@ -107,6 +109,7 @@
       </if>
     ) as d
     on a.id = d.excel_id
+    LEFT JOIN project e ON d.project_id = e.id
     where 1=1
     <if test="excelType != null">
       and a.excel_type =  #{excelType,jdbcType=INTEGER}
@@ -123,10 +126,10 @@
           resultMap="BaseResultMap">
     select a.id,a.version,a.excel_type,d.delete_flg,d.plan_start_date,d.plan_end_date,
     d.excel_id,d.excel_name,d.status,d.create_time,d.create_user_id,d.create_user_name,
-    d.update_time,d.update_user_id,d.update_user_name,d.data_json,d.owner_name from excel as a
+    d.update_time,d.update_user_id,d.update_user_name,d.data_json,d.owner_name,d.project_id,e.project_name from excel as a
     inner join
     (
-    select b.excel_id,b.excel_name,b.status,b.delete_flg,b.data_json,b.plan_start_date,b.plan_end_date,
+    select b.excel_id,b.excel_name,b.project_id,b.status,b.delete_flg,b.data_json,b.plan_start_date,b.plan_end_date,
     b.create_time,b.create_user_id,b.create_user_name,
     b.update_time,b.update_user_id,b.update_user_name,b.owner_name from excel_data as b
     where b.version = (select max(c.version) from excel_data as c where b.excel_id = c.excel_id)
@@ -138,6 +141,7 @@
     </if>
     ) as d
     on a.id = d.excel_id
+    LEFT JOIN project e ON d.project_id = e.id
     ORDER BY a.id DESC
   </select>
 </mapper>

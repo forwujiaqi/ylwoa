@@ -63,6 +63,7 @@ public class ProgressService implements IProgressService {
 
         excelData.setExcelId(excel.getId());
         excelData.setExcelName(excel.getExcelName());
+        excelData.setProjectId(excel.getProjectId());
         excelData.setDataJson(excel.getDataJson());
         excelData.setStatus(0);
         excelData.setDeleteFlg(ACTIVE_STATE);
@@ -96,6 +97,7 @@ public class ProgressService implements IProgressService {
 
             excelData.setExcelId(excelResult.getId());
             excelData.setExcelName(excel.getExcelName());
+            excelData.setProjectId(excel.getProjectId());
             excelData.setDataJson(excel.getDataJson());
             excelData.setStatus(excel.getStatus());
             excelData.setVersion(excelResult.getVersion() + 1);

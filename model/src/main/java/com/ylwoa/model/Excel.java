@@ -15,6 +15,10 @@ public class Excel {
 
     private Integer status;
 
+    private Long projectId;
+
+    private String projectName;
+
     //TODO
     private Integer deleteFlg;
 
@@ -44,14 +48,6 @@ public class Excel {
 
     private String ownerName;
 
-    public String getProgressRange() {
-        return progressRange;
-    }
-
-    public void setProgressRange(String progressRange) {
-        this.progressRange = progressRange;
-    }
-
     @Override
     public String toString() {
         return "Excel{" +
@@ -61,10 +57,13 @@ public class Excel {
                 ", excelName='" + excelName + '\'' +
                 ", version=" + version +
                 ", status=" + status +
+                ", projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
                 ", deleteFlg=" + deleteFlg +
                 ", createTime=" + createTime +
                 ", createUserId=" + createUserId +
                 ", createUserName='" + createUserName + '\'' +
+                ", progressRange='" + progressRange + '\'' +
                 ", planStartDate=" + planStartDate +
                 ", planEndDate=" + planEndDate +
                 ", updateTime=" + updateTime +
@@ -72,7 +71,33 @@ public class Excel {
                 ", updateUserName='" + updateUserName + '\'' +
                 ", dataJson='" + dataJson + '\'' +
                 ", settingJson='" + settingJson + '\'' +
+                ", owner='" + owner + '\'' +
+                ", ownerName='" + ownerName + '\'' +
                 '}';
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProgressRange() {
+        return progressRange;
+    }
+
+    public void setProgressRange(String progressRange) {
+        this.progressRange = progressRange;
     }
 
     public String getOwner() {

@@ -7,6 +7,7 @@
     <result column="excel_name" jdbcType="VARCHAR" property="excelName" />
     <result column="version" jdbcType="BIGINT" property="version" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
     <result column="delete_flg" jdbcType="INTEGER" property="deleteFlg" />
     <result column="plan_start_date" jdbcType="DATE" property="planStartDate" />
     <result column="plan_end_date" jdbcType="DATE" property="planEndDate" />
@@ -22,7 +23,7 @@
     <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, excel_id, excel_name, version, status,delete_flg,plan_start_date,plan_end_date, create_time, create_user_id,
+    id, excel_id, excel_name, version,project_id, status,delete_flg,plan_start_date,plan_end_date, create_time, create_user_id,
     create_user_name, update_time, update_user_id, update_user_name,owner_name
   </sql>
   <sql id="Blob_Column_List">
@@ -42,12 +43,12 @@
   </delete>
   <insert id="insert" parameterType="com.ylwoa.model.ExcelData">
     insert into excel_data (id, excel_id, excel_name,
-      version, status,delete_flg,plan_start_date,plan_end_date,
+      version,project_id, status,delete_flg,plan_start_date,plan_end_date,
       create_time, create_user_id, create_user_name,
       update_time, update_user_id, update_user_name,
       data_json,owner_name)
     values (#{id,jdbcType=BIGINT}, #{excelId,jdbcType=BIGINT}, #{excelName,jdbcType=VARCHAR},
-      #{version,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},#{deleteFlg,jdbcType=INTEGER},
+      #{version,jdbcType=BIGINT},#{projectId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},#{deleteFlg,jdbcType=INTEGER},
       #{planStartDate,jdbcType=DATE},#{planEndDate,jdbcType=DATE},
       #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR},
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{updateUserName,jdbcType=VARCHAR},
@@ -67,6 +68,9 @@
       </if>
       <if test="version != null">
         version,
+      </if>
+      <if test="projectId != null">
+        project_id,
       </if>
       <if test="status != null">
         status,
@@ -118,6 +122,9 @@
       <if test="version != null">
         #{version,jdbcType=BIGINT},
       </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
@@ -168,6 +175,9 @@
       <if test="version != null">
         version = #{version,jdbcType=BIGINT},
       </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
@@ -212,6 +222,7 @@
     set excel_id = #{excelId,jdbcType=BIGINT},
       excel_name = #{excelName,jdbcType=VARCHAR},
       version = #{version,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
       status = #{status,jdbcType=INTEGER},
       delete_flg = #{deleteFlg,jdbcType=INTEGER},
       plan_start_date = #{planStartDate,jdbcType=DATE},
@@ -231,6 +242,7 @@
     set excel_id = #{excelId,jdbcType=BIGINT},
       excel_name = #{excelName,jdbcType=VARCHAR},
       version = #{version,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
       status = #{status,jdbcType=INTEGER},
       delete_flg = #{deleteFlg,jdbcType=INTEGER},
       plan_start_date = #{planStartDate,jdbcType=DATE},

@@ -11,6 +11,10 @@ public class JobRecord {
 
     private Integer deleteFlg;
 
+    private Long projectId;
+
+    private String projectName;
+
     private Date createTime;
 
     private Integer createUserId;
@@ -38,6 +42,8 @@ public class JobRecord {
                 ", recordName='" + recordName + '\'' +
                 ", recordType=" + recordType +
                 ", deleteFlg=" + deleteFlg +
+                ", projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
                 ", createTime=" + createTime +
                 ", createUserId=" + createUserId +
                 ", createUserName='" + createUserName + '\'' +
@@ -49,6 +55,22 @@ public class JobRecord {
                 ", ownerName='" + ownerName + '\'' +
                 ", owner='" + owner + '\'' +
                 '}';
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public String getCreateUserName() {

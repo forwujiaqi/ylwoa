@@ -13,6 +13,10 @@ public class ExcelData {
 
     private Integer status;
 
+    private Long projectId;
+
+    private String projectName;
+
     private Integer deleteFlg;
 
     private Date createTime;
@@ -47,6 +51,8 @@ public class ExcelData {
                 ", excelName='" + excelName + '\'' +
                 ", version=" + version +
                 ", status=" + status +
+                ", projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
                 ", deleteFlg=" + deleteFlg +
                 ", createTime=" + createTime +
                 ", planStartDate=" + planStartDate +
@@ -58,7 +64,25 @@ public class ExcelData {
                 ", updateUserName='" + updateUserName + '\'' +
                 ", dataJson='" + dataJson + '\'' +
                 ", settingJson='" + settingJson + '\'' +
+                ", owner='" + owner + '\'' +
+                ", ownerName='" + ownerName + '\'' +
                 '}';
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     public String getOwner() {

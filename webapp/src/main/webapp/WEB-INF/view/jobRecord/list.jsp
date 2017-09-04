@@ -90,6 +90,7 @@
                                 <tr>
                                     <th style="text-align: center">序号</th>
                                     <th style="text-align: center">日报</th>
+                                    <th style="text-align: center">工程</th>
                                     <th style="text-align: center">填写人</th>
                                     <th style="text-align: center">填写时间</th>
                                     <th style="text-align: center">操作</th>
@@ -100,6 +101,7 @@
                                     <tr class="odd gradeX">
                                         <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
                                         <td style="text-align: left;vertical-align: middle">${item.recordName}</td>
+                                        <td style="text-align: left;vertical-align: middle">${item.projectName}</td>
                                         <td style="text-align: left;vertical-align: middle">${item.createUserName}</td>
                                         <td style="text-align: left;vertical-align: middle"><fmt:formatDate
                                                 value="${item.createTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></td>

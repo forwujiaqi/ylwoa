@@ -1,6 +1,8 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,13 +69,19 @@
                         <div class="col-lg-12" >
                             <input id="recordName" name="recordName" class="form-control"  placeholder="请填写施工日志名称" style="width: 500px">
                             <br>
+                            <div class="form-group">
+                                <form:select path="projectList" class="form-control" style="width: 500px" name="projectId" id="projectId">
+                                    <c:forEach items="${projectList}" var="item">
+                                        <form:option value="${item.id}">${item.projectName}</form:option>
+                                    </c:forEach>
+                                </form:select>
+                            </div>
                         </div>
                         <%--<div class="col-lg-12" >--%>
                             <%--<input id="owner" name="owner" autocomplete="off">&nbsp;&nbsp;*请填写项目负责人，可以填多个，以半角逗号分隔--%>
                             <%--<input type="hidden" name="ownerName" id="ownerName">--%>
                         <%--</div>--%>
                         <div class="col-lg-12">
-                            <br>
                             <script id="editor" type="text/plain" style="width:100%;height:650px;"></script>
                             <input id="recordContent" name="recordContent" type="hidden" value="">
                             <input id="id" name="id" type="hidden" value="">
@@ -193,6 +201,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#projectId").val(${data.projectId});
             ue.ready(function() {//编辑器初始化完成再赋值
                 $("#recordName").val("${data.recordName}")
                 ue.execCommand('insertHtml', '${data.recordContent}')

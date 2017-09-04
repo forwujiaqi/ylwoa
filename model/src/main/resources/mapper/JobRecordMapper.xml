@@ -6,6 +6,8 @@
     <result column="record_name" jdbcType="VARCHAR" property="recordName" />
     <result column="record_type" jdbcType="INTEGER" property="recordType" />
     <result column="delete_flg" jdbcType="INTEGER" property="deleteFlg" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
     <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
@@ -20,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, record_name, record_type, delete_flg, create_time, create_user_id, update_time, owner_id,owner_name,
-    update_user_id,create_user_name,update_user_name
+    update_user_id,create_user_name,update_user_name,project_id
   </sql>
   <sql id="Blob_Column_List">
     record_content
@@ -38,11 +40,11 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ylwoa.model.JobRecord">
-    insert into job_record (id, record_name, record_type, 
+    insert into job_record (id, record_name, record_type, project_id,
       delete_flg, create_time, create_user_id, 
       update_time, update_user_id, record_content,owner_id,owner_name,create_user_name,update_user_name
       )
-    values (#{id,jdbcType=BIGINT}, #{recordName,jdbcType=VARCHAR}, #{recordType,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{recordName,jdbcType=VARCHAR}, #{recordType,jdbcType=INTEGER}, #{projectId,jdbcType=BIGINT},
       #{deleteFlg,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{recordContent,jdbcType=LONGVARCHAR},
       #{ownerId,jdbcType=INTEGER},#{ownerName,jdbcType=VARCHAR},#{createUserName,jdbcType=VARCHAR},#{updateUserName,jdbcType=VARCHAR}
@@ -59,6 +61,9 @@
       </if>
       <if test="recordType != null">
         record_type,
+      </if>
+      <if test="projectId != null">
+        project_id,
       </if>
       <if test="deleteFlg != null">
         delete_flg,
@@ -101,6 +106,9 @@
       <if test="recordType != null">
         #{recordType,jdbcType=INTEGER},
       </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
       <if test="deleteFlg != null">
         #{deleteFlg,jdbcType=INTEGER},
       </if>
@@ -142,6 +150,9 @@
       <if test="recordType != null">
         record_type = #{recordType,jdbcType=INTEGER},
       </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
       <if test="deleteFlg != null">
         delete_flg = #{deleteFlg,jdbcType=INTEGER},
       </if>
@@ -179,6 +190,7 @@
     update job_record
     set record_name = #{recordName,jdbcType=VARCHAR},
       record_type = #{recordType,jdbcType=INTEGER},
+      project_id =  #{projectId,jdbcType=BIGINT},
       delete_flg = #{deleteFlg,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
@@ -193,6 +205,7 @@
     update job_record
     set record_name = #{recordName,jdbcType=VARCHAR},
       record_type = #{recordType,jdbcType=INTEGER},
+      project_id =  #{projectId,jdbcType=BIGINT},
       delete_flg = #{deleteFlg,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
@@ -208,26 +221,26 @@
           parameterType="map"
           resultMap="ResultMapWithBLOBs">
     select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from job_record
+    a.id, a.record_name, a.record_type, a.delete_flg, a.create_time, a.create_user_id, a.update_time, a.owner_id,a.owner_name,
+    a.update_user_id,a.create_user_name,a.update_user_name,a.project_id,a.record_content,b.project_name
+    from job_record a
+    left join project b on a.project_id = b.id
     <where>
       <if test="id!=null">
-        and id=#{id}
+        and a.id=#{id}
       </if>
       <if test="recordType != null">
-        and record_type = #{recordType,jdbcType=INTEGER}
+        and a.record_type = #{recordType,jdbcType=INTEGER}
       </if>
       <if test="deleteFlg != null">
-        and delete_flg= #{deleteFlg,jdbcType=INTEGER}
+        and a.delete_flg= #{deleteFlg,jdbcType=INTEGER}
       </if>
       <if test="createUserId != null and myName != null">
-        and (create_user_id = #{createUserId,jdbcType=INTEGER}
-        or position(#{myName,jdbcType=VARCHAR} in CONCAT(owner_name,',') ) >0
-        or create_user_id = 1)
+        and (a.create_user_id = #{createUserId,jdbcType=INTEGER}
+        or position(#{myName,jdbcType=VARCHAR} in CONCAT(a.owner_name,',') ) >0
+        or a.create_user_id = 1)
       </if>
     </where>
-    ORDER BY id DESC
+    ORDER BY a.id DESC
   </select>
 </mapper>

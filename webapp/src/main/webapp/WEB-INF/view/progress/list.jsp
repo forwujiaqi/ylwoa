@@ -79,6 +79,7 @@
                                 <tr>
                                     <th style="text-align: center">序号</th>
                                     <th style="text-align: center">进度表</th>
+                                    <th style="text-align: center">工程</th>
                                     <th class="visible-md" style="text-align: center">计划开始时间</th>
                                     <th style="text-align: center">计划完成时间</th>
                                     <th style="text-align: center">状态</th>
@@ -109,6 +110,7 @@
                                     </c:choose>
                                     <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
                                     <td style="text-align: left;vertical-align: middle">${item.excelName}</td>
+                                    <td style="text-align: left;vertical-align: middle">${item.projectName}</td>
                                     <td class="visible-md" tyle="text-align: left;vertical-align: middle"><fmt:formatDate
                                             value="${item.planStartDate}" type="date" pattern="yyyy-MM-dd"/></td>
                                     <td style="text-align: left;vertical-align: middle"><fmt:formatDate

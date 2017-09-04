@@ -1,6 +1,8 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,13 +68,19 @@
                     <div class="col-lg-12" >
                         <input value="${data.excelName}" readonly id="excelName" name="excelName" class="form-control" placeholder="请填写施工进度名" style="width: 500px">
                         <br>
+                        <div class="form-group">
+                            <form:select disabled="true" path="projectList" class="form-control" style="width: 500px" name="projectId" id="projectId">
+                                <c:forEach items="${projectList}" var="item">
+                                    <form:option value="${item.id}">${item.projectName}</form:option>
+                                </c:forEach>
+                            </form:select>
+                        </div>
                     </div>
                     <%--<div class="col-lg-12" >--%>
                         <%--<input id="owner" name="owner" autocomplete="off">--%>
                         <%--<input type="hidden" name="ownerName" id="ownerName">--%>
                     <%--</div>--%>
                     <div class="col-lg-12" >
-                        <br>
                         <label>工期：</label>
                         <input style="width: 250px" type="text" name="progressRange" disabled class="form-control active"
                                id="progressRange">
@@ -235,6 +243,8 @@
 
 
     $(document).ready(function () {
+        $("#projectId").val(${data.projectId});
+
         load()
 
         $('#progressRange').daterangepicker({

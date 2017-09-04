@@ -1,9 +1,11 @@
 package com.ylwoa.web.controller;
 
 import com.google.common.collect.Maps;
+import com.ylwoa.base.IProjectService;
 import com.ylwoa.common.Commons;
 import com.ylwoa.common.ExcelTypeEnum;
 import com.ylwoa.model.Excel;
+import com.ylwoa.model.Project;
 import com.ylwoa.model.User;
 import com.ylwoa.progress.IProgressService;
 import org.slf4j.Logger;
@@ -32,6 +34,9 @@ import static com.ylwoa.common.Commons.USER_SESSION_MARK;
 public class ProgressController {
     @Autowired
     private IProgressService progressService;
+
+    @Autowired
+    private IProjectService projectService;
 
     private static transient Logger log = LoggerFactory.getLogger(ProgressController.class);
 
@@ -66,7 +71,22 @@ public class ProgressController {
 
     @RequestMapping(value = "/toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd() {
+        Map<String, Object> paras = Maps.newHashMap();
+        List<Project> projectList = null;
+        try {
+            paras.put("deleteFlg", ACTIVE_STATE);
+            projectList = projectService.getList(paras);
+        } catch (Exception e) {
+            log.error("toAdd error:", e);
+            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            mv.addObject("success", false);
+            mv.addObject("message", "取得工程列表失败");
+            return mv;
+        }
+
         ModelAndView mv = new ModelAndView("/progress/add");
+        mv.addObject("success", true);
+        mv.addObject("projectList", projectList);
         return mv;
     }
 
@@ -93,14 +113,28 @@ public class ProgressController {
 
     @RequestMapping(value = "/toView/{excelId}", method = RequestMethod.GET)
     public ModelAndView toView(@PathVariable String excelId) throws Exception {
-        ModelAndView mv = new ModelAndView("/progress/view");
         Map<String, Object> paras = Maps.newHashMap();
+        List<Project> projectList = null;
+        try {
+            paras.put("deleteFlg", ACTIVE_STATE);
+            projectList = projectService.getList(paras);
+        } catch (Exception e) {
+            log.error("toAdd error:", e);
+            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            mv.addObject("success", false);
+            mv.addObject("message", "取得工程列表失败");
+            return mv;
+        }
+
+        ModelAndView mv = new ModelAndView("/progress/view");
+        paras = Maps.newHashMap();
         paras.put("excelId", excelId);
         try {
             List<Excel> progressList = progressService.getListById(paras);
             if (null != progressList && progressList.size() > 0) {
                 mv.addObject("success", true);
                 mv.addObject("data", progressList.get(0));
+                mv.addObject("projectList", projectList);
             }
         } catch (Exception e) {
             log.error("toView error excelId:"+ excelId, e);
@@ -135,14 +169,28 @@ public class ProgressController {
 
     @RequestMapping(value = "/toEdit/{excelId}")
     public ModelAndView toEdit(@PathVariable String excelId) throws Exception {
-        ModelAndView mv = new ModelAndView("/progress/edit");
         Map<String, Object> paras = Maps.newHashMap();
+        List<Project> projectList = null;
+        try {
+            paras.put("deleteFlg", ACTIVE_STATE);
+            projectList = projectService.getList(paras);
+        } catch (Exception e) {
+            log.error("toAdd error:", e);
+            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            mv.addObject("success", false);
+            mv.addObject("message", "取得工程列表失败");
+            return mv;
+        }
+
+        ModelAndView mv = new ModelAndView("/progress/edit");
+        paras = Maps.newHashMap();
         paras.put("excelId", excelId);
         try {
             List<Excel> progressList = progressService.getListById(paras);
             if (null != progressList && progressList.size() > 0) {
                 mv.addObject("success", true);
                 mv.addObject("data", progressList.get(0));
+                mv.addObject("projectList", projectList);
             }
         } catch (Exception e) {
             log.error("toEdit error excelId:"+ excelId, e);

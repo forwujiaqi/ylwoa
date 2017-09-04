@@ -52,7 +52,7 @@
                     <div><p><span>2017.9.4发布  version 1.1</span></p></div>
                     <div><p><span>采供系统颜色功能添加</span></p></div>
                     <div><p><span>工程管理模块功能添加</span></p></div>
-                    <div><p><span style="color: rgb(255, 0, 0);">TODO 原有功能关联工程</span></p></div>
+                    <div><p><span>原有功能关联工程</span></p></div>
                     <br>
                     <div><p><span>2017.9.3发布 version 1.0</span></p></div>
                     <div><p><span>采购模块和到货模块合并为采供模块</span></p></div>

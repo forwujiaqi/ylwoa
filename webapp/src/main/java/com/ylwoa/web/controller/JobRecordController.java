@@ -2,9 +2,11 @@ package com.ylwoa.web.controller;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+import com.ylwoa.base.IProjectService;
 import com.ylwoa.common.Commons;
 import com.ylwoa.jobrecord.IJobRecordService;
 import com.ylwoa.model.JobRecord;
+import com.ylwoa.model.Project;
 import com.ylwoa.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,9 @@ public class JobRecordController {
 
     @Autowired
     private IJobRecordService jobRecordService;
+
+    @Autowired
+    private IProjectService projectService;
 
     private static transient Logger log = LoggerFactory.getLogger(JobRecordController.class);
 
@@ -74,7 +78,22 @@ public class JobRecordController {
 
     @RequestMapping(value = "/toAdd", method = RequestMethod.GET)
     public ModelAndView toAdd() {
+        Map<String, Object> paras = Maps.newHashMap();
+        List<Project> projectList = null;
+        try {
+            paras.put("deleteFlg", ACTIVE_STATE);
+            projectList = projectService.getList(paras);
+        } catch (Exception e) {
+            log.error("toAdd error:", e);
+            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            mv.addObject("success", false);
+            mv.addObject("message", "取得工程列表失败");
+            return mv;
+        }
+
         ModelAndView mv = new ModelAndView("/jobRecord/add");
+        mv.addObject("success", true);
+        mv.addObject("projectList", projectList);
         return mv;
     }
 
@@ -108,14 +127,28 @@ public class JobRecordController {
 
     @RequestMapping(value = "/toView/{recordId}", method = RequestMethod.GET)
     public ModelAndView toView(@PathVariable String recordId) throws Exception {
-        ModelAndView mv = new ModelAndView("/jobRecord/view");
         Map<String, Object> paras = Maps.newHashMap();
+        List<Project> projectList = null;
+        try {
+            paras.put("deleteFlg", ACTIVE_STATE);
+            projectList = projectService.getList(paras);
+        } catch (Exception e) {
+            log.error("toAdd error:", e);
+            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            mv.addObject("success", false);
+            mv.addObject("message", "取得工程列表失败");
+            return mv;
+        }
+
+        ModelAndView mv = new ModelAndView("/jobRecord/view");
+        paras = Maps.newHashMap();
         paras.put("id", recordId);
         try {
             List<JobRecord> jobRecordList = jobRecordService.getList(paras);
             if (null != jobRecordList && jobRecordList.size() > 0) {
                 mv.addObject("success", true);
                 mv.addObject("data", jobRecordList.get(0));
+                mv.addObject("projectList", projectList);
             }
         } catch (Exception e) {
             log.error("toView error recordId：" + recordId, e);
@@ -150,14 +183,28 @@ public class JobRecordController {
 
     @RequestMapping(value = "/toEdit/{recordId}")
     public ModelAndView toEdit(@PathVariable String recordId) throws Exception {
-        ModelAndView mv = new ModelAndView("/jobRecord/edit");
         Map<String, Object> paras = Maps.newHashMap();
+        List<Project> projectList = null;
+        try {
+            paras.put("deleteFlg", ACTIVE_STATE);
+            projectList = projectService.getList(paras);
+        } catch (Exception e) {
+            log.error("toAdd error:", e);
+            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            mv.addObject("success", false);
+            mv.addObject("message", "取得工程列表失败");
+            return mv;
+        }
+
+        ModelAndView mv = new ModelAndView("/jobRecord/edit");
+        paras = Maps.newHashMap();
         paras.put("id", recordId);
         try {
             List<JobRecord> jobRecordList = jobRecordService.getList(paras);
             if (null != jobRecordList && jobRecordList.size() > 0) {
                 mv.addObject("success", true);
                 mv.addObject("data", jobRecordList.get(0));
+                mv.addObject("projectList", projectList);
             }
         } catch (Exception e) {
             log.error("toEdit error recordId："+ recordId, e);
@@ -173,6 +220,7 @@ public class JobRecordController {
         JobRecord jobRecordForUpdate = new JobRecord();
         jobRecordForUpdate.setId(jobRecord.getId());
         jobRecordForUpdate.setRecordContent(jobRecord.getRecordContent());
+        jobRecordForUpdate.setProjectId(jobRecord.getProjectId());
         jobRecordForUpdate.setRecordName(jobRecord.getRecordName());
         jobRecordForUpdate.setUpdateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
         jobRecordForUpdate.setUpdateTime(new Date());

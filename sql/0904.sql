@@ -12,3 +12,5 @@ CREATE TABLE `project` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+ALTER TABLE job_record ADD COLUMN project_id bigint(20)  DEFAULT NULL COMMENT '工程ID';
+ALTER TABLE excel_data ADD COLUMN project_id bigint(20)  DEFAULT NULL COMMENT '工程ID';
