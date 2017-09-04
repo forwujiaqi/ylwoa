@@ -129,6 +129,24 @@
 
     <script type="text/javascript">
 
+        function negativeValueRenderer(instance, td, row, col, prop, value, cellProperties) {
+            Handsontable.renderers.TextRenderer.apply(this, arguments);
+
+            if (value === 'OK' || value === '可行') {
+                td.style.background = '#CEC';
+            }
+
+            if (value === 'NG' || value === '不可行') {
+                td.style.background = '#F08080';
+            }
+
+            if (value === '需要延误') {
+                td.style.background = 'yellow';
+            }
+        }
+
+        Handsontable.renderers.registerRenderer('negativeValueRenderer', negativeValueRenderer);
+
         function getData() {
             return [
                 ['']
@@ -197,6 +215,14 @@
                 {},
                 {}
             ],
+            cells: function (row, col, prop) {
+                var cellProperties = {};
+
+                if (col === 7 || col === 10 || col === 13) {
+                    cellProperties.renderer = "negativeValueRenderer"; // uses lookup map
+                }
+                return cellProperties;
+            },
             mergeCells: [],
             //       contextMenu:true
             contextMenu: ['row_above', 'row_below', '---------','col_left','col_right','---------','remove_row','remove_col','---------','mergeCells','---------','undo','redo']

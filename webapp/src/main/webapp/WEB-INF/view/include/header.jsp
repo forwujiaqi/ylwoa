@@ -87,6 +87,18 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>工程管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/project/toAdd">添加工程</a>
+                        </li>
+                        <li>
+                            <a href="/project/list/0">工程列表</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-user fa-fw"></i>用户管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>

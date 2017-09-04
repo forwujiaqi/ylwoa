@@ -15,6 +15,7 @@
     <import resource="classpath*:applicationContext-datasource.xml"/>
     <import resource="classpath*:applicationContext-dailyrecord.xml"/>
     <import resource="classpath*:applicationContext-progress.xml"/>
+    <import resource="classpath*:applicationContext-base.xml"/>
 
     <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
         <property name="config">

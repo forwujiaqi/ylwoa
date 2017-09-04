@@ -15,6 +15,7 @@
         <module>user</module>
         <module>dailyrecord</module>
         <module>progress</module>
+        <module>base</module>
     </modules>
     <packaging>pom</packaging>
 
