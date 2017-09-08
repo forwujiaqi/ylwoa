@@ -52,6 +52,7 @@ public class LoginController {
         if (!code.equals(mcode)) {
             log.error("login error. captcha  code:"+code +" mcode:"+mcode +" user:"+ user);
             modelAndView.addObject("success", false);
+            modelAndView.addObject("phone", user.getPhone());
             modelAndView.addObject("message", "验证码不正确");
             modelAndView.setViewName("/login");
             return modelAndView;

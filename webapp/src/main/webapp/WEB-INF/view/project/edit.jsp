@@ -66,6 +66,7 @@
                     <div class="row">
                         <div class="col-lg-12" >
                             <input id="projectName" name="projectName" class="form-control"  placeholder="请填写工程名称" value="${data.projectName}" style="width: 500px">
+                            <input id="id" name="id" type="hidden" value="${data.id}">
                             <br>
                         </div>
                         <div class="col-lg-12" >

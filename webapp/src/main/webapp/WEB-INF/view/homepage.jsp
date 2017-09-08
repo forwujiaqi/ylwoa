@@ -49,6 +49,12 @@
                     </div>
                     <div><p><span style="color: rgb(255, 0, 0);">请尽快修改默认密码。（用户管理-&gt;修改密码）</span></p></div>
                     <br>
+                    <div><p><span>2017.9.8发布  version 1.3</span></p></div>
+                    <div><p><span>验证码输错时，不需要再重新输入手机号</span></p></div>
+                    <br>
+                    <div><p><span>2017.9.7发布  version 1.2</span></p></div>
+                    <div><p><span>数据库备份功能上线。每天17:30分备份一次</span></p></div>
+                    <br>
                     <div><p><span>2017.9.4发布  version 1.1</span></p></div>
                     <div><p><span>采供系统颜色功能添加</span></p></div>
                     <div><p><span>工程管理模块功能添加</span></p></div>

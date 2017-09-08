@@ -72,7 +72,7 @@
                         <form role="form" action="${pageContext.request.contextPath}/login" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="请输入手机号" name="phone" required  autofocus>
+                                    <input class="form-control" placeholder="请输入手机号" value="${phone}" name="phone" required  autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="请输入密码" name="password" type="password" required value="">
