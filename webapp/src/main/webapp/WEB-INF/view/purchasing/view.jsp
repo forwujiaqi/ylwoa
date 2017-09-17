@@ -181,7 +181,7 @@
         colHeaders: true,
         minSpareRows: 1,
         fixedRowsTop: 2,
-        colHeaders: ['序号','名称','品牌','规格','单位','数量','要求到货时间','采购部反馈意见','备注','发货时间','确认','备注','收货时间','确认','备注'],
+        colHeaders: ['名称','品牌','规格','单位','合同内数量','合同外数量','要求到货时间','采购部反馈意见','备注','工程部反馈意见','最终协商决议','最终发货时间','确认','备注','最终收货时间','确认','备注','发货确认人','收货确认人'],
 //        manualColumnMove: true,
 //        manualRowMove: true,
         columns: [
@@ -201,6 +201,8 @@
                 source: ['可行', '需要延误', '不可行']
             },
             {},
+            {},
+            {},
             {
                 type: 'date',
                 dateFormat: 'YYYY/MM/DD',
@@ -220,9 +222,6 @@
                 type: 'dropdown',
                 source: ['OK', 'NG']
             },
-            {},
-            {},
-            {},
             {},
             {},
             {}
@@ -230,7 +229,7 @@
         cells: function (row, col, prop) {
             var cellProperties = {};
 
-            if (col === 7 || col === 10 || col === 13) {
+            if (col === 7 || col === 12 || col === 15) {
                 cellProperties.renderer = "negativeValueRenderer"; // uses lookup map
             }
             return cellProperties;

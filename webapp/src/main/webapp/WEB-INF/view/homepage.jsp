@@ -47,7 +47,12 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">明仁信息管理系统</h1>
                     </div>
-                    <div><p><span style="color: rgb(255, 0, 0);">请尽快修改默认密码。（用户管理-&gt;修改密码）</span></p></div>
+                    <div><p>请尽快修改默认密码。（用户管理-&gt;修改密码）</p></div>
+                    <br>
+                    <div><p><span style="color: rgb(255, 0, 0);">2017.9.17发布  version 1.4</span></p></div>
+                    <div><p><span>采供单layout调整</span></p></div>
+                    <div><p><span>搜索文字改为筛选</span></p></div>
+                    <div><p><span>已完成保存时，添加发货收货确认人check</span></p></div>
                     <br>
                     <div><p><span>2017.9.8发布  version 1.3</span></p></div>
                     <div><p><span>验证码输错时，不需要再重新输入手机号</span></p></div>

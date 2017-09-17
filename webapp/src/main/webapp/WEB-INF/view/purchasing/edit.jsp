@@ -97,7 +97,7 @@
                                 <input type="radio" name="status" id="optionsRadiosInline2" value="1" <c:if test="${data.status == 1}">checked="checked"</c:if>>已完成
                             </label>
                             <input id="dataJson" name="dataJson" type="hidden" value="${data.dataJson}">
-                            <input id="status" name="status" type="hidden" value="${data.status}">
+                            <%--<input id="status" name="status" type="hidden" value="${data.status}">--%>
                             <input id="id" name="id" type="hidden" value="${data.id}">
                         </div>
                         <div class="col-lg-12">
@@ -183,7 +183,7 @@
             manualRowResize: true,
             rowHeaders: true,
             colHeaders: true,
-            colHeaders: ['序号','名称','品牌','规格','单位','数量','要求到货时间','采购部反馈意见','备注','发货时间','确认','备注','收货时间','确认','备注'],
+            colHeaders: ['名称','品牌','规格','单位','合同内数量','合同外数量','要求到货时间','采购部反馈意见','备注','工程部反馈意见','最终协商决议','最终发货时间','确认','备注','最终收货时间','确认','备注','发货确认人','收货确认人'],
             minSpareRows: 1,
             fixedRowsTop: 2,
 //            manualColumnMove: true,
@@ -205,6 +205,8 @@
                     source: ['可行', '需要延误', '不可行']
                 },
                 {},
+                {},
+                {},
                 {
                     type: 'date',
                     dateFormat: 'YYYY/MM/DD',
@@ -224,9 +226,6 @@
                     type: 'dropdown',
                     source: ['OK', 'NG']
                 },
-                {},
-                {},
-                {},
                 {},
                 {},
                 {}
@@ -234,7 +233,7 @@
             cells: function (row, col, prop) {
                 var cellProperties = {};
 
-                if (col === 7 || col === 10 || col === 13) {
+                if (col === 7 || col === 12 || col === 15) {
                     cellProperties.renderer = "negativeValueRenderer"; // uses lookup map
                 }
                 return cellProperties;
@@ -281,10 +280,18 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-//            if($('#owner').manifest('values') == ""){
-//                alert("请填写项目负责人");
-//                return;
-//            }
+
+            if($("input[name='status']:checked").val() == 1) {
+                if(hot.getData()[0][17].trim() == ""){
+                    alert("请填写发货确认人");
+                    return;
+                }
+
+                if(hot.getData()[0][18].trim() == "") {
+                    alert("请填写收货确认人");
+                    return;
+                }
+            }
 
             $(this).button('loading')
             var cellJson = new Object();

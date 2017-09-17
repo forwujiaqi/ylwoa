@@ -176,7 +176,7 @@
             manualRowResize: true,
             rowHeaders: true,
             colHeaders: true,
-            colHeaders: ['序号','名称','品牌','规格','单位','数量','要求到货时间','采购部反馈意见','备注','发货时间','确认','备注','收货时间','确认','备注'],
+            colHeaders: ['名称','品牌','规格','单位','合同内数量','合同外数量','要求到货时间','采购部反馈意见','备注','工程部反馈意见','最终协商决议','最终发货时间','确认','备注','最终收货时间','确认','备注','发货确认人','收货确认人'],
             minSpareRows: 1,
             fixedRowsTop: 2,
 //            manualColumnMove: true,
@@ -198,6 +198,8 @@
                     source: ['可行', '需要延误', '不可行']
                 },
                 {},
+                {},
+                {},
                 {
                     type: 'date',
                     dateFormat: 'YYYY/MM/DD',
@@ -217,9 +219,6 @@
                     type: 'dropdown',
                     source: ['OK', 'NG']
                 },
-                {},
-                {},
-                {},
                 {},
                 {},
                 {}
@@ -227,7 +226,7 @@
             cells: function (row, col, prop) {
                 var cellProperties = {};
 
-                if (col === 7 || col === 10 || col === 13) {
+                if (col === 7 || col === 12 || col === 15) {
                     cellProperties.renderer = "negativeValueRenderer"; // uses lookup map
                 }
                 return cellProperties;
@@ -251,7 +250,7 @@
         });
 
         function load() {
-            var aa = {"data":{"dataInfo":[["1","","","","","","","","","","","","","","","","",null,null,null],["2","","","","","","","","","","","","","","","","",null,null,null],["3","","","","","","","","","","","","","","","","",null,null,null],["5","","","","","","","","","","","","","","","","",null,null,null],["6","","","","","","","","","","","","","","","","",null,null,null],["7","","","","","","","","","","","","","","","","",null,null,null],["8","","","","","","","","","","","","","","","","",null,null,null],["9","","","","","","","","","","","","","","","","",null,null,null],["10","","","","","","","","","","","","","","","","",null,null,null],["11","","","","","","","","","","","","","","","","",null,null,null],["12","","","","","","","","","","","","","","","","",null,null,null],["13","","","","","","","","","","","","","","","","",null,null,null],["14","","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","",null,"",null,null,null,null],["","","","","","","","","","","","","","",null,"",null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"",null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"",null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"",null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"",null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"",null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"",null,null,null,null],["发货确认人",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],["收货确认人",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]],"mergeInfo":[]}}
+            var aa = {"data":{"dataInfo":[["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null],["","","","","","","","","","","","","","","","",null,null,null]],"mergeInfo":[]}}
             var mergeInfo = aa.data.mergeInfo
             for (var i = 0; i < mergeInfo.length; i++) {
                 settings1.mergeCells.push(mergeInfo[i]);
