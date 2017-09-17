@@ -178,7 +178,6 @@
             colHeaders: true,
             colHeaders: ['名称','品牌','规格','单位','合同内数量','合同外数量','要求到货时间','采购部反馈意见','备注','工程部反馈意见','最终协商决议','最终发货时间','确认','备注','最终收货时间','确认','备注','发货确认人','收货确认人'],
             minSpareRows: 1,
-            fixedRowsTop: 2,
 //            manualColumnMove: true,
 //            manualRowMove: true,
             columns: [
