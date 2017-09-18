@@ -279,14 +279,13 @@
     </script>
     <script type="text/javascript">
         $("#save").click(function () {
-
             if($("input[name='status']:checked").val() == 1) {
-                if(hot.getData()[0][17].trim() == ""){
+                if(hot.getData()[0][17] == "" || hot.getData()[0][17] == null || hot.getData()[0][17] == undefined){
                     alert("请填写发货确认人");
                     return;
                 }
 
-                if(hot.getData()[0][18].trim() == "") {
+                if(hot.getData()[0][18] == "" || hot.getData()[0][18] == null || hot.getData()[0][18] == undefined){
                     alert("请填写收货确认人");
                     return;
                 }
