@@ -106,7 +106,7 @@
                 <div class="row">
                     <div class="col-lg-12" style="text-align:center;width:100%;">
                         <br>
-                        <a href="/purchasing/list/0" class="btn btn-warning" role="button">退出</a>
+                        <a href="/purchasing/list/9999" class="btn btn-warning" role="button">退出</a>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

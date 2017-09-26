@@ -110,7 +110,7 @@
                         <div class="col-lg-12" style="text-align:center;width:100%">
                             <br>
                             <button type="button" id="save" class="btn btn-success">保存</button>
-                            <a href="/purchasing/list/0" class="btn btn-warning" role="button">退出</a>
+                            <a href="/purchasing/list/9999" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -280,14 +280,20 @@
     <script type="text/javascript">
         $("#save").click(function () {
             if($("input[name='status']:checked").val() == 1) {
-                if(hot.getData()[0][17] == "" || hot.getData()[0][17] == null || hot.getData()[0][17] == undefined){
-                    alert("请填写发货确认人");
-                    return;
-                }
+                for (var i=0;i<hot.getData().length;i++){
+                    if(hot.getData()[i][0] == "" || hot.getData()[i][0] == null || hot.getData()[i][0] == undefined){
+                        break;
+                    }
+                    if(hot.getData()[i][17] == "" || hot.getData()[i][17] == null || hot.getData()[i][17] == undefined){
+                        alert("请填写发货确认人");
+                        return;
+                    }
 
-                if(hot.getData()[0][18] == "" || hot.getData()[0][18] == null || hot.getData()[0][18] == undefined){
-                    alert("请填写收货确认人");
-                    return;
+                    if(hot.getData()[i][18] == "" || hot.getData()[i][18] == null || hot.getData()[i][18] == undefined){
+                        alert("请填写收货确认人");
+                        return;
+                    }
+
                 }
             }
 

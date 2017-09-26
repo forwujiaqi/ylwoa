@@ -119,7 +119,7 @@
       or position(#{myName,jdbcType=VARCHAR} in CONCAT(d.owner_name,',') ) >0
       or d.create_user_id = 1)
     </if>
-    ORDER BY d.status, d.plan_end_date
+    ORDER BY d.status ASC, d.update_time DESC
   </select>
   <select id="selectById"
           parameterType="map"
