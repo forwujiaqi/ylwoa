@@ -91,20 +91,37 @@
                                     <th style="text-align: center">序号</th>
                                     <th style="text-align: center">日报</th>
                                     <th style="text-align: center">工程</th>
-                                    <th style="text-align: center">填写人</th>
-                                    <th style="text-align: center">填写时间</th>
+                                    <th style="text-align: center">状态</th>
+                                    <th style="text-align: center">创建人</th>
+                                    <th style="text-align: center">创建时间</th>
+                                    <th style="text-align: center">修改人</th>
+                                    <th style="text-align: center">修改时间</th>
                                     <th style="text-align: center">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${pageData}" var="item" varStatus="status">
-                                    <tr class="odd gradeX">
+                                    <c:choose>
+                                        <c:when test="${item.status == 1}">
+                                            <tr class="success">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                        </c:otherwise>
+                                    </c:choose>
                                         <td style="text-align: right;vertical-align: middle">${status.index+1}</td>
                                         <td style="text-align: left;vertical-align: middle">${item.recordName}</td>
                                         <td style="text-align: left;vertical-align: middle">${item.projectName}</td>
+                                        <td style="text-align: left;vertical-align: middle">
+                                            <c:if test="${item.status != 0}">已回复</c:if>
+                                            <c:if test="${item.status == 0}">已提交</c:if>
+                                        </td>
                                         <td style="text-align: left;vertical-align: middle">${item.createUserName}</td>
                                         <td style="text-align: left;vertical-align: middle"><fmt:formatDate
                                                 value="${item.createTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></td>
+                                        <td style="text-align: left;vertical-align: middle">${item.updateUserName}</td>
+                                        <td style="text-align: left;vertical-align: middle"><fmt:formatDate
+                                                value="${item.updateTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></td>
                                         <td style="text-align: center;vertical-align: middle">
                                             <c:if test="${sessionScope.USER_SESSION_MARK.id == item.createUserId or
                                              (permitNo == 1 or permitNo == 3)}">
@@ -114,6 +131,9 @@
                                             </c:if>
                                             <button type="button" class="btn btn-info" id="view"
                                                     onclick="return showRecord(${item.id})">查看
+                                            </button>
+                                            <button type="button" class="btn btn-warning" id="view"
+                                                    onclick="return showReply(${item.id})">回复
                                             </button>
                                             <c:if test="${sessionScope.USER_SESSION_MARK.id == item.createUserId or
                                              (permitNo == 1 or permitNo == 3)}">
@@ -196,6 +216,12 @@
 
     function showRecord(recordId) {
         document.form1.action = "${ctx}/jobRecord/toView/" + recordId;
+        document.form1.submit();
+        return true;
+    }
+
+    function showReply(recordId) {
+        document.form1.action = "${ctx}/jobRecord/toReply/" + recordId;
         document.form1.submit();
         return true;
     }

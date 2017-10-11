@@ -85,7 +85,7 @@ public class JobRecordController {
             projectList = projectService.getList(paras);
         } catch (Exception e) {
             log.error("toAdd error:", e);
-            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            ModelAndView mv = new ModelAndView("/jobRecord/add");
             mv.addObject("success", false);
             mv.addObject("message", "取得工程列表失败");
             return mv;
@@ -105,6 +105,7 @@ public class JobRecordController {
             jobRecord.setRecordType(1);
             jobRecord.setUpdateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
             jobRecord.setUpdateTime(now);
+            jobRecord.setStatus(0);//未回复
             jobRecord.setUpdateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
             jobRecord.setCreateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
             jobRecord.setCreateTime(now);
@@ -134,7 +135,7 @@ public class JobRecordController {
             projectList = projectService.getList(paras);
         } catch (Exception e) {
             log.error("toAdd error:", e);
-            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            ModelAndView mv = new ModelAndView("/jobRecord/add");
             mv.addObject("success", false);
             mv.addObject("message", "取得工程列表失败");
             return mv;
@@ -189,8 +190,8 @@ public class JobRecordController {
             paras.put("deleteFlg", ACTIVE_STATE);
             projectList = projectService.getList(paras);
         } catch (Exception e) {
-            log.error("toAdd error:", e);
-            ModelAndView mv = new ModelAndView("/purchasing/Add");
+            log.error("toEdit error:", e);
+            ModelAndView mv = new ModelAndView("/jobRecord/edit");
             mv.addObject("success", false);
             mv.addObject("message", "取得工程列表失败");
             return mv;
@@ -226,6 +227,62 @@ public class JobRecordController {
         jobRecordForUpdate.setUpdateTime(new Date());
 //        jobRecordForUpdate.setOwnerName(jobRecord.getOwnerName().replaceAll("，",","));
         jobRecordForUpdate.setUpdateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
+        try {
+            jobRecordService.updateJobRecord(jobRecordForUpdate);
+            mv.setViewName("forward:/jobRecord/list/9999");
+        } catch (Exception e) {
+            log.error("edit error jobRecord：" + jobRecord, e);
+            mv.addObject("success", false);
+            mv.addObject("message", "编辑失败");
+            mv.setViewName("/jobRecord/edit");
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/toReply/{recordId}")
+    public ModelAndView toReply(@PathVariable String recordId) throws Exception {
+        Map<String, Object> paras = Maps.newHashMap();
+        List<Project> projectList = null;
+        try {
+            paras.put("deleteFlg", ACTIVE_STATE);
+            projectList = projectService.getList(paras);
+        } catch (Exception e) {
+            log.error("toReply error:", e);
+            ModelAndView mv = new ModelAndView("/jobRecord/reply");
+            mv.addObject("success", false);
+            mv.addObject("message", "取得工程列表失败");
+            return mv;
+        }
+
+        ModelAndView mv = new ModelAndView("/jobRecord/reply");
+        paras = Maps.newHashMap();
+        paras.put("id", recordId);
+        try {
+            List<JobRecord> jobRecordList = jobRecordService.getList(paras);
+            if (null != jobRecordList && jobRecordList.size() > 0) {
+                mv.addObject("success", true);
+                mv.addObject("data", jobRecordList.get(0));
+                mv.addObject("projectList", projectList);
+            }
+        } catch (Exception e) {
+            log.error("toReply error recordId："+ recordId, e);
+            mv.addObject("success", false);
+            throw e;
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/reply")
+    public ModelAndView reply(JobRecord jobRecord,HttpSession session) {
+        ModelAndView mv = new ModelAndView("/jobRecord/list");
+        JobRecord jobRecordForUpdate = new JobRecord();
+        jobRecordForUpdate.setId(jobRecord.getId());
+        jobRecordForUpdate.setUpdateUserId(((User)session.getAttribute(USER_SESSION_MARK)).getId());
+        jobRecordForUpdate.setUpdateTime(new Date());
+        jobRecordForUpdate.setUpdateUserName(((User)session.getAttribute(USER_SESSION_MARK)).getRealName());
+        jobRecordForUpdate.setStatus(1);//已阅
+        jobRecordForUpdate.setReply(jobRecord.getReply());
+
         try {
             jobRecordService.updateJobRecord(jobRecordForUpdate);
             mv.setViewName("forward:/jobRecord/list/9999");

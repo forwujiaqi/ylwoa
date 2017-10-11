@@ -64,7 +64,7 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/edit">
+                <form role="form" id="form" method="post" action="${pageContext.request.contextPath}/jobRecord/reply">
                     <div class="row">
                         <div class="col-lg-12" >
                             <input readonly="readonly" id="recordName" name="recordName" class="form-control" placeholder="请填写日志名称" style="width: 500px">
@@ -88,17 +88,18 @@
                             <input id="id" name="id" type="hidden" value="">
                         </div>
                         <div class="col-lg-12" >
-                        <br><lable>领导回复：</lable>
+                            <br><lable>请填写回复：</lable>
                         </div>
                         <div class="col-lg-12" >
-                                <br>
-                            <textarea style="width:100%"   readonly="readonly"  id="reply" name="reply" class="form-control" rows="5"></textarea>
+                             <br>
+                            <textarea style="width: 100%" id="reply" name="reply" class="form-control" rows="5"></textarea>
                         </div>
                     <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
                         <div class="col-lg-12" style="text-align:center;width:100%">
                             <br>
+                                <button type="button" id="btnReply" class="btn btn-success">回复</button>
                                 <a href="/jobRecord/list/9999" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->
@@ -219,6 +220,12 @@
                 <%--$("#owner").val("${data.ownerName}")--%>
                 <%--$('#owner').manifest();--%>
             });
+        });
+
+        $("#btnReply").click(function () {
+            $(this).button('loading')
+            $("#form").method="post";
+            $("#form").submit();
         });
     </script>
 </body>

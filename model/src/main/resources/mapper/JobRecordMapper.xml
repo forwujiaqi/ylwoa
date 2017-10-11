@@ -16,13 +16,15 @@
     <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
     <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
     <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="reply" jdbcType="VARCHAR" property="reply" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ylwoa.model.JobRecord">
     <result column="record_content" jdbcType="LONGVARCHAR" property="recordContent" />
   </resultMap>
   <sql id="Base_Column_List">
     id, record_name, record_type, delete_flg, create_time, create_user_id, update_time, owner_id,owner_name,
-    update_user_id,create_user_name,update_user_name,project_id
+    update_user_id,create_user_name,update_user_name,project_id,reply,status
   </sql>
   <sql id="Blob_Column_List">
     record_content
@@ -42,12 +44,14 @@
   <insert id="insert" parameterType="com.ylwoa.model.JobRecord">
     insert into job_record (id, record_name, record_type, project_id,
       delete_flg, create_time, create_user_id, 
-      update_time, update_user_id, record_content,owner_id,owner_name,create_user_name,update_user_name
+      update_time, update_user_id, record_content,owner_id,owner_name,create_user_name,update_user_name,status,reply
       )
     values (#{id,jdbcType=BIGINT}, #{recordName,jdbcType=VARCHAR}, #{recordType,jdbcType=INTEGER}, #{projectId,jdbcType=BIGINT},
       #{deleteFlg,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{recordContent,jdbcType=LONGVARCHAR},
       #{ownerId,jdbcType=INTEGER},#{ownerName,jdbcType=VARCHAR},#{createUserName,jdbcType=VARCHAR},#{updateUserName,jdbcType=VARCHAR}
+      ,#{status,jdbcType=INTEGER}
+      ,#{reply,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ylwoa.model.JobRecord">
@@ -95,6 +99,12 @@
       <if test="ownerName != null">
         owner_name,
       </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="reply != null">
+        reply,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -138,6 +148,12 @@
       </if>
       <if test="ownerName != null">
         #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reply != null">
+        #{reply,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -183,6 +199,12 @@
       <if test="ownerName != null">
         owner_name = #{ownerName,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reply != null">
+        reply = #{reply,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -198,6 +220,8 @@
       update_user_id = #{updateUserId,jdbcType=INTEGER},
       record_content = #{recordContent,jdbcType=LONGVARCHAR},
       owner_id = #{ownerId,jdbcType=INTEGER},
+      reply = #{reply,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       owner_name = #{ownerName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -214,6 +238,8 @@
       update_user_id = #{updateUserId,jdbcType=INTEGER},
       update_user_name = #{updateUserName,jdbcType=VARCHAR},
       owner_id = #{ownerId,jdbcType=INTEGER},
+      reply = #{reply,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       owner_name = #{ownerName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -222,7 +248,7 @@
           resultMap="ResultMapWithBLOBs">
     select
     a.id, a.record_name, a.record_type, a.delete_flg, a.create_time, a.create_user_id, a.update_time, a.owner_id,a.owner_name,
-    a.update_user_id,a.create_user_name,a.update_user_name,a.project_id,a.record_content,b.project_name
+    a.update_user_id,a.create_user_name,a.update_user_name,a.project_id,a.record_content,b.project_name,a.status,a.reply
     from job_record a
     left join project b on a.project_id = b.id
     <where>
@@ -241,6 +267,6 @@
         or a.create_user_id = 1)
       </if>
     </where>
-    ORDER BY a.id DESC
+    ORDER BY a.status ASC , a.update_time DESC
   </select>
 </mapper>

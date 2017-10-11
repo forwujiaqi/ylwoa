@@ -35,6 +35,10 @@ public class JobRecord {
 
     private String owner;
 
+    private String reply;
+
+    private Integer status;
+
     @Override
     public String toString() {
         return "JobRecord{" +
@@ -54,7 +58,25 @@ public class JobRecord {
                 ", ownerId=" + ownerId +
                 ", ownerName='" + ownerName + '\'' +
                 ", owner='" + owner + '\'' +
+                ", reply='" + reply + '\'' +
+                ", status=" + status +
                 '}';
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Long getProjectId() {
