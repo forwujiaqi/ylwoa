@@ -113,7 +113,7 @@
                                         <td style="text-align: left;vertical-align: middle">${item.recordName}</td>
                                         <td style="text-align: left;vertical-align: middle">${item.projectName}</td>
                                         <td style="text-align: left;vertical-align: middle">
-                                            <c:if test="${item.status != 0}">已回复</c:if>
+                                            <c:if test="${item.status != 0}">已阅</c:if>
                                             <c:if test="${item.status == 0}">已提交</c:if>
                                         </td>
                                         <td style="text-align: left;vertical-align: middle">${item.createUserName}</td>
@@ -133,7 +133,7 @@
                                                     onclick="return showRecord(${item.id})">查看
                                             </button>
                                             <button type="button" class="btn btn-warning" id="view"
-                                                    onclick="return showReply(${item.id})">回复
+                                                    onclick="return showReply(${item.id})">批阅
                                             </button>
                                             <c:if test="${sessionScope.USER_SESSION_MARK.id == item.createUserId or
                                              (permitNo == 1 or permitNo == 3)}">

@@ -88,7 +88,7 @@
                             <input id="id" name="id" type="hidden" value="">
                         </div>
                         <div class="col-lg-12" >
-                            <br><lable>请填写回复：</lable>
+                            <br><lable>请填写批复：</lable>
                         </div>
                         <div class="col-lg-12" >
                              <br>
@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-lg-12" style="text-align:center;width:100%">
                             <br>
-                                <button type="button" id="btnReply" class="btn btn-success">回复</button>
+                                <button type="button" id="btnReply" class="btn btn-success">已阅</button>
                                 <a href="/jobRecord/list/9999" class="btn btn-warning" role="button">退出</a>
                         </div>
                         <!-- /.col-lg-12 -->

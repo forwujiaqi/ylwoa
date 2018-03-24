@@ -88,7 +88,7 @@
                             <input id="id" name="id" type="hidden" value="">
                         </div>
                         <div class="col-lg-12" >
-                        <br><lable>领导回复：</lable>
+                        <br><lable>领导批复：</lable>
                         </div>
                         <div class="col-lg-12" >
                                 <br>
